@@ -7,4 +7,11 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    /**
+     * @var array
+     */
+    protected $headers = [
+        'Accept' => 'application/json',
+    ];
 }
