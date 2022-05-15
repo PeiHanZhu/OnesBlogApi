@@ -25,13 +25,28 @@ class Post extends Model
     ];
 
     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true,
+            ]
+        ];
+    }
+
+    /**
      * Get the user of the post.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -45,17 +60,12 @@ class Post extends Model
     }
 
     /**
-     * Return the sluggable configuration array for this model.
+     * Get the comments for the post.
      *
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function sluggable(): array
+    public function comments()
     {
-        return [
-            'slug' => [
-                'source' => 'title',
-                'onUpdate' => true,
-            ]
-        ];
+        return $this->hasMany(Comment::class);
     }
 }

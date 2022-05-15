@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
     protected $store;
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function setup(): void
     {

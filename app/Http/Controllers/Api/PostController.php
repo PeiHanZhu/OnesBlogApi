@@ -18,6 +18,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -36,23 +37,23 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $vaildator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'store_id' => 'required|integer',
             'category_id' => ['required', 'integer', Rule::in(PostCategoryEnum::getAllCategoryValues())],
             'title' => 'required|string|max:255',
             'content' => 'nullable',
             'published_at' => 'nullable|date',
-            'active' => '|boolean',
+            'active' => 'boolean',
         ]);
-        if ($vaildator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
-                'data' => $vaildator->errors()->messages(),
+                'data' => $validator->errors()->messages(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -65,7 +66,7 @@ class PostController extends Controller
                 'content',
                 'published_at',
                 'active',
-            ])),
+            ]))->refresh(),
             Response::HTTP_CREATED
         );
     }
@@ -73,7 +74,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param Post $post
      * @return \Illuminate\Http\Response
      * @throws ModelNotFoundException
      */
@@ -88,22 +89,22 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param \Illuminate\Http\Request $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
     {
-        $vaildator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'category_id' => ['integer', Rule::in(PostCategoryEnum::getAllCategoryValues())],
             'title' => 'string|max:255',
             'content' => 'nullable',
             'published_at' => 'nullable|date',
             'active' => 'nullable|boolean',
         ]);
-        if ($vaildator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
-                'data' => $vaildator->errors()->messages(),
+                'data' => $validator->errors()->messages(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -115,13 +116,13 @@ class PostController extends Controller
             'active',
         ]));
 
-        return new PostResource($post);
+        return new PostResource($post->refresh());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)

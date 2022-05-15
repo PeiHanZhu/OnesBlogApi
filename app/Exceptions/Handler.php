@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function render($request, Throwable $exception)
     {
@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
                     );
             }
         }
-        
+
         return parent::render($request, $exception);
     }
 }

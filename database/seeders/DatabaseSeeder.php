@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
@@ -19,9 +20,11 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         User::truncate();
         Post::truncate();
+        Comment::truncate();
 
         User::factory(5)->create();
-        Post::factory(200)->create();
+        Post::factory(100)->create();
+        Comment::factory(20)->create();
 
         Schema::enableForeignKeyConstraints();
     }

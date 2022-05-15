@@ -19,3 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('posts', PostController::class);
+Route::scopeBindings()->group(function () {
+    Route::apiResource('posts/{post}/comments', CommentController::class);
+});

@@ -51,7 +51,7 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->hasMany(Post::class, 'user_id');
+        return $this->hasMany(Post::class);
     }
 
     /**
@@ -62,5 +62,15 @@ class User extends Authenticatable
     public function storePosts()
     {
         return $this->hasMany(Post::class, 'store_id');
+    }
+
+    /**
+     * Get the comments for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
