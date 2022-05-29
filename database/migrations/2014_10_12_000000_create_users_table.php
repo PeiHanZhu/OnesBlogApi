@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->comment('帳號');
-            $table->string('email')->unique()->comment('電子郵件');
+            $table->string('name')->comment('帳號')->index();
+            $table->string('email')->unique()->comment('電子郵件')->index();
             $table->timestamp('email_verified_at')->nullable()->comment('信箱驗證時間');
             $table->string('password')->comment('密碼');
             $table->boolean('is_store')->comment('是否有店家身份')->default(false)->index();
