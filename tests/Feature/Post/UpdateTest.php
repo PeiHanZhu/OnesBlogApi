@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
 
 class UpdateTest extends TestCase
 {
@@ -25,11 +27,15 @@ class UpdateTest extends TestCase
     /**
      * @inheritDoc
      */
-    protected function setup(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
+        $this->user = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
         $this->store = User::factory()->create([
             'is_store' => 1
         ]);
@@ -54,7 +60,7 @@ class UpdateTest extends TestCase
         ];
 
         // WHEN
-        $response = $this->patchJson(route('posts.update', [
+        $response = $this->putJson(route('posts.update', [
             'post' => $this->post->id
         ]), $data, $this->headers);
 

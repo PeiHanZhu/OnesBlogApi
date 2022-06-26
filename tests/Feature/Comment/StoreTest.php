@@ -7,6 +7,8 @@ use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
 
 class StoreTest extends TestCase
 {
@@ -15,7 +17,11 @@ class StoreTest extends TestCase
     public function testStore()
     {
         // GIVEN
-        $user = User::factory()->create();
+        $user = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
         $store = User::factory()->create([
             'is_store' => 1
         ]);

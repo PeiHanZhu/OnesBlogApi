@@ -8,16 +8,21 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
 
 class DestroyTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function testDestroy()
     {
         // GIVEN
-        $user = User::factory()->create();
+        $user = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
         $store = User::factory()->create([
             'is_store' => 1
         ]);

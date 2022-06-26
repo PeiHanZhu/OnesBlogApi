@@ -7,6 +7,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
 
 class DestroyTest extends TestCase
 {
@@ -25,11 +27,15 @@ class DestroyTest extends TestCase
     /**
      *  @inheritDoc
      */
-    protected function setup(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
+        $this->user = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
         $this->store = User::factory()->create([
             'is_store' => 1,
         ]);
@@ -38,6 +44,8 @@ class DestroyTest extends TestCase
     public function testDestroy()
     {
         // GIVEN
+
+
         $post = Post::factory()->create([
             'user_id' => $this->user->id,
             'store_id' => $this->store->id,
