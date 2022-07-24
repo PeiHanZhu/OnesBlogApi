@@ -44,8 +44,6 @@ class DestroyTest extends TestCase
     public function testDestroy()
     {
         // GIVEN
-
-
         $post = Post::factory()->create([
             'user_id' => $this->user->id,
             'store_id' => $this->store->id,
@@ -77,7 +75,7 @@ class DestroyTest extends TestCase
         ]);
 
         $expected = [
-            'data' => 'No query results for model [App\\Models\\Post] ' . $post->id,
+            'data' => "Post(ID:{$post->id}) is not found.",
         ];
         $post->delete();    // Assume that the post had been deleted.
 

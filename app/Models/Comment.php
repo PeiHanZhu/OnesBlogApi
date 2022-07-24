@@ -37,4 +37,14 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    /**
+     * Get the comment images for the comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function commentImages()
+    {
+        return $this->hasMany(commentImage::class);
+    }
 }

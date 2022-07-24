@@ -76,7 +76,7 @@ class ShowTest extends TestCase
         ]);
 
         $expected = [
-            'data' => 'Post not found',
+            'data' => "Post(ID:{$post->id}) is not found.",
         ];
 
         // WHEN
@@ -98,7 +98,7 @@ class ShowTest extends TestCase
         ]);
 
         $expected = [
-            'data' => 'Post not found',
+            'data' => "Post(ID:{$post->id}) is not found.",
         ];
 
         // WHEN

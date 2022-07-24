@@ -1,0 +1,21 @@
+{
+    "data": {
+        "created_at": "2022-07-18T06:58:02.000000Z",
+        "user": {
+            "id": 34,
+            "created_at": "2022-07-18T06:56:38.000000Z",
+            "updated_at": "2022-07-18T06:57:03.000000Z",
+            "name": "Han",
+            "email": "han@gmail.com",
+            "email_verified_at": "2022-07-18T06:57:03.000000Z",
+            "is_store": 0,
+            "login_type_id": 1
+        },
+        "store_id": 6,
+        "category_id": 2,
+        "title": "post",
+        "content": "test",
+        "published_at": null,
+        "slug": "post"
+    }
+}

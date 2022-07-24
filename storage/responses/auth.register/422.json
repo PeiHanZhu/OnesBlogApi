@@ -1,0 +1,16 @@
+{
+    "data": {
+        "name": [
+            "{validation-error-message}"
+        ],
+        "email": [
+            "{validation-error-message}"
+        ],
+        "password": [
+            "{validation-error-message}"
+        ],
+        "device_name": [
+            "{validation-error-message}"
+        ]
+    }
+}

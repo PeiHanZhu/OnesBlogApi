@@ -56,7 +56,7 @@ class LogoutTest extends TestCase
         ];
 
         $expected = [
-            'message' => 'Unauthenticated.',
+            'data' => 'Unauthenticated.',
         ];
 
         // WHEN

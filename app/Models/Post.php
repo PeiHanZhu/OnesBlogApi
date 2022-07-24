@@ -68,4 +68,14 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get the post images for the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function postImages()
+    {
+        return $this->hasMany(PostImage::class);
+    }
 }

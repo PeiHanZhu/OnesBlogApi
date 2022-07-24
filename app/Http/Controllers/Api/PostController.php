@@ -7,16 +7,27 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+
+/**
+ * Class PostController.
+ */
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the posts.
+     *
+     * @group 02. Posts
+     * @queryParam category_id integer The id of the category. Example: 2
+     * @queryParam limit integer The amount of results per page. Defaults to '10'. Example: 10
+     * @queryParam page integer The page of the results. Defaults to '1'. Example: 1
+     * @responseFile 200 scenario="when posts displayed." responses/posts.index/200.json
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -35,7 +46,20 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
+     *
+     * @group 02. Posts
+     * @authenticated
+     * @header token Bearer {personal-access-token}
+     * @bodyParam store_id integer required The store of the post. Example: 6
+     * @bodyParam category_id integer required The category of the post.  Example: 1
+     * @bodyParam title string required The title of the post. Example: Post
+     * @bodyParam content string The content of the post. Example: Test
+     * @bodyParam published_at string The published time of the post. Example: 2022-07-23T08:31:45.000000Z
+     * @bodyParam active boolean The state of the post. Example: 1
+     * @responseFile 201 scenario="when post created." responses/posts.store/201.json
+     * @responseFile 401 scenario="without personal access token." responses/401.json
+     * @responseFile 422 scenario="when any validation failed." responses/posts.store/422.json
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -43,7 +67,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
             'store_id' => 'required|integer',
             'category_id' => ['required', 'integer', Rule::in(PostCategoryEnum::getAllCategoryValues())],
             'title' => 'required|string|max:255',
@@ -58,21 +81,25 @@ class PostController extends Controller
         }
 
         return new PostResource(
-            Post::create($request->only([
-                'user_id',
+            Post::create(array_merge(['user_id' => $request->user()->id], $request->only([
                 'store_id',
                 'category_id',
                 'title',
                 'content',
                 'published_at',
                 'active',
-            ]))->refresh(),
+            ])))->refresh(),
             Response::HTTP_CREATED
         );
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified post.
+     *
+     * @group 02. Posts
+     * @urlParam post integer required The id of the post. Example: 108
+     * @responseFile 200 scenario="when post displayed." responses/posts.show/200.json
+     * @responseFile 404 scenario="when post not found, inactive or unpublished." responses/posts.show/404.json
      *
      * @param Post $post
      * @return \Illuminate\Http\Response
@@ -81,13 +108,27 @@ class PostController extends Controller
     public function show(Post $post)
     {
         if (!$post->active or $post->published_at > now()) {
-            throw new ModelNotFoundException('Post not found');
+            throw (new ModelNotFoundException)->setModel($post, $post->id);
         }
         return new PostResource($post);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified post in storage.
+     *
+     * @group 02. Posts
+     * @authenticated
+     * @header token Bearer {personal-access-token}
+     * @urlParam post integer required The id of the post. Example: 108
+     * @bodyParam category_id integer The category of the post. Example: 3
+     * @bodyParam title string The title of the post. Example: 0724Post
+     * @bodyParam content string The content of the post. Example: 0724Test
+     * @bodyParam published_at string The published time of the post. Example: 20220724
+     * @bodyParam active boolean The state of the post. Example: 1
+     * @responseFile 200 scenario="when post updated." responses/posts.update/200.json
+     * @responseFile 401 scenario="without personal access token." responses/401.json
+     * @responseFile 404 scenario="when post not found." responses/posts.update/404.json
+     * @responseFile 422 scenario="when any validation failed." responses/posts.update/422.json
      *
      * @param \Illuminate\Http\Request $request
      * @param Post $post
@@ -108,6 +149,10 @@ class PostController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        if ($request->user()->cant('update', $post)) {
+            throw new AuthorizationException();
+        }
+
         $post->update($request->only([
             'category_id',
             'title',
@@ -120,14 +165,28 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified post from storage.
      *
+     * @group 02. Posts
+     * @authenticated
+     * @header token Bearer {personal-access-token}
+     * @urlParam post integer required The id of the post. Example: 108
+     * @responseFile 200 scenario="when post deleted." responses/posts.destroy/200.json
+     * @responseFile 401 scenario="without personal access token." responses/401.json
+     * @responseFile 404 scenario="when post not found." responses/posts.destroy/404.json
+     *
+     * @param \Illuminate\Http\Request $request
      * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        $post->delete();
+        if ($request->user()->cant('delete', $post)) {
+            throw new AuthorizationException();
+        } else {
+            $post->delete();
+        }
+
         return response()->json([
             'data' => 'Success',
         ]);

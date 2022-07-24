@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +18,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('register', [AuthController::class, 'register'])->name('auth.register');
+Route::post('verifyCode', [AuthController::class, 'verifyCode'])->name('auth.verifyCode');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum',)->group(function() {
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
