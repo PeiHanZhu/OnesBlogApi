@@ -72,4 +72,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get the location for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function location()
+    {
+        return $this->hasOne(Location::class);
+    }
 }

@@ -98,6 +98,7 @@ return [
         'filter_clear'       => '顯示全部',
         'filter_placeholder' => '過濾',
     ],
+    'grid_items_selected'    => '已選擇 {n} 個項目',
     'menu_titles'            => [],
     'prev'                   => '上一步',
     'next'                   => '下一步',
@@ -116,11 +117,7 @@ return [
     // User
     'email' => '電子信箱',
     'email_verified_at' => '電子信箱驗證日期',
-    'is_store' => '是否有店家身份',
-    'is_store_options' => [
-        1 => '是',
-        0 => '否',
-    ],
+    'location_name' => '店家名稱',
     'login_type_id' => '當前登入身份',
     'login_type_options' => [
         1 => '會員',
