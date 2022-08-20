@@ -21,7 +21,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'is_store',
         'login_type_id',
     ];
 
@@ -61,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function storePosts()
     {
-        return $this->hasMany(Post::class, 'store_id');
+        return $this->hasMany(Post::class, 'location_id');
     }
 
     /**

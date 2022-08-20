@@ -17,8 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->comment('發文者')->constrained()->cascadeOnDelete();
-            $table->foreignId('store_id')->comment('店家')->nullable()->constrained('users')->nullOnDelete();
-            $table->unsignedBigInteger('category_id')->comment('文章分類')->index();
+            $table->foreignId('location_id')->comment('店家')->nullable()->constrained()->nullOnDelete();
             $table->string('title')->comment('文章標題')->index();
             $table->longText('content')->comment('文章內容')->nullable();
             $table->timestamp('published_at')->comment('發佈時間')->nullable()->index();

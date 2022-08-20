@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "103ae197-bef5-428d-b7b8-d68bfda6cae8",
+        "_postman_id": "3be2285c-a2e5-4cca-b0f0-c69205f5f19b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -888,7 +888,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"store_id\": 6,\n    \"category_id\": 1,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
+                            "raw": "{\n    \"location_id\": 6,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
                         },
                         "description": ""
                     },
@@ -920,7 +920,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"store_id\": 6,\n    \"category_id\": 1,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"location_id\": 6,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -955,7 +955,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"store_id\": 6,\n    \"category_id\": 1,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"location_id\": 6,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -990,7 +990,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"store_id\": 6,\n    \"category_id\": 1,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"location_id\": 6,\n    \"title\": \"Post\",\n    \"content\": \"Test\",\n    \"published_at\": \"2022-07-23T08:31:45.000000Z\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -1035,7 +1035,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"category_id\": 3,\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
+                            "raw": "{\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
                         },
                         "description": ""
                     },
@@ -1075,7 +1075,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"category_id\": 3,\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -1118,7 +1118,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"category_id\": 3,\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -1161,7 +1161,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"category_id\": 3,\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -1204,7 +1204,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"category_id\": 3,\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
+                                    "raw": "{\n    \"title\": \"0724Post\",\n    \"content\": \"0724Test\",\n    \"published_at\": \"20220724\",\n    \"active\": true\n}"
                                 },
                                 "description": ""
                             },
@@ -2187,7 +2187,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "18",
+                                    "value": "5",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -2230,7 +2230,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "18",
+                                            "value": "5",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2276,7 +2276,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "18",
+                                            "value": "5",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2322,7 +2322,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "18",
+                                            "value": "5",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2368,7 +2368,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "18",
+                                            "value": "5",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]

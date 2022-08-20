@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\PostCategoryEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
@@ -12,7 +11,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 
 /**
@@ -36,8 +34,11 @@ class PostController extends Controller
     {
         return (new PostCollection(
             Post::when($request->query('category_id'), function ($query, $categoryId) {
-                $query->where([
-                    ['category_id', $categoryId],
+                $query->whereHas('location', function($query) use ($categoryId){
+                    $query->where([
+                        ['category_id', $categoryId],
+                    ]);
+                })->where([
                     ['active', true],
                     ['published_at', '<=', now()],
                 ]);
@@ -51,8 +52,7 @@ class PostController extends Controller
      * @group 02. Posts
      * @authenticated
      * @header token Bearer {personal-access-token}
-     * @bodyParam store_id integer required The store of the post. Example: 6
-     * @bodyParam category_id integer required The category of the post.  Example: 1
+     * @bodyParam location_id integer required The location of the post. Example: 6
      * @bodyParam title string required The title of the post. Example: Post
      * @bodyParam content string The content of the post. Example: Test
      * @bodyParam published_at string The published time of the post. Example: 2022-07-23T08:31:45.000000Z
@@ -67,8 +67,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'store_id' => 'required|integer',
-            'category_id' => ['required', 'integer', Rule::in(PostCategoryEnum::getAllCategoryValues())],
+            'location_id' => 'required|integer',
             'title' => 'required|string|max:255',
             'content' => 'nullable',
             'published_at' => 'nullable|date',
@@ -82,8 +81,7 @@ class PostController extends Controller
 
         return new PostResource(
             Post::create(array_merge(['user_id' => $request->user()->id], $request->only([
-                'store_id',
-                'category_id',
+                'location_id',
                 'title',
                 'content',
                 'published_at',
@@ -120,7 +118,6 @@ class PostController extends Controller
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 108
-     * @bodyParam category_id integer The category of the post. Example: 3
      * @bodyParam title string The title of the post. Example: 0724Post
      * @bodyParam content string The content of the post. Example: 0724Test
      * @bodyParam published_at string The published time of the post. Example: 20220724
@@ -137,7 +134,6 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $validator = Validator::make($request->all(), [
-            'category_id' => ['integer', Rule::in(PostCategoryEnum::getAllCategoryValues())],
             'title' => 'string|max:255',
             'content' => 'nullable',
             'published_at' => 'nullable|date',
@@ -154,7 +150,6 @@ class PostController extends Controller
         }
 
         $post->update($request->only([
-            'category_id',
             'title',
             'content',
             'published_at',

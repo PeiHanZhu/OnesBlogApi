@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-class PostCategoryEnum
+class LocationCategoryEnum
 {
     const RESTAURANTS = 1;
     const SPOTS = 2;

@@ -496,14 +496,10 @@ paths:
                         schema:
                             type: object
                             properties:
-                                store_id:
+                                location_id:
                                     type: integer
-                                    description: 'The store of the post.'
+                                    description: 'The location of the post.'
                                     example: 6
-                                category_id:
-                                    type: integer
-                                    description: 'The category of the post.'
-                                    example: 1
                                 title:
                                     type: string
                                     description: 'The title of the post.'
@@ -521,8 +517,7 @@ paths:
                                     description: 'The state of the post.'
                                     example: true
                             required:
-                                - store_id
-                                - category_id
+                                - location_id
                                 - title
     '/api/posts/{post}':
         get:
@@ -642,10 +637,6 @@ paths:
                         schema:
                             type: object
                             properties:
-                                category_id:
-                                    type: integer
-                                    description: 'The category of the post.'
-                                    example: 3
                                 title:
                                     type: string
                                     description: 'The title of the post.'

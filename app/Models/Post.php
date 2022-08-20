@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasUser;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory, Sluggable;
+    use HasUser, HasFactory, Sluggable;
 
     /**
      * @inheritDoc
      */
     protected $fillable = [
         'user_id',
-        'store_id',
-        'category_id',
+        'location_id',
         'title',
         'content',
         'published_at',
@@ -40,23 +40,13 @@ class Post extends Model
     }
 
     /**
-     * Get the user of the post.
+     * Get the location of the post.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function location()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the store of the post.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function store()
-    {
-        return $this->belongsTo(User::class, 'store_id');
+        return $this->belongsTo(Location::class);
     }
 
     /**

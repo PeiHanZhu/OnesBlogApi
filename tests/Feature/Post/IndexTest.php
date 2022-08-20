@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Post;
 
-use App\Enums\PostCategoryEnum;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\TestCase;
 
 class IndexTest extends TestCase
 {
@@ -19,9 +19,9 @@ class IndexTest extends TestCase
     protected $user;
 
     /**
-     * @var User
+     * @var Location
      */
-    protected $store;
+    protected $location;
 
     /**
      * @inheritDoc
@@ -30,19 +30,17 @@ class IndexTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
-        $this->store = User::factory()->create([
-            'is_store' => 1,
-        ]);
+        $this->locationUser = User::factory()->create();
+        $this->location = Location::factory()->for($this->locationUser)->create();
+        $this->postUser = User::factory()->create();
     }
 
     public function testIndexQueriedByCategoryId()
     {
         // GIVEN
-        Post::factory()->create($data = [
-            'user_id' => $this->user->id,
-            'store_id' => $this->store->id,
-            'category_id' => ($categoryId = PostCategoryEnum::RESTAURANTS),
+        $post = Post::factory()->create($data = [
+            'user_id' => $this->postUser->id,
+            'location_id' => $this->location->id,
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
@@ -55,14 +53,14 @@ class IndexTest extends TestCase
             'data' => [
                 array_merge(
                     $data,
-                    ['user' => ['id' => $this->user->id]]
+                    ['user' => ['id' => $this->postUser->id]]
                 ),
             ],
         ];
 
         // WHEN
         $response = $this->getJson(route('posts.index') . '?' . http_build_query([
-            'category_id' => $categoryId,
+            'category_id' => $post->location->category_id,
         ]), $this->headers);
 
         // THEN

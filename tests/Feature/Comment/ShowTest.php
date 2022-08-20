@@ -3,11 +3,12 @@
 namespace Tests\Feature\Comment;
 
 use App\Models\Comment;
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\TestCase;
 
 class ShowTest extends TestCase
 {
@@ -19,9 +20,9 @@ class ShowTest extends TestCase
     protected $user;
 
     /**
-     * @var User
+     * @var Location
      */
-    protected $store;
+    protected $location;
 
     /**
      * @var Post
@@ -31,13 +32,13 @@ class ShowTest extends TestCase
     public function testShow()
     {
         // GIVEN
+        $locationUser = User::factory()->create();
+        $location = Location::factory()->for($locationUser)->create();
         $user = User::factory()->create();
-        $store = User::factory()->create([
-            'is_store' => 1
-        ]);
+
         $post = Post::factory()->create([
             'user_id' => $user->id,
-            'store_id' => $store->id,
+            'location_id' => $location->id,
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);

@@ -2,40 +2,39 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class CityArea extends Model
 {
-    use HasUser, HasFactory;
+    use HasFactory;
 
     /**
      * @inheritDoc
      */
     protected $fillable = [
-        'user_id',
-        'post_id',
-        'content',
+        'city_id',
+        'name',
+        'zip_code',
     ];
 
     /**
-     * Get the post of the comment.
+     * Get the city of the city area.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function post()
+    public function city()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(City::class);
     }
 
     /**
-     * Get the comment images for the comment.
+     * Get the locations for the city area.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function commentImages()
+    public function locations()
     {
-        return $this->hasMany(commentImage::class);
+        return $this->hasMany(Location::class);
     }
 }

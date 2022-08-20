@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Post;
 
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,9 +19,9 @@ class ShowTest extends TestCase
     protected $user;
 
     /**
-     * @var User
+     * @var Location
      */
-    protected $store;
+    protected $location;
 
     /**
      * @inheritDoc
@@ -29,18 +30,17 @@ class ShowTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
-        $this->store = User::factory()->create([
-            'is_store' => 1,
-        ]);
+        $this->locationUser = User::factory()->create();
+        $this->location = Location::factory()->for($this->locationUser)->create();
+        $this->postUser = User::factory()->create();
     }
 
     public function testShow()
     {
         // GIVEN
         $post = Post::factory()->create($data = [
-            'user_id' => $this->user->id,
-            'store_id' => $this->store->id,
+            'user_id' => $this->postUser->id,
+            'location_id' => $this->location->id,
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
@@ -53,7 +53,7 @@ class ShowTest extends TestCase
             'data' =>
             array_merge(
                 $data,
-                ['user' => ['id' => $this->user->id]]
+                ['user' => ['id' => $this->postUser->id]]
             ),
         ];
 
@@ -70,8 +70,9 @@ class ShowTest extends TestCase
     {
         // GIVEN
         $post = Post::factory()->create([
-            'user_id' => $this->user->id,
-            'store_id' => $this->store->id,
+            'user_id' => $this->postUser->id,
+            'location_id' => $this->location->id,
+            'title' => 'Test',
             'active' => 0,
         ]);
 
@@ -92,8 +93,9 @@ class ShowTest extends TestCase
     {
         // GIVEN
         $post = Post::factory()->create([
-            'user_id' => $this->user->id,
-            'store_id' => $this->store->id,
+            'user_id' => $this->postUser->id,
+            'location_id' => $this->location->id,
+            'title' => 'Test',
             'published_at' => now()->addHours(6),
         ]);
 

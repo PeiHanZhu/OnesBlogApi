@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Comment;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\TestCase;
 
 class IndexTest extends TestCase
 {
@@ -15,20 +16,20 @@ class IndexTest extends TestCase
     public function testIndex()
     {
         // GIVEN
-        $user = User::factory()->create();
-        $store = User::factory()->create([
-            'is_store' => 1
-        ]);
+        $locationUser = User::factory()->create();
+        $location = Location::factory()->create(['user_id' => $locationUser->id]);
+        $postUser = User::factory()->create();
         $post = Post::factory()->create([
-            'user_id' => $user->id,
-            'store_id' => $store->id,
+            'user_id' => $postUser->id,
+            'location_id' => $location->id,
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
         $post->comments()->create($data = [
-            'user_id' => $user->id,
+            'user_id' => $postUser->id,
             'content' => 'test',
         ]);
+
         $expected = [
             'data' => [
                 $data

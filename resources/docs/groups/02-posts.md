@@ -486,7 +486,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"store_id":6,"category_id":1,"title":"Post","content":"Test","published_at":"2022-07-23T08:31:45.000000Z","active":true}'
+    -d '{"location_id":6,"title":"Post","content":"Test","published_at":"2022-07-23T08:31:45.000000Z","active":true}'
 
 ```
 
@@ -502,8 +502,7 @@ let headers = {
 };
 
 let body = {
-    "store_id": 6,
-    "category_id": 1,
+    "location_id": 6,
     "title": "Post",
     "content": "Test",
     "published_at": "2022-07-23T08:31:45.000000Z",
@@ -528,8 +527,7 @@ $response = $client->post(
             'token' => 'Bearer {personal-access-token}',
         ],
         'json' => [
-            'store_id' => 6,
-            'category_id' => 1,
+            'location_id' => 6,
             'title' => 'Post',
             'content' => 'Test',
             'published_at' => '2022-07-23T08:31:45.000000Z',
@@ -547,8 +545,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 payload = {
-    "store_id": 6,
-    "category_id": 1,
+    "location_id": 6,
     "title": "Post",
     "content": "Test",
     "published_at": "2022-07-23T08:31:45.000000Z",
@@ -638,16 +635,10 @@ response.json()
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
-<b><code>store_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="store_id" data-endpoint="POSTapi-posts" data-component="body" required  hidden>
+<b><code>location_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="location_id" data-endpoint="POSTapi-posts" data-component="body" required  hidden>
 <br>
-The store of the post.
-</p>
-<p>
-<b><code>category_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="category_id" data-endpoint="POSTapi-posts" data-component="body" required  hidden>
-<br>
-The category of the post.
+The location of the post.
 </p>
 <p>
 <b><code>title</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
@@ -692,7 +683,7 @@ curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"category_id":3,"title":"0724Post","content":"0724Test","published_at":"20220724","active":true}'
+    -d '{"title":"0724Post","content":"0724Test","published_at":"20220724","active":true}'
 
 ```
 
@@ -708,7 +699,6 @@ let headers = {
 };
 
 let body = {
-    "category_id": 3,
     "title": "0724Post",
     "content": "0724Test",
     "published_at": "20220724",
@@ -733,7 +723,6 @@ $response = $client->put(
             'token' => 'Bearer {personal-access-token}',
         ],
         'json' => [
-            'category_id' => 3,
             'title' => '0724Post',
             'content' => '0724Test',
             'published_at' => '20220724',
@@ -751,7 +740,6 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 payload = {
-    "category_id": 3,
     "title": "0724Post",
     "content": "0724Test",
     "published_at": "20220724",
@@ -845,12 +833,6 @@ response.json()
 The id of the post.
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-<p>
-<b><code>category_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-<input type="number" name="category_id" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>
-<br>
-The category of the post.
-</p>
 <p>
 <b><code>title</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
 <input type="text" name="title" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>

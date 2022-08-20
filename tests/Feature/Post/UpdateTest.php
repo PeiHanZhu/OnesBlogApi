@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Post;
 
+use App\Models\Location;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\Sanctum;
+use Symfony\Component\HttpFoundation\Response;
+use Tests\TestCase;
 
 class UpdateTest extends TestCase
 {
@@ -20,9 +21,9 @@ class UpdateTest extends TestCase
     protected $user;
 
     /**
-     * @var User
+     * @var Location
      */
-    protected $store;
+    protected $location;
 
     /**
      * @inheritDoc
@@ -31,18 +32,16 @@ class UpdateTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = Sanctum::actingAs(User::factory()->create([
+        $this->locationUser = User::factory()->create();
+        $this->location = Location::factory()->for($this->locationUser)->create();
+        $this->postUser = Sanctum::actingAs(User::factory()->create([
             'name' => 'GUO_XUN',
             'email' => 'saber@gmail.com',
             'password' => Hash::make('123456'),
         ]), ['*']);
-        $this->store = User::factory()->create([
-            'is_store' => 1
-        ]);
         $this->post = Post::factory()->create([
-            'user_id' => $this->user->id,
-            'store_id' => $this->store->id,
-            'category_id' => 2,
+            'user_id' => $this->postUser->id,
+            'location_id' => $this->location->id,
             'title' => '20220510',
         ]);
     }
@@ -51,7 +50,6 @@ class UpdateTest extends TestCase
     {
         // GIVEN
         $data = [
-            'category_id' => 3,
             'title' => 'Update20220510'
         ];
 
