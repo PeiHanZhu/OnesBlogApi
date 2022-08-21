@@ -13,8 +13,8 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('users', UserController::class);
     $router->resource('posts', PostController::class);
-    $router->get('stores/without_user', 'PostController@indexStoresWithoutUser')
-        ->name('stores.without.user')
+    $router->get('locations/without_user', 'PostController@indexLocationsWithoutUser')
+        ->name('locations.without.user')
         ->withoutMiddleware($middleware);
     $router->resource('comments', CommentController::class);
 });

@@ -111,7 +111,7 @@ return [
         0 => '未公開',
     ],
     'user_name' => '使用者名稱',
-    'store_name' => '店家名稱',
+    'location_name' => '店家名稱',
     'validation.required' => '必填',
 
     // User
@@ -124,8 +124,10 @@ return [
         2 => '店家',
     ],
 
+    // Location
+    'category_id' => '店家分類',
+
     // Post
-    'category_id' => '文章分類',
     'post_id' => '文章編號',
     'category_options' => [
         1 => '餐廳',
