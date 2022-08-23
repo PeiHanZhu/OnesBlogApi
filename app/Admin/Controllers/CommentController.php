@@ -31,10 +31,9 @@ class CommentController extends AdminController
         $grid->filter(function ($filter) {
             $filter->between('created_at', __('admin.created_at'))->datetime();
             $filter->between('updated_at', __('admin.updated_at'))->datetime();
-            $filter->like('user_id', __('admin.user_name'))
+            $filter->equal('user_id', __('admin.user_name'))
                 ->select($this->getUserSelectOptions());
-            $filter->like('title', __('admin.post_title'));
-            $filter->between('published_at', __('admin.published_at'))->datetime();
+            $filter->like('post.title', __('admin.post_title'));
             $filter->like('content', __('admin.comment_content'));
         });
 
@@ -51,8 +50,8 @@ class CommentController extends AdminController
                 $href = route('admin.posts.show', [
                     'post' => $this->post_id,
                 ]);
-            return "<a href='$href' target='_blank'>$value</a>";
-        });
+                return "<a href='$href' target='_blank'>$value</a>";
+            });
         $grid->column('content', __('admin.comment_content'))->limit(30);
 
         return $grid;
