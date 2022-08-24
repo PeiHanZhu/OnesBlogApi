@@ -52,7 +52,12 @@ class PostController extends AdminController
         $grid->column('updated_at', __('admin.updated_at'))->display(function () {
             return date('Y-m-d H:i:s');
         });
-        $grid->column('user.name', __('admin.user_name'))->sortable();
+        $grid->column('user.name', __('admin.user_name'))->display(function ($value) {
+            $href = route('admin.users.show', [
+                'user' => $this->user_id,
+            ]);
+            return "<a href='$href' target='_blank'>$value</a>";
+        })->sortable();
         $grid->column('location.name', __('admin.location_name'))->sortable();
         $grid->column('location.category_id', __('admin.category_id'))
             ->using(__('admin.category_options'))
@@ -111,9 +116,9 @@ class PostController extends AdminController
             $form->display('user.name', __('admin.user_name'));
             $form->display('location.name', __('admin.location_name'));
             $form->display('location.category_id', __('admin.category_id'))
-            ->with(function ($value) {
-                return __('admin.category_options')[$value];
-            });
+                ->with(function ($value) {
+                    return __('admin.category_options')[$value];
+                });
         } else {
             $form->select('user_id', __('admin.user_name'))
                 ->options(User::pluck('name', 'id'))

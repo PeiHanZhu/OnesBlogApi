@@ -37,22 +37,28 @@ class CommentController extends AdminController
             $filter->like('content', __('admin.comment_content'));
         });
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('created_at', __('admin.created_at'))->display(function () {
             return date('Y-m-d H:i:s');
         });;
         $grid->column('updated_at', __('admin.updated_at'))->display(function () {
             return date('Y-m-d H:i:s');
         });;
-        $grid->column('user.name', __('admin.user_name'));
+        $grid->column('user.name', __('admin.user_name'))
+            ->display(function ($value) {
+                $href = route('admin.users.show', [
+                    'user' => $this->user_id,
+                ]);
+                return "<a href='$href' target='_blank'>$value</a>";
+            })->sortable();
         $grid->column('post.title', __('admin.post_title'))->limit(50)
             ->display(function ($value) {
                 $href = route('admin.posts.show', [
                     'post' => $this->post_id,
                 ]);
                 return "<a href='$href' target='_blank'>$value</a>";
-            });
-        $grid->column('content', __('admin.comment_content'))->limit(30);
+            })->sortable();
+        $grid->column('content', __('admin.comment_content'))->limit(30)->sortable();
 
         return $grid;
     }

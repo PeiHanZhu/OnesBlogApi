@@ -54,7 +54,7 @@ class UserController extends AdminController
         $grid->column('email_verified_at', __('admin.email_verified_at'))->display(function ($value) {
             return date('Y-m-d H:i:s', strtotime($value));
         });
-        $grid->column('location.name', __('admin.location_name'));
+        $grid->column('location.name', __('admin.location_name'))->sortable();
         $grid->column('login_type_id', __('admin.login_type_id'))->using(__('admin.login_type_options'))->label([
             1 => 'danger',
             2 => 'success',
