@@ -13,7 +13,7 @@ class City extends Model
      * @inheritDoc
      */
     protected $fillable = [
-        'name',
+        'city',
     ];
 
     /**

@@ -19,6 +19,9 @@ class AdminMenuSeeder extends Seeder
             'users' => [
                 'icon' => 'fa-group',
             ],
+            'locations' => [
+                'icon' => 'fa-map-marker',
+            ],
             'posts' => [
                 'icon' => 'fa-newspaper-o'
             ],

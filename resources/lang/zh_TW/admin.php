@@ -117,7 +117,6 @@ return [
     // User
     'email' => '電子信箱',
     'email_verified_at' => '電子信箱驗證日期',
-    'location_name' => '店家名稱',
     'login_type_id' => '當前登入身份',
     'login_type_options' => [
         1 => '會員',
@@ -126,6 +125,14 @@ return [
 
     // Location
     'category_id' => '店家分類',
+    'location_name' => '店家名稱',
+    'location_address' => '店家地址',
+    'location_phone' => '店家電話',
+    'location_introduction' => '店家簡介',
+    'location_avgScore' => '店家分數',
+    'location_city' => '縣市',
+    'location_area' => '鄉鎮市區',
+
 
     // Post
     'post_id' => '文章編號',

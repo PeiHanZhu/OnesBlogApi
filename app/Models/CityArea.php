@@ -14,7 +14,7 @@ class CityArea extends Model
      */
     protected $fillable = [
         'city_id',
-        'name',
+        'city_area',
         'zip_code',
     ];
 

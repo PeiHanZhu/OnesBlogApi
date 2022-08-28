@@ -20,9 +20,9 @@ class LocationFactory extends Factory
                 min($categoryIds = LocationCategoryEnum::getAllCategoryValues()),
                 max($categoryIds)
             ),
-            'name' => $this->faker->text,
-            'address' => $this->faker->text,
-            'phone' => $this->faker->text,
+            'name' => $this->faker->company(),
+            'address' => $this->faker->streetAddress(),
+            'phone' => $this->faker->numerify('##########'),
             'avgScore' => $this->faker->randomFloat(2, 1, 5),
             'introduction' => $this->faker->text,
         ];

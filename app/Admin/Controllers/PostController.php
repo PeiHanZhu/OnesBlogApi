@@ -122,7 +122,7 @@ class PostController extends AdminController
         } else {
             $form->select('user_id', __('admin.user_name'))
                 ->options(User::pluck('name', 'id'))
-                ->load('location_id', route('admin.locations.without.user'), 'id', 'name', false)
+                ->load('location_id', route('admin.api.locations.index.without-user'), 'id', 'name', false)
                 ->config('allowClear', false)
                 ->rules('required');
             $form->select('location_id', __('admin.location_name'))->rules('required');
