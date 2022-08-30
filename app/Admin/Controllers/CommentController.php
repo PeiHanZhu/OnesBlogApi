@@ -40,10 +40,10 @@ class CommentController extends AdminController
         $grid->column('id', __('Id'))->sortable();
         $grid->column('created_at', __('admin.created_at'))->display(function () {
             return date('Y-m-d H:i:s');
-        });;
+        });
         $grid->column('updated_at', __('admin.updated_at'))->display(function () {
             return date('Y-m-d H:i:s');
-        });;
+        });
         $grid->column('user.name', __('admin.user_name'))
             ->display(function ($value) {
                 $href = route('admin.users.show', [

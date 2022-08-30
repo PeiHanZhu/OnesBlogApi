@@ -6,7 +6,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -73,6 +73,13 @@ class Handler extends ExceptionHandler
                         ),
                     ],
                     Response::HTTP_NOT_FOUND
+                );
+            } else {
+                return response()->json(
+                    [
+                        'data' => $exception->getMessage(),
+                    ],
+                    Response::HTTP_INTERNAL_SERVER_ERROR
                 );
             }
         }

@@ -28,6 +28,9 @@ class AdminMenuSeeder extends Seeder
             'comments' => [
                 'icon' => 'fa-align-left',
             ],
+            'cities' => [
+                'icon' => 'fa-info-circle',
+            ],
         ] as $uri => $data) {
             Menu::firstOrCreate([
                 'uri' => $uri,

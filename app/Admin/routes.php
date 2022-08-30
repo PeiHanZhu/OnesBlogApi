@@ -21,4 +21,5 @@ Route::group([
         ->name('api.city-areas.index.belong-to-city')
         ->withoutMiddleware($middleware);
     $router->resource('comments', CommentController::class);
+    $router->resource('cities', CityController::class);
 });

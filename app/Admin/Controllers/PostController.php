@@ -33,11 +33,7 @@ class PostController extends AdminController
             $filter->between('updated_at', __('admin.updated_at'))->datetime();
             $filter->equal('user_id', __('admin.user_name'))
                 ->select(User::pluck('name', 'id'));
-            $filter->where(function ($query) {
-                $query->whereHas('location', function ($query) {
-                    $query->where('name', 'like', "%{$this->input}%");
-                });
-            }, __('admin.location_name'));
+            $filter->like('location.name', __('admin.location_name'));
             $filter->equal('location.category_id', __('admin.category_id'))
                 ->select(__('admin.category_options'));
             $filter->like('title', __('admin.post_title'));

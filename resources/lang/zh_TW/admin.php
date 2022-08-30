@@ -133,7 +133,6 @@ return [
     'location_city' => '縣市',
     'location_area' => '鄉鎮市區',
 
-
     // Post
     'post_id' => '文章編號',
     'category_options' => [
@@ -147,4 +146,8 @@ return [
 
     // Comment
     'comment_content' => '留言內容',
+
+    // City
+    'city_zip_code' => '郵遞區號',
+    'city_area_zip_code' => '鄉鎮市區或郵遞區號',
 ];
