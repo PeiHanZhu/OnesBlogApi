@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Policies\CommentPolicy;
+use App\Policies\LocationPolicy;
 use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -17,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Post::class => PostPolicy::class,
         Comment::class => CommentPolicy::class,
+        Location::class => LocationPolicy::class,
     ];
 
     /**

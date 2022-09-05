@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\LocationController;
+use App\Models\Location;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,10 +27,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
+Route::get('locations', [LocationController::class, 'index'])->name('locations.index');
+Route::get('locations/{location}', [LocationController::class, 'show'])->name('locations.show');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('locations', [LocationController::class, 'store'])->name('locations.store');
+    Route::put('locations/{location}', [LocationController::class, 'update'])->name('locations.update');
+    Route::delete('locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+});
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::middleware('auth:sanctum',)->group(function() {
+Route::middleware('auth:sanctum')->group(function() {
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
