@@ -21,7 +21,7 @@ class PostController extends Controller
     /**
      * Display a listing of the posts.
      *
-     * @group 02. Posts
+     * @group 03. Posts
      * @queryParam category_id integer The id of the category. Example: 2
      * @queryParam limit integer The amount of results per page. Defaults to '10'. Example: 10
      * @queryParam page integer The page of the results. Defaults to '1'. Example: 1
@@ -49,7 +49,7 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      *
-     * @group 02. Posts
+     * @group 03. Posts
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @bodyParam location_id integer required The location of the post. Example: 6
@@ -94,7 +94,7 @@ class PostController extends Controller
     /**
      * Display the specified post.
      *
-     * @group 02. Posts
+     * @group 03. Posts
      * @urlParam post integer required The id of the post. Example: 108
      * @responseFile 200 scenario="when post displayed." responses/posts.show/200.json
      * @responseFile 404 scenario="when post not found, inactive or unpublished." responses/posts.show/404.json
@@ -114,7 +114,7 @@ class PostController extends Controller
     /**
      * Update the specified post in storage.
      *
-     * @group 02. Posts
+     * @group 03. Posts
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 108
@@ -162,7 +162,7 @@ class PostController extends Controller
     /**
      * Remove the specified post from storage.
      *
-     * @group 02. Posts
+     * @group 03. Posts
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 108

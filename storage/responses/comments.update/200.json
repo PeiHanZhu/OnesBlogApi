@@ -1,7 +1,7 @@
 {
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "0724Comment"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }

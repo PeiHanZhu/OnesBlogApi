@@ -1,206 +1,26 @@
 {
     "data": [
         {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Tenetur dignissimos nostrum ad. Et numquam qui tenetur esse ut omnis consequatur. Soluta et esse cumque. Illum eos deleniti alias iure vel eos.",
-            "content": "Mollitia consequatur alias accusamus a rem. Explic...",
-            "published_at": "2022-05-05 17:57:31",
-            "slug": "tenetur-dignissimos-nostrum-ad-et-numquam-qui-tenetur-esse-ut-omnis-consequatur-soluta-et-esse-cumque-illum-eos-deleniti-alias-iure-vel-eos"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Cumque doloremque repudiandae occaecati alias autem. Et velit rerum recusandae illum unde cupiditate est.",
-            "content": "Ut sed eum odit distinctio aut. Rem id fugit conse...",
-            "published_at": "2022-05-17 07:04:48",
-            "slug": "cumque-doloremque-repudiandae-occaecati-alias-autem-et-velit-rerum-recusandae-illum-unde-cupiditate-est"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Officia omnis commodi quia adipisci eos. Quaerat quam maiores atque dolorem beatae omnis odio. Inventore quidem ut magnam pariatur alias ut ipsa. Aperiam in ratione libero expedita omnis nulla.",
-            "content": "Reiciendis et laborum quia eaque. Dolorem et ducim...",
-            "published_at": "2022-04-29 01:24:19",
-            "slug": "officia-omnis-commodi-quia-adipisci-eos-quaerat-quam-maiores-atque-dolorem-beatae-omnis-odio-inventore-quidem-ut-magnam-pariatur-alias-ut-ipsa-aperiam-in-ratione-libero-expedita-omnis-nulla"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Deleniti culpa optio autem vel. Aut explicabo qui sint rerum ea natus inventore. Est omnis vel omnis sed voluptatem a deleniti. Culpa aut ut illum voluptatem voluptatum nobis.",
-            "content": "Consequatur aliquam iste magnam quisquam consequat...",
-            "published_at": "2022-04-25 20:13:56",
-            "slug": "deleniti-culpa-optio-autem-vel-aut-explicabo-qui-sint-rerum-ea-natus-inventore-est-omnis-vel-omnis-sed-voluptatem-a-deleniti-culpa-aut-ut-illum-voluptatem-voluptatum-nobis"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Non voluptatem laudantium officia id porro est. Officiis officiis tempore nemo qui. Ut et qui est accusamus minima.",
-            "content": "Sed voluptatem praesentium autem omnis quo sunt pe...",
-            "published_at": "2022-05-16 10:12:50",
-            "slug": "non-voluptatem-laudantium-officia-id-porro-est-officiis-officiis-tempore-nemo-qui-ut-et-qui-est-accusamus-minima"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Et explicabo ut deleniti et nemo illo. Maxime ut nihil deleniti vitae porro. Quas voluptatem sint labore numquam aut sed.",
-            "content": "Dicta quia ut distinctio velit ipsum placeat ipsum...",
-            "published_at": "2022-05-18 07:50:07",
-            "slug": "et-explicabo-ut-deleniti-et-nemo-illo-maxime-ut-nihil-deleniti-vitae-porro-quas-voluptatem-sint-labore-numquam-aut-sed"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Autem odio consequuntur ut architecto placeat enim. Et adipisci eligendi ut fuga debitis qui dicta. Fugiat eveniet adipisci aut ut.",
-            "content": "Qui asperiores consequatur harum aliquam rerum. Cu...",
-            "published_at": "2022-05-14 01:54:51",
-            "slug": "autem-odio-consequuntur-ut-architecto-placeat-enim-et-adipisci-eligendi-ut-fuga-debitis-qui-dicta-fugiat-eveniet-adipisci-aut-ut"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 1,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-24T14:11:09.000000Z",
-                "name": "計廷",
-                "email": "zsong@example.org",
-                "email_verified_at": "2022-05-17T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 2,
-            "category_id": 2,
-            "title": "Qui dolor alias voluptas consequatur. Facere sunt nostrum alias illum id itaque odio laboriosam. Neque eum officiis molestias mollitia est rerum.",
-            "content": "Qui sunt aut excepturi dolor. Molestias nihil numq...",
-            "published_at": "2022-04-25 00:17:38",
-            "slug": "qui-dolor-alias-voluptas-consequatur-facere-sunt-nostrum-alias-illum-id-itaque-odio-laboriosam-neque-eum-officiis-molestias-mollitia-est-rerum"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 2,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "羊舌偉",
-                "email": "yujia.ru@example.net",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 1,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Pariatur veritatis at nam quam ut aut aut. Nam iure vitae consequuntur architecto illum. Labore sed eaque hic id officiis accusamus cupiditate.",
-            "content": "Eveniet voluptatem hic possimus possimus quo assum...",
-            "published_at": "2022-05-04 07:17:12",
-            "slug": "pariatur-veritatis-at-nam-quam-ut-aut-aut-nam-iure-vitae-consequuntur-architecto-illum-labore-sed-eaque-hic-id-officiis-accusamus-cupiditate"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 2,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "羊舌偉",
-                "email": "yujia.ru@example.net",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 1,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Magni magnam minus aspernatur. Beatae natus in sit soluta similique aut ea. Et consequatur quos quod eius beatae magnam. Magni voluptates deserunt reprehenderit et ab laboriosam.",
-            "content": "Inventore qui quisquam qui laudantium accusantium....",
-            "published_at": "2022-04-27 07:05:38",
-            "slug": "magni-magnam-minus-aspernatur-beatae-natus-in-sit-soluta-similique-aut-ea-et-consequatur-quos-quod-eius-beatae-magnam-magni-voluptates-deserunt-reprehenderit-et-ab-laboriosam"
+            "user_id": "{user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}"
         }
     ],
     "links": {
-        "first": "http://ones-blog-api.test/api/posts?category_id=2&page=1",
-        "last": "http://ones-blog-api.test/api/posts?category_id=2&page=2",
+        "first": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
+        "last": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
         "prev": null,
-        "next": "http://ones-blog-api.test/api/posts?category_id=2&page=2"
+        "next": null
     },
     "meta": {
         "current_page": 1,
         "from": 1,
-        "last_page": 2,
+        "last_page": 1,
         "links": [
             {
                 "url": null,
@@ -208,24 +28,19 @@
                 "active": false
             },
             {
-                "url": "http://ones-blog-api.test/api/posts?category_id=2&page=1",
+                "url": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
                 "label": "1",
                 "active": true
             },
             {
-                "url": "http://ones-blog-api.test/api/posts?category_id=2&page=2",
-                "label": "2",
-                "active": false
-            },
-            {
-                "url": "http://ones-blog-api.test/api/posts?category_id=2&page=2",
+                "url": null,
                 "label": "pagination.next",
                 "active": false
             }
         ],
-        "path": "http://ones-blog-api.test/api/posts",
+        "path": "http://ones-blog-api.test/api/locations",
         "per_page": 10,
-        "to": 10,
-        "total": 16
+        "to": 1,
+        "total": 1
     }
 }

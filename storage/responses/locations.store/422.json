@@ -1,0 +1,19 @@
+{
+    "data": {
+        "city_area_id": [
+            "{validation-error-message}"
+        ],
+        "category_id": [
+            "{validation-error-message}"
+        ],
+        "name": [
+            "{validation-error-message}"
+        ],
+        "address": [
+            "{validation-error-message}"
+        ],
+        "phone": [
+            "{validation-error-message}"
+        ]
+    }
+}

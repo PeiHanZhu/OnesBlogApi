@@ -88,9 +88,9 @@ response.json()
 ```json
 {
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }
 ```
@@ -240,9 +240,9 @@ response.json()
 ```json
 {
     "data": {
-        "name": "han",
-        "email": "hanTest@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }
 ```
@@ -250,9 +250,14 @@ response.json()
 
 ```json
 {
-    "data": [
-        "The code is incorrect."
-    ]
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
 }
 ```
 <div id="execution-results-POSTapi-verifyCode" hidden>
@@ -372,8 +377,8 @@ response.json()
 ```json
 {
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
+        "name": "{user-name}",
+        "email": "{user-email}",
         "token": "{personal-access-token}"
     }
 }
@@ -523,9 +528,9 @@ response.json()
 ```json
 {
     "data": {
-        "name": "HanHan",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{user-token}"
     }
 }
 ```
@@ -548,6 +553,9 @@ response.json()
 ```json
 {
     "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
         "password": [
             "{validation-error-message}"
         ]
@@ -686,9 +694,9 @@ response.json()
 ```json
 {
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }
 ```

@@ -1,4 +1,4 @@
-# 03. Comments
+# 04. Comments
 
 
 ## Display a listing of the comments.
@@ -83,19 +83,9 @@ response.json()
 {
     "data": [
         {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "commentTest"
-        },
-        {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "Test"
-        },
-        {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "TestTest"
+            "user_id": "{user-id}",
+            "post_id": "{post-id}",
+            "content": "{content}"
         }
     ],
     "links": {
@@ -127,8 +117,8 @@ response.json()
         ],
         "path": "http:\/\/ones-blog-api.test\/api\/posts\/109\/comments",
         "per_page": 10,
-        "to": 3,
-        "total": 3
+        "to": 1,
+        "total": 1
     }
 }
 ```
@@ -237,9 +227,9 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "TestTest"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }
 ```
@@ -372,9 +362,9 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "commentTest"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }
 ```
@@ -523,9 +513,9 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "0724Comment"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }
 ```
@@ -614,7 +604,7 @@ The content of the comment.
 
 ```bash
 curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/5" \
+    "http://ones-blog-api.test/api/posts/109/comments/16" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"
@@ -622,7 +612,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/5"
+    "http://ones-blog-api.test/api/posts/109/comments/16"
 );
 
 let headers = {
@@ -642,7 +632,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://ones-blog-api.test/api/posts/109/comments/5',
+    'http://ones-blog-api.test/api/posts/109/comments/16',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -658,7 +648,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/5'
+url = 'http://ones-blog-api.test/api/posts/109/comments/16'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

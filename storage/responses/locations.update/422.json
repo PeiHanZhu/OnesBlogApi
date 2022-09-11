@@ -1,9 +1,9 @@
 {
     "data": {
-        "email": [
+        "city_area_id": [
             "{validation-error-message}"
         ],
-        "code": [
+        "category_id": [
             "{validation-error-message}"
         ]
     }

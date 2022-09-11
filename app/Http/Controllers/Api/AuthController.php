@@ -150,7 +150,7 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'data' => $validator->errors->messages()
+                'data' => $validator->errors()->messages()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $user = User::where('email', $request->input('email'))->first();
@@ -159,7 +159,9 @@ class AuthController extends Controller
         } else {
             return response()->json([
                 'data' => [
-                    'The code is incorrect.'
+                    'email' => [
+                        'The code is incorrect.'
+                    ],
                 ],
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }

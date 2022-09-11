@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Location;
 
+use App\Enums\LocationCategoryEnum;
+use App\Http\Resources\LocationCollection;
+use App\Http\Resources\LocationResource;
 use App\Models\CityArea;
 use App\Models\Location;
 use App\Models\User;
@@ -14,22 +17,35 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     *  @var CityArea
+     */
+    protected $cityArea;
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(CityAndAreaSeeder::class);
+        $this->cityArea = CityArea::inRandomOrder()->first();
+    }
+
     public function testLocationQueriedByCategoryIdAndCityId()
     {
         // GIVEN
         $user = User::factory()->create();
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
-        $location = Location::factory()->create($data = [
+        $location = Location::factory()->create([
             'user_id' => $user->id,
-            'city_area_id' => $cityArea->id,
+            'city_area_id' => $this->cityArea->id,
         ]);
-        $data = array_diff_key($data, array_flip([
-            'user_id', 'city_area_id'
-        ]));
 
         $expected = [
-            'data' => $data
+            'data' => [
+                (new LocationResource($location))->jsonSerialize(),
+            ],
         ];
 
         // WHEN
@@ -42,56 +58,27 @@ class IndexTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
 
-    public function testLocationQueriedByCategoryIdAndRandom()
-    {
-        // GIVEN
-        $user = User::factory()->create();
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
-        $location = Location::factory()->create($data = [
-            'user_id' => $user->id,
-            'city_area_id' => $cityArea->id,
-        ]);
-        $data = array_diff_key($data, array_flip([
-            'user_id', 'city_area_id'
-        ]));
-
-        $expected = [
-            'data' => $data
-        ];
-
-        // WHEN
-        $response = $this->getJson(route('locations.index') . '?' . http_build_query([
-            'category_id' => $location->category_id,
-            'random' => true,
-        ]), $this->headers);
-
-        // THEN
-        $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
-    }
-
     public function testLocationQueriedByCategoryIdAndRanking()
     {
         // GIVEN
-        $user = User::factory()->create();
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
-        $location = Location::factory()->create($data = [
-            'user_id' => $user->id,
-            'city_area_id' => $cityArea->id,
-        ]);
-        $data = array_diff_key($data, array_flip([
-            'user_id', 'city_area_id'
-        ]));
+        $locations = collect();
+        $categoryId = LocationCategoryEnum::RESTAURANTS;
+        User::factory(3)->create()->each(function ($user, $i) use ($locations, $categoryId) {
+            $locations->push(Location::factory()->for($user)->create([
+                'category_id' => $categoryId,
+                'city_area_id' => $this->cityArea->id,
+                'avgScore' => $i + 1,
+            ]));
+        });
 
         $expected = [
-            'data' => $data
+            'data' => (new LocationCollection($locations->sortByDesc('avgScore')))->jsonSerialize(),
         ];
 
         // WHEN
         $response = $this->getJson(route('locations.index') . '?' . http_build_query([
-            'category_id' => $location->category_id,
-            'ranking' => true,
+            'category_id' => $categoryId,
+            'ranking' => 6,
         ]), $this->headers);
 
         // THEN

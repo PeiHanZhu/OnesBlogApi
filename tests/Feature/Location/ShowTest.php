@@ -7,35 +7,45 @@ use App\Models\Location;
 use App\Models\User;
 use Database\Seeders\CityAndAreaSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ShowTest extends TestCase
 {
-
     use RefreshDatabase;
+
+    /**
+     * @var CityArea
+     */
+    protected $cityArea;
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(CityAndAreaSeeder::class);
+        $this->cityArea = CityArea::inRandomOrder()->first();
+    }
 
     public function testWhenLocationDisplayed()
     {
         // GIVEN
-        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
-        $location = Location::factory()->create($data =
-            [
-                'user_id' => $user->id,
-                'city_area_id' => $cityArea->id,
-            ]
-        );
+        $user = User::factory()->create();
+        $location = Location::factory()->create($data = [
+            'user_id' => $user->id,
+            'city_area_id' => $this->cityArea->id,
+        ]);
 
         $expected = [
-            'data' => $data
+            'data' => $data,
         ];
 
         // WHEN
         $response = $this->getJson(route('locations.show', [
-            'location' => $location->id
+            'location' => $location->id,
         ]), $this->headers);
 
         // THEN
@@ -45,19 +55,16 @@ class ShowTest extends TestCase
     public function testWhenLocationNotFound()
     {
         // GIVEN
-        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
         $faker = \Faker\Factory::create();
         $locationId = $faker->numberBetween(100, 300);
 
         $expected = [
-            'data' => "Location(ID:{$locationId}) is not found."
+            'data' => "Location(ID:{$locationId}) is not found.",
         ];
 
         // WHEN
         $response = $this->getJson(route('locations.show', [
-            'location' => $locationId
+            'location' => $locationId,
         ]), $this->headers);
 
         // THEN

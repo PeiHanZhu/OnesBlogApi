@@ -1,7 +1,7 @@
 {
     "data": {
-        "name": "HanHan",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{user-token}"
     }
 }

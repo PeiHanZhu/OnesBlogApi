@@ -14,20 +14,29 @@ class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @var CityArea
+     */
+    protected $cityArea;
+
+    /**
+     * @inheritDoc
+     */
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->seed(CityAndAreaSeeder::class);
+        $this->cityArea = CityArea::inRandomOrder()->first();
     }
 
     public function testWhenLocationCreated()
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
         $data = [
             'user_id' => $user->id,
-            'city_area_id' => $cityArea->id,
+            'city_area_id' => $this->cityArea->id,
             'category_id' => 2,
             'name' => '巨小機械',
             'address' => '鳳仁街九段243巷701號64樓',
@@ -37,7 +46,7 @@ class StoreTest extends TestCase
         ];
 
         $expected = [
-            'data' => $data
+            'data' => $data,
         ];
 
         // WHEN
@@ -50,11 +59,9 @@ class StoreTest extends TestCase
     public function testWithoutPersonalAccessToken()
     {
         $user = User::factory()->create();
-        $this->seed(CityAndAreaSeeder::class);
-        $cityArea = CityArea::inRandomOrder()->first();
         $data = [
             'user_id' => $user->id,
-            'city_area_id' => $cityArea->id,
+            'city_area_id' => $this->cityArea->id,
             'category_id' => 2,
             'name' => '巨小機械',
             'address' => '鳳仁街九段243巷701號64樓',

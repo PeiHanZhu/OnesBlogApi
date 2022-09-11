@@ -1,21 +1,19 @@
 {
     "data": {
-        "created_at": "2022-07-23T08:29:28.000000Z",
+        "created_at": "{post-created-at}",
         "user": {
-            "id": 34,
-            "created_at": "2022-07-18T06:56:38.000000Z",
-            "updated_at": "2022-07-18T15:02:00.000000Z",
-            "name": "Han",
-            "email": "han@gmail.com",
-            "email_verified_at": "2022-07-18T06:57:03.000000Z",
-            "is_store": 0,
-            "login_type_id": 1
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}"
         },
-        "store_id": 6,
-        "category_id": 1,
-        "title": "Post",
-        "content": "Test",
-        "published_at": null,
-        "slug": "post"
+        "location_id": "{post-location_id}",
+        "title": "{post-title}",
+        "content": "{post-content}",
+        "published_at": "{post-published-at}",
+        "slug": "{post-slug}"
     }
 }

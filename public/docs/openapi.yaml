@@ -34,9 +34,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { name: Han, email: han@gmail.com, token: null }
+                                    data: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' }
                                 properties:
-                                    data: { type: object, example: { name: Han, email: han@gmail.com, token: null } }
+                                    data: { type: object, example: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' } }
                 422:
                     description: '422, when any validation failed.'
                     content:
@@ -105,9 +105,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { name: han, email: hanTest@gmail.com, token: null }
+                                    data: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' }
                                 properties:
-                                    data: { type: object, example: { name: han, email: hanTest@gmail.com, token: null } }
+                                    data: { type: object, example: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' } }
                 422:
                     description: '422, when verify incorrect.'
                     content:
@@ -115,9 +115,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: ['The code is incorrect.']
+                                    data: { email: ['{validation-error-message}'], code: ['{validation-error-message}'] }
                                 properties:
-                                    data: { type: array, example: ['The code is incorrect.'], items: { type: string } }
+                                    data: { type: object, example: { email: ['{validation-error-message}'], code: ['{validation-error-message}'] } }
             tags:
                 - '01. Authentication and User'
             requestBody:
@@ -166,9 +166,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { name: Han, email: han@gmail.com, token: '{personal-access-token}' }
+                                    data: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' }
                                 properties:
-                                    data: { type: object, example: { name: Han, email: han@gmail.com, token: '{personal-access-token}' } }
+                                    data: { type: object, example: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' } }
                 422:
                     description: '422, when any validation failed.'
                     content:
@@ -239,9 +239,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { name: HanHan, email: han@gmail.com, token: null }
+                                    data: { name: '{user-name}', email: '{user-email}', token: '{user-token}' }
                                 properties:
-                                    data: { type: object, example: { name: HanHan, email: han@gmail.com, token: null } }
+                                    data: { type: object, example: { name: '{user-name}', email: '{user-email}', token: '{user-token}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -269,9 +269,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { password: ['{validation-error-message}'] }
+                                    data: { email: ['{validation-error-message}'], password: ['{validation-error-message}'] }
                                 properties:
-                                    data: { type: object, example: { password: ['{validation-error-message}'] } }
+                                    data: { type: object, example: { email: ['{validation-error-message}'], password: ['{validation-error-message}'] } }
             tags:
                 - '01. Authentication and User'
             requestBody:
@@ -336,9 +336,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { name: Han, email: han@gmail.com, token: null }
+                                    data: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' }
                                 properties:
-                                    data: { type: object, example: { name: Han, email: han@gmail.com, token: null } }
+                                    data: { type: object, example: { name: '{user-name}', email: '{user-email}', token: '{personal-access-token}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -364,6 +364,433 @@ paths:
                                     example: iPhone
                             required:
                                 - device_name
+    /api/locations:
+        get:
+            summary: 'Display a listing of the locations.'
+            description: ''
+            parameters:
+                -
+                    in: query
+                    name: category_id
+                    description: 'The id of the category.'
+                    example: 2
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The id of the category.'
+                        example: 2
+                -
+                    in: query
+                    name: city_id
+                    description: 'The id of the city.'
+                    example: 11
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The id of the city.'
+                        example: 11
+                -
+                    in: query
+                    name: random
+                    description: 'Whether the results are in random order or not.'
+                    example: true
+                    required: false
+                    schema:
+                        type: boolean
+                        description: 'Whether the results are in random order or not.'
+                        example: true
+                -
+                    in: query
+                    name: ranking
+                    description: 'The top amount of the results.'
+                    example: 6
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The top amount of the results.'
+                        example: 6
+                -
+                    in: query
+                    name: limit
+                    description: 'The amount of results per page. Defaults to ''10''.'
+                    example: 10
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The amount of results per page. Defaults to ''10''.'
+                        example: 10
+                -
+                    in: query
+                    name: page
+                    description: 'The page of the results. Defaults to ''1''.'
+                    example: 1
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The page of the results. Defaults to ''1''.'
+                        example: 1
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when locations displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: [{ user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }]
+                                    links: { first: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', last: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', prev: null, next: null }
+                                    meta: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/locations', per_page: 10, to: 1, total: 1 }
+                                properties:
+                                    data: { type: array, example: [{ user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }], items: { type: object } }
+                                    links: { type: object, example: { first: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', last: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', prev: null, next: null } }
+                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/locations?category_id=1&city_id=11&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/locations', per_page: 10, to: 1, total: 1 } }
+            tags:
+                - '02. Locations'
+            security: []
+        post:
+            summary: 'Store a newly created resource in storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: token
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                201:
+                    description: '201, when location created.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }
+                                properties:
+                                    data: { type: object, example: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' } }
+                401:
+                    description: '401, without personal access token.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Unauthenticated.
+                                properties:
+                                    data: { type: string, example: Unauthenticated. }
+                422:
+                    description: '422, when any validation failed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { city_area_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'], name: ['{validation-error-message}'], address: ['{validation-error-message}'], phone: ['{validation-error-message}'] }
+                                properties:
+                                    data: { type: object, example: { city_area_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'], name: ['{validation-error-message}'], address: ['{validation-error-message}'], phone: ['{validation-error-message}'] } }
+            tags:
+                - '02. Locations'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                city_area_id:
+                                    type: integer
+                                    description: 'The city area of the location.'
+                                    example: 153
+                                category_id:
+                                    type: integer
+                                    description: 'The category of the location.'
+                                    example: 2
+                                name:
+                                    type: string
+                                    description: 'The name of the location.'
+                                    example: 新亞洲汽車
+                                address:
+                                    type: string
+                                    description: 'The address of the location.'
+                                    example: 賢好街四段43巷434號75樓
+                                phone:
+                                    type: string
+                                    description: 'The phone of the location.'
+                                    example: '9110576179'
+                                introduction:
+                                    type: string
+                                    description: 'The introduction of the location.'
+                                    example: Introduction
+                            required:
+                                - city_area_id
+                                - category_id
+                                - name
+                                - address
+                                - phone
+    '/api/locations/{location}':
+        get:
+            summary: 'Display the specified resource.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when location displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { user_id: 7, city_area_id: 86, category_id: 2, name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }
+                                properties:
+                                    data: { type: object, example: { user_id: 7, city_area_id: 86, category_id: 2, name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' } }
+                404:
+                    description: '404, when location not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'Location(ID:{location-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'Location(ID:{location-id}) is not found.' }
+            tags:
+                - '02. Locations'
+            security: []
+        put:
+            summary: 'Update the specified resource in storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: token
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when location displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }
+                                properties:
+                                    data: { type: object, example: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' } }
+                401:
+                    description: '401, without personal access token.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Unauthenticated.
+                                properties:
+                                    data: { type: string, example: Unauthenticated. }
+                403:
+                    description: '403, when location updated by wrong user.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'This action is unauthorized.'
+                                properties:
+                                    data: { type: string, example: 'This action is unauthorized.' }
+                404:
+                    description: '404, when location not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'Location(ID:{location-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'Location(ID:{location-id}) is not found.' }
+                422:
+                    description: '422, when any validation failed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { city_area_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'] }
+                                properties:
+                                    data: { type: object, example: { city_area_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'] } }
+            tags:
+                - '02. Locations'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                city_area_id:
+                                    type: integer
+                                    description: 'The city area of the location.'
+                                    example: 153
+                                category_id:
+                                    type: integer
+                                    description: 'The category of the location.'
+                                    example: 2
+                                name:
+                                    type: string
+                                    description: 'The name of the location.'
+                                    example: 統一娛樂
+                                address:
+                                    type: string
+                                    description: 'The address of the location.'
+                                    example: 豐裡二路180巷804弄601號49樓
+                                phone:
+                                    type: string
+                                    description: 'The phone of the location.'
+                                    example: '1335933680'
+                                introduction:
+                                    type: string
+                                    description: 'The introduction of the location.'
+                                    example: IntroductionTest
+                            required:
+                                - city_area_id
+                                - category_id
+                                - name
+                                - address
+                                - phone
+        delete:
+            summary: 'Remove the specified resource from storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: token
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when location deleted.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Success
+                                properties:
+                                    data: { type: string, example: Success }
+                401:
+                    description: '401, without personal access token.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Unauthenticated.
+                                properties:
+                                    data: { type: string, example: Unauthenticated. }
+                403:
+                    description: '403, when location deleted by wrong user.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'This action is unauthorized.'
+                                properties:
+                                    data: { type: string, example: 'This action is unauthorized.' }
+                404:
+                    description: '404, when location not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'Location(ID:{location-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'Location(ID:{location-id}) is not found.' }
+            tags:
+                - '02. Locations'
+        parameters:
+            -
+                in: path
+                name: location
+                description: 'The id of the location.'
+                example: 5
+                required: true
+                schema:
+                    type: integer
     /api/posts:
         get:
             summary: 'Display a listing of the posts.'
@@ -421,15 +848,15 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: [{ created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Tenetur dignissimos nostrum ad. Et numquam qui tenetur esse ut omnis consequatur. Soluta et esse cumque. Illum eos deleniti alias iure vel eos.', content: 'Mollitia consequatur alias accusamus a rem. Explic...', published_at: '2022-05-05 17:57:31', slug: tenetur-dignissimos-nostrum-ad-et-numquam-qui-tenetur-esse-ut-omnis-consequatur-soluta-et-esse-cumque-illum-eos-deleniti-alias-iure-vel-eos }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Cumque doloremque repudiandae occaecati alias autem. Et velit rerum recusandae illum unde cupiditate est.', content: 'Ut sed eum odit distinctio aut. Rem id fugit conse...', published_at: '2022-05-17 07:04:48', slug: cumque-doloremque-repudiandae-occaecati-alias-autem-et-velit-rerum-recusandae-illum-unde-cupiditate-est }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Officia omnis commodi quia adipisci eos. Quaerat quam maiores atque dolorem beatae omnis odio. Inventore quidem ut magnam pariatur alias ut ipsa. Aperiam in ratione libero expedita omnis nulla.', content: 'Reiciendis et laborum quia eaque. Dolorem et ducim...', published_at: '2022-04-29 01:24:19', slug: officia-omnis-commodi-quia-adipisci-eos-quaerat-quam-maiores-atque-dolorem-beatae-omnis-odio-inventore-quidem-ut-magnam-pariatur-alias-ut-ipsa-aperiam-in-ratione-libero-expedita-omnis-nulla }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Deleniti culpa optio autem vel. Aut explicabo qui sint rerum ea natus inventore. Est omnis vel omnis sed voluptatem a deleniti. Culpa aut ut illum voluptatem voluptatum nobis.', content: 'Consequatur aliquam iste magnam quisquam consequat...', published_at: '2022-04-25 20:13:56', slug: deleniti-culpa-optio-autem-vel-aut-explicabo-qui-sint-rerum-ea-natus-inventore-est-omnis-vel-omnis-sed-voluptatem-a-deleniti-culpa-aut-ut-illum-voluptatem-voluptatum-nobis }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Non voluptatem laudantium officia id porro est. Officiis officiis tempore nemo qui. Ut et qui est accusamus minima.', content: 'Sed voluptatem praesentium autem omnis quo sunt pe...', published_at: '2022-05-16 10:12:50', slug: non-voluptatem-laudantium-officia-id-porro-est-officiis-officiis-tempore-nemo-qui-ut-et-qui-est-accusamus-minima }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Et explicabo ut deleniti et nemo illo. Maxime ut nihil deleniti vitae porro. Quas voluptatem sint labore numquam aut sed.', content: 'Dicta quia ut distinctio velit ipsum placeat ipsum...', published_at: '2022-05-18 07:50:07', slug: et-explicabo-ut-deleniti-et-nemo-illo-maxime-ut-nihil-deleniti-vitae-porro-quas-voluptatem-sint-labore-numquam-aut-sed }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Autem odio consequuntur ut architecto placeat enim. Et adipisci eligendi ut fuga debitis qui dicta. Fugiat eveniet adipisci aut ut.', content: 'Qui asperiores consequatur harum aliquam rerum. Cu...', published_at: '2022-05-14 01:54:51', slug: autem-odio-consequuntur-ut-architecto-placeat-enim-et-adipisci-eligendi-ut-fuga-debitis-qui-dicta-fugiat-eveniet-adipisci-aut-ut }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 1, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-24T14:11:09.000000Z', name: 計廷, email: zsong@example.org, email_verified_at: '2022-05-17T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 2, category_id: 2, title: 'Qui dolor alias voluptas consequatur. Facere sunt nostrum alias illum id itaque odio laboriosam. Neque eum officiis molestias mollitia est rerum.', content: 'Qui sunt aut excepturi dolor. Molestias nihil numq...', published_at: '2022-04-25 00:17:38', slug: qui-dolor-alias-voluptas-consequatur-facere-sunt-nostrum-alias-illum-id-itaque-odio-laboriosam-neque-eum-officiis-molestias-mollitia-est-rerum }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 2, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 羊舌偉, email: yujia.ru@example.net, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 1, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Pariatur veritatis at nam quam ut aut aut. Nam iure vitae consequuntur architecto illum. Labore sed eaque hic id officiis accusamus cupiditate.', content: 'Eveniet voluptatem hic possimus possimus quo assum...', published_at: '2022-05-04 07:17:12', slug: pariatur-veritatis-at-nam-quam-ut-aut-aut-nam-iure-vitae-consequuntur-architecto-illum-labore-sed-eaque-hic-id-officiis-accusamus-cupiditate }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 2, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 羊舌偉, email: yujia.ru@example.net, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 1, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Magni magnam minus aspernatur. Beatae natus in sit soluta similique aut ea. Et consequatur quos quod eius beatae magnam. Magni voluptates deserunt reprehenderit et ab laboriosam.', content: 'Inventore qui quisquam qui laudantium accusantium....', published_at: '2022-04-27 07:05:38', slug: magni-magnam-minus-aspernatur-beatae-natus-in-sit-soluta-similique-aut-ea-et-consequatur-quos-quod-eius-beatae-magnam-magni-voluptates-deserunt-reprehenderit-et-ab-laboriosam }]
-                                    links: { first: 'http://ones-blog-api.test/api/posts?category_id=2&page=1', last: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', prev: null, next: 'http://ones-blog-api.test/api/posts?category_id=2&page=2' }
-                                    meta: { current_page: 1, from: 1, last_page: 2, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=1', label: '1', active: true }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', label: '2', active: false }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts', per_page: 10, to: 10, total: 16 }
+                                    data: [{ user_id: '{user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }]
+                                    links: { first: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', last: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', prev: null, next: null }
+                                    meta: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/locations', per_page: 10, to: 1, total: 1 }
                                 properties:
-                                    data: { type: array, example: [{ created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Tenetur dignissimos nostrum ad. Et numquam qui tenetur esse ut omnis consequatur. Soluta et esse cumque. Illum eos deleniti alias iure vel eos.', content: 'Mollitia consequatur alias accusamus a rem. Explic...', published_at: '2022-05-05 17:57:31', slug: tenetur-dignissimos-nostrum-ad-et-numquam-qui-tenetur-esse-ut-omnis-consequatur-soluta-et-esse-cumque-illum-eos-deleniti-alias-iure-vel-eos }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Cumque doloremque repudiandae occaecati alias autem. Et velit rerum recusandae illum unde cupiditate est.', content: 'Ut sed eum odit distinctio aut. Rem id fugit conse...', published_at: '2022-05-17 07:04:48', slug: cumque-doloremque-repudiandae-occaecati-alias-autem-et-velit-rerum-recusandae-illum-unde-cupiditate-est }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Officia omnis commodi quia adipisci eos. Quaerat quam maiores atque dolorem beatae omnis odio. Inventore quidem ut magnam pariatur alias ut ipsa. Aperiam in ratione libero expedita omnis nulla.', content: 'Reiciendis et laborum quia eaque. Dolorem et ducim...', published_at: '2022-04-29 01:24:19', slug: officia-omnis-commodi-quia-adipisci-eos-quaerat-quam-maiores-atque-dolorem-beatae-omnis-odio-inventore-quidem-ut-magnam-pariatur-alias-ut-ipsa-aperiam-in-ratione-libero-expedita-omnis-nulla }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Deleniti culpa optio autem vel. Aut explicabo qui sint rerum ea natus inventore. Est omnis vel omnis sed voluptatem a deleniti. Culpa aut ut illum voluptatem voluptatum nobis.', content: 'Consequatur aliquam iste magnam quisquam consequat...', published_at: '2022-04-25 20:13:56', slug: deleniti-culpa-optio-autem-vel-aut-explicabo-qui-sint-rerum-ea-natus-inventore-est-omnis-vel-omnis-sed-voluptatem-a-deleniti-culpa-aut-ut-illum-voluptatem-voluptatum-nobis }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Non voluptatem laudantium officia id porro est. Officiis officiis tempore nemo qui. Ut et qui est accusamus minima.', content: 'Sed voluptatem praesentium autem omnis quo sunt pe...', published_at: '2022-05-16 10:12:50', slug: non-voluptatem-laudantium-officia-id-porro-est-officiis-officiis-tempore-nemo-qui-ut-et-qui-est-accusamus-minima }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 3, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T14:43:09.000000Z', name: 酈霖銘, email: ilu@example.com, email_verified_at: '2022-05-23T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Et explicabo ut deleniti et nemo illo. Maxime ut nihil deleniti vitae porro. Quas voluptatem sint labore numquam aut sed.', content: 'Dicta quia ut distinctio velit ipsum placeat ipsum...', published_at: '2022-05-18 07:50:07', slug: et-explicabo-ut-deleniti-et-nemo-illo-maxime-ut-nihil-deleniti-vitae-porro-quas-voluptatem-sint-labore-numquam-aut-sed }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 5, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 冷傑, email: jgan@example.org, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Autem odio consequuntur ut architecto placeat enim. Et adipisci eligendi ut fuga debitis qui dicta. Fugiat eveniet adipisci aut ut.', content: 'Qui asperiores consequatur harum aliquam rerum. Cu...', published_at: '2022-05-14 01:54:51', slug: autem-odio-consequuntur-ut-architecto-placeat-enim-et-adipisci-eligendi-ut-fuga-debitis-qui-dicta-fugiat-eveniet-adipisci-aut-ut }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 1, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-24T14:11:09.000000Z', name: 計廷, email: zsong@example.org, email_verified_at: '2022-05-17T04:29:46.000000Z', is_store: 0, login_type_id: 1 }, store_id: 2, category_id: 2, title: 'Qui dolor alias voluptas consequatur. Facere sunt nostrum alias illum id itaque odio laboriosam. Neque eum officiis molestias mollitia est rerum.', content: 'Qui sunt aut excepturi dolor. Molestias nihil numq...', published_at: '2022-04-25 00:17:38', slug: qui-dolor-alias-voluptas-consequatur-facere-sunt-nostrum-alias-illum-id-itaque-odio-laboriosam-neque-eum-officiis-molestias-mollitia-est-rerum }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 2, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 羊舌偉, email: yujia.ru@example.net, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 1, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Pariatur veritatis at nam quam ut aut aut. Nam iure vitae consequuntur architecto illum. Labore sed eaque hic id officiis accusamus cupiditate.', content: 'Eveniet voluptatem hic possimus possimus quo assum...', published_at: '2022-05-04 07:17:12', slug: pariatur-veritatis-at-nam-quam-ut-aut-aut-nam-iure-vitae-consequuntur-architecto-illum-labore-sed-eaque-hic-id-officiis-accusamus-cupiditate }, { created_at: '2022-05-23T12:29:46.000000Z', user: { id: 2, created_at: '2022-05-23T12:29:46.000000Z', updated_at: '2022-05-23T12:29:46.000000Z', name: 羊舌偉, email: yujia.ru@example.net, email_verified_at: '2022-05-23T12:29:46.000000Z', is_store: 1, login_type_id: 1 }, store_id: 1, category_id: 2, title: 'Magni magnam minus aspernatur. Beatae natus in sit soluta similique aut ea. Et consequatur quos quod eius beatae magnam. Magni voluptates deserunt reprehenderit et ab laboriosam.', content: 'Inventore qui quisquam qui laudantium accusantium....', published_at: '2022-04-27 07:05:38', slug: magni-magnam-minus-aspernatur-beatae-natus-in-sit-soluta-similique-aut-ea-et-consequatur-quos-quod-eius-beatae-magnam-magni-voluptates-deserunt-reprehenderit-et-ab-laboriosam }], items: { type: object } }
-                                    links: { type: object, example: { first: 'http://ones-blog-api.test/api/posts?category_id=2&page=1', last: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', prev: null, next: 'http://ones-blog-api.test/api/posts?category_id=2&page=2' } }
-                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 2, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=1', label: '1', active: true }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', label: '2', active: false }, { url: 'http://ones-blog-api.test/api/posts?category_id=2&page=2', label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts', per_page: 10, to: 10, total: 16 } }
+                                    data: { type: array, example: [{ user_id: '{user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }], items: { type: object } }
+                                    links: { type: object, example: { first: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', last: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', prev: null, next: null } }
+                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/locations', per_page: 10, to: 1, total: 1 } }
             tags:
-                - '02. Posts'
+                - '03. Posts'
             security: []
         post:
             summary: 'Store a newly created post in storage.'
@@ -464,9 +891,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { created_at: '2022-07-23T08:29:28.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T15:02:00.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 6, category_id: 1, title: Post, content: Test, published_at: null, slug: post }
+                                    data: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location_id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' }
                                 properties:
-                                    data: { type: object, example: { created_at: '2022-07-23T08:29:28.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T15:02:00.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 6, category_id: 1, title: Post, content: Test, published_at: null, slug: post } }
+                                    data: { type: object, example: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location_id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -484,11 +911,11 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { user_id: ['{validation-error-message}'], store_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'], title: ['{validation-error-message}'] }
+                                    data: { location_id: ['{validation-error-message}'], title: ['{validation-error-message}'] }
                                 properties:
-                                    data: { type: object, example: { user_id: ['{validation-error-message}'], store_id: ['{validation-error-message}'], category_id: ['{validation-error-message}'], title: ['{validation-error-message}'] } }
+                                    data: { type: object, example: { location_id: ['{validation-error-message}'], title: ['{validation-error-message}'] } }
             tags:
-                - '02. Posts'
+                - '03. Posts'
             requestBody:
                 required: true
                 content:
@@ -546,9 +973,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { created_at: '2022-07-18T06:58:02.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T06:57:03.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 6, category_id: 2, title: post, content: test, published_at: null, slug: post }
+                                    data: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' }
                                 properties:
-                                    data: { type: object, example: { created_at: '2022-07-18T06:58:02.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T06:57:03.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 6, category_id: 2, title: post, content: test, published_at: null, slug: post } }
+                                    data: { type: object, example: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' } }
                 404:
                     description: '404, when post not found, inactive or unpublished.'
                     content:
@@ -560,7 +987,7 @@ paths:
                                 properties:
                                     data: { type: string, example: 'Post(ID:{post-id}) is not found.' }
             tags:
-                - '02. Posts'
+                - '03. Posts'
             security: []
         put:
             summary: 'Update the specified post in storage.'
@@ -595,9 +1022,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { created_at: '2022-07-23T08:31:45.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T15:02:00.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 3, title: 0724Post, content: 0724Test, published_at: '2022-07-24 00:00:00', slug: 0724post }
+                                    data: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' }
                                 properties:
-                                    data: { type: object, example: { created_at: '2022-07-23T08:31:45.000000Z', user: { id: 34, created_at: '2022-07-18T06:56:38.000000Z', updated_at: '2022-07-18T15:02:00.000000Z', name: Han, email: han@gmail.com, email_verified_at: '2022-07-18T06:57:03.000000Z', is_store: 0, login_type_id: 1 }, store_id: 1, category_id: 3, title: 0724Post, content: 0724Test, published_at: '2022-07-24 00:00:00', slug: 0724post } }
+                                    data: { type: object, example: { created_at: '{post-created-at}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', slug: '{post-slug}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -625,11 +1052,11 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { category_id: ['{validation-error-message}'] }
+                                    data: { title: ['{validation-error-message}'], published_at: ['{validation-error-message}'], active: ['{validation-error-message}'] }
                                 properties:
-                                    data: { type: object, example: { category_id: ['{validation-error-message}'] } }
+                                    data: { type: object, example: { title: ['{validation-error-message}'], published_at: ['{validation-error-message}'], active: ['{validation-error-message}'] } }
             tags:
-                - '02. Posts'
+                - '03. Posts'
             requestBody:
                 required: false
                 content:
@@ -710,7 +1137,7 @@ paths:
                                 properties:
                                     data: { type: string, example: 'Post(ID:{post-id}) is not found.' }
             tags:
-                - '02. Posts'
+                - '03. Posts'
         parameters:
             -
                 in: path
@@ -767,15 +1194,15 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: [{ user_id: 34, post_id: 109, content: commentTest }, { user_id: 34, post_id: 109, content: Test }, { user_id: 34, post_id: 109, content: TestTest }]
+                                    data: [{ user_id: '{user-id}', post_id: '{post-id}', content: '{content}' }]
                                     links: { first: 'http://ones-blog-api.test/api/posts/109/comments?page=1', last: 'http://ones-blog-api.test/api/posts/109/comments?page=1', prev: null, next: null }
-                                    meta: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts/109/comments?page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts/109/comments', per_page: 10, to: 3, total: 3 }
+                                    meta: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts/109/comments?page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts/109/comments', per_page: 10, to: 1, total: 1 }
                                 properties:
-                                    data: { type: array, example: [{ user_id: 34, post_id: 109, content: commentTest }, { user_id: 34, post_id: 109, content: Test }, { user_id: 34, post_id: 109, content: TestTest }], items: { type: object } }
+                                    data: { type: array, example: [{ user_id: '{user-id}', post_id: '{post-id}', content: '{content}' }], items: { type: object } }
                                     links: { type: object, example: { first: 'http://ones-blog-api.test/api/posts/109/comments?page=1', last: 'http://ones-blog-api.test/api/posts/109/comments?page=1', prev: null, next: null } }
-                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts/109/comments?page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts/109/comments', per_page: 10, to: 3, total: 3 } }
+                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/posts/109/comments?page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/posts/109/comments', per_page: 10, to: 1, total: 1 } }
             tags:
-                - '03. Comments'
+                - '04. Comments'
             security: []
         post:
             summary: 'Store a newly created comment in storage.'
@@ -810,9 +1237,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { user_id: 34, post_id: 109, content: commentTest }
+                                    data: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' }
                                 properties:
-                                    data: { type: object, example: { user_id: 34, post_id: 109, content: commentTest } }
+                                    data: { type: object, example: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -844,7 +1271,7 @@ paths:
                                 properties:
                                     data: { type: object, example: { content: ['{validation-error-message}'] } }
             tags:
-                - '03. Comments'
+                - '04. Comments'
             requestBody:
                 required: false
                 content:
@@ -892,9 +1319,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { user_id: 34, post_id: 109, content: TestTest }
+                                    data: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' }
                                 properties:
-                                    data: { type: object, example: { user_id: 34, post_id: 109, content: TestTest } }
+                                    data: { type: object, example: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' } }
                 404:
                     description: '404, when comment not found.'
                     content:
@@ -906,7 +1333,7 @@ paths:
                                 properties:
                                     data: { type: string, example: 'Comment(ID:{comment-id}) is not found.' }
             tags:
-                - '03. Comments'
+                - '04. Comments'
             security: []
         put:
             summary: 'Update the specified comment in storage.'
@@ -941,9 +1368,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { user_id: 34, post_id: 109, content: 0724Comment }
+                                    data: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' }
                                 properties:
-                                    data: { type: object, example: { user_id: 34, post_id: 109, content: 0724Comment } }
+                                    data: { type: object, example: { user_id: '{user-id}', post_id: '{post-id}', content: '{content}' } }
                 401:
                     description: '401, without personal access token.'
                     content:
@@ -975,7 +1402,7 @@ paths:
                                 properties:
                                     data: { type: object, example: { content: ['{validation-error-message}'] } }
             tags:
-                - '03. Comments'
+                - '04. Comments'
             requestBody:
                 required: true
                 content:
@@ -1046,7 +1473,7 @@ paths:
                                 properties:
                                     data: { type: string, example: 'Comment(ID:{comment-id}) is not found.' }
             tags:
-                - '03. Comments'
+                - '04. Comments'
         parameters:
             -
                 in: path

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "3be2285c-a2e5-4cca-b0f0-c69205f5f19b",
+        "_postman_id": "4d7264e9-e837-411a-8c6c-32bafffc00cb",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -82,7 +82,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"Han\",\n        \"email\": \"han@gmail.com\",\n        \"token\": null\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
                         },
                         {
                             "name": "Register a user with a personal access token for the device. Response #2",
@@ -183,7 +183,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"han\",\n        \"email\": \"hanTest@gmail.com\",\n        \"token\": null\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
                         },
                         {
                             "name": "Verify a user with a code. Response #2",
@@ -217,7 +217,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        \"The code is incorrect.\"\n    ]\n}"
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"code\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -284,7 +284,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"Han\",\n        \"email\": \"han@gmail.com\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
                         },
                         {
                             "name": "Login a user with a new personal access token for the device. Response #2",
@@ -403,7 +403,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"HanHan\",\n        \"email\": \"han@gmail.com\",\n        \"token\": null\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{user-token}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified user in storage. Response #2",
@@ -532,7 +532,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"password\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"password\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -601,7 +601,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"Han\",\n        \"email\": \"han@gmail.com\",\n        \"token\": null\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
                         },
                         {
                             "name": "Logout a user with all the personal access tokens being revoked on the device. Response #2",
@@ -643,7 +643,859 @@
             ]
         },
         {
-            "name": "02. Posts",
+            "name": "02. Locations",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the locations.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations",
+                            "query": [
+                                {
+                                    "key": "category_id",
+                                    "value": "2",
+                                    "description": "The id of the category.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "city_id",
+                                    "value": "11",
+                                    "description": "The id of the city.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "random",
+                                    "value": "1",
+                                    "description": "Whether the results are in random order or not.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "ranking",
+                                    "value": "6",
+                                    "description": "The top amount of the results.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10",
+                                    "description": "The amount of results per page. Defaults to '10'.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page of the results. Defaults to '1'.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=1&ranking=6&limit=10&page=1"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display a listing of the locations. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations",
+                                    "query": [
+                                        {
+                                            "key": "category_id",
+                                            "value": "2",
+                                            "description": "The id of the category.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "city_id",
+                                            "value": "11",
+                                            "description": "The id of the city.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "random",
+                                            "value": "1",
+                                            "description": "Whether the results are in random order or not.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "ranking",
+                                            "value": "6",
+                                            "description": "The top amount of the results.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=1&ranking=6&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"city_area_id\": \"{city-area-id}\",\n            \"category_id\": \"{category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations\/:location",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                            "variable": [
+                                {
+                                    "id": "location",
+                                    "key": "location",
+                                    "value": "5",
+                                    "description": "The id of the location."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display the specified resource. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"user_id\": 7,\n        \"city_area_id\": 86,\n        \"category_id\": 2,\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                        },
+                        {
+                            "name": "Display the specified resource. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Location(ID:{location-id}) is not found.\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "token",
+                                "value": "Bearer {personal-access-token}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u65b0\u4e9e\u6d32\u6c7d\u8eca\",\n    \"address\": \"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13\",\n    \"phone\": \"9110576179\",\n    \"introduction\": \"Introduction\"\n}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "name": "Store a newly created resource in storage. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u65b0\u4e9e\u6d32\u6c7d\u8eca\",\n    \"address\": \"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13\",\n    \"phone\": \"9110576179\",\n    \"introduction\": \"Introduction\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                        },
+                        {
+                            "name": "Store a newly created resource in storage. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u65b0\u4e9e\u6d32\u6c7d\u8eca\",\n    \"address\": \"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13\",\n    \"phone\": \"9110576179\",\n    \"introduction\": \"Introduction\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
+                        },
+                        {
+                            "name": "Store a newly created resource in storage. Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u65b0\u4e9e\u6d32\u6c7d\u8eca\",\n    \"address\": \"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13\",\n    \"phone\": \"9110576179\",\n    \"introduction\": \"Introduction\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"city_area_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"category_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"name\": [\n            \"{validation-error-message}\"\n        ],\n        \"address\": [\n            \"{validation-error-message}\"\n        ],\n        \"phone\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations\/:location",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                            "variable": [
+                                {
+                                    "id": "location",
+                                    "key": "location",
+                                    "value": "5",
+                                    "description": "The id of the location."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "token",
+                                "value": "Bearer {personal-access-token}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "name": "Update the specified resource in storage. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                        },
+                        {
+                            "name": "Update the specified resource in storage. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
+                        },
+                        {
+                            "name": "Update the specified resource in storage. Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"This action is unauthorized.\"\n}"
+                        },
+                        {
+                            "name": "Update the specified resource in storage. Response #4",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Location(ID:{location-id}) is not found.\"\n}"
+                        },
+                        {
+                            "name": "Update the specified resource in storage. Response #5",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"city_area_id\": 153,\n    \"category_id\": 2,\n    \"name\": \"\u7d71\u4e00\u5a1b\u6a02\",\n    \"address\": \"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13\",\n    \"phone\": \"1335933680\",\n    \"introduction\": \"IntroductionTest\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"city_area_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"category_id\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations\/:location",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                            "variable": [
+                                {
+                                    "id": "location",
+                                    "key": "location",
+                                    "value": "5",
+                                    "description": "The id of the location."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "token",
+                                "value": "Bearer {personal-access-token}"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "name": "Remove the specified resource from storage. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Success\"\n}"
+                        },
+                        {
+                            "name": "Remove the specified resource from storage. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
+                        },
+                        {
+                            "name": "Remove the specified resource from storage. Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"This action is unauthorized.\"\n}"
+                        },
+                        {
+                            "name": "Remove the specified resource from storage. Response #4",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "5",
+                                            "description": "The id of the location."
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Location(ID:{location-id}) is not found.\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "03. Posts",
             "description": "",
             "item": [
                 {
@@ -741,7 +1593,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 5,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u51b7\\u5091\",\n                \"email\": \"jgan@example.org\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Tenetur dignissimos nostrum ad. Et numquam qui tenetur esse ut omnis consequatur. Soluta et esse cumque. Illum eos deleniti alias iure vel eos.\",\n            \"content\": \"Mollitia consequatur alias accusamus a rem. Explic...\",\n            \"published_at\": \"2022-05-05 17:57:31\",\n            \"slug\": \"tenetur-dignissimos-nostrum-ad-et-numquam-qui-tenetur-esse-ut-omnis-consequatur-soluta-et-esse-cumque-illum-eos-deleniti-alias-iure-vel-eos\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 5,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u51b7\\u5091\",\n                \"email\": \"jgan@example.org\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Cumque doloremque repudiandae occaecati alias autem. Et velit rerum recusandae illum unde cupiditate est.\",\n            \"content\": \"Ut sed eum odit distinctio aut. Rem id fugit conse...\",\n            \"published_at\": \"2022-05-17 07:04:48\",\n            \"slug\": \"cumque-doloremque-repudiandae-occaecati-alias-autem-et-velit-rerum-recusandae-illum-unde-cupiditate-est\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 3,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T14:43:09.000000Z\",\n                \"name\": \"\\u9148\\u9716\\u9298\",\n                \"email\": \"ilu@example.com\",\n                \"email_verified_at\": \"2022-05-23T04:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Officia omnis commodi quia adipisci eos. Quaerat quam maiores atque dolorem beatae omnis odio. Inventore quidem ut magnam pariatur alias ut ipsa. Aperiam in ratione libero expedita omnis nulla.\",\n            \"content\": \"Reiciendis et laborum quia eaque. Dolorem et ducim...\",\n            \"published_at\": \"2022-04-29 01:24:19\",\n            \"slug\": \"officia-omnis-commodi-quia-adipisci-eos-quaerat-quam-maiores-atque-dolorem-beatae-omnis-odio-inventore-quidem-ut-magnam-pariatur-alias-ut-ipsa-aperiam-in-ratione-libero-expedita-omnis-nulla\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 3,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T14:43:09.000000Z\",\n                \"name\": \"\\u9148\\u9716\\u9298\",\n                \"email\": \"ilu@example.com\",\n                \"email_verified_at\": \"2022-05-23T04:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Deleniti culpa optio autem vel. Aut explicabo qui sint rerum ea natus inventore. Est omnis vel omnis sed voluptatem a deleniti. Culpa aut ut illum voluptatem voluptatum nobis.\",\n            \"content\": \"Consequatur aliquam iste magnam quisquam consequat...\",\n            \"published_at\": \"2022-04-25 20:13:56\",\n            \"slug\": \"deleniti-culpa-optio-autem-vel-aut-explicabo-qui-sint-rerum-ea-natus-inventore-est-omnis-vel-omnis-sed-voluptatem-a-deleniti-culpa-aut-ut-illum-voluptatem-voluptatum-nobis\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 5,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u51b7\\u5091\",\n                \"email\": \"jgan@example.org\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Non voluptatem laudantium officia id porro est. Officiis officiis tempore nemo qui. Ut et qui est accusamus minima.\",\n            \"content\": \"Sed voluptatem praesentium autem omnis quo sunt pe...\",\n            \"published_at\": \"2022-05-16 10:12:50\",\n            \"slug\": \"non-voluptatem-laudantium-officia-id-porro-est-officiis-officiis-tempore-nemo-qui-ut-et-qui-est-accusamus-minima\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 3,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T14:43:09.000000Z\",\n                \"name\": \"\\u9148\\u9716\\u9298\",\n                \"email\": \"ilu@example.com\",\n                \"email_verified_at\": \"2022-05-23T04:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Et explicabo ut deleniti et nemo illo. Maxime ut nihil deleniti vitae porro. Quas voluptatem sint labore numquam aut sed.\",\n            \"content\": \"Dicta quia ut distinctio velit ipsum placeat ipsum...\",\n            \"published_at\": \"2022-05-18 07:50:07\",\n            \"slug\": \"et-explicabo-ut-deleniti-et-nemo-illo-maxime-ut-nihil-deleniti-vitae-porro-quas-voluptatem-sint-labore-numquam-aut-sed\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 5,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u51b7\\u5091\",\n                \"email\": \"jgan@example.org\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Autem odio consequuntur ut architecto placeat enim. Et adipisci eligendi ut fuga debitis qui dicta. Fugiat eveniet adipisci aut ut.\",\n            \"content\": \"Qui asperiores consequatur harum aliquam rerum. Cu...\",\n            \"published_at\": \"2022-05-14 01:54:51\",\n            \"slug\": \"autem-odio-consequuntur-ut-architecto-placeat-enim-et-adipisci-eligendi-ut-fuga-debitis-qui-dicta-fugiat-eveniet-adipisci-aut-ut\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 1,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-24T14:11:09.000000Z\",\n                \"name\": \"\\u8a08\\u5ef7\",\n                \"email\": \"zsong@example.org\",\n                \"email_verified_at\": \"2022-05-17T04:29:46.000000Z\",\n                \"is_store\": 0,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 2,\n            \"category_id\": 2,\n            \"title\": \"Qui dolor alias voluptas consequatur. Facere sunt nostrum alias illum id itaque odio laboriosam. Neque eum officiis molestias mollitia est rerum.\",\n            \"content\": \"Qui sunt aut excepturi dolor. Molestias nihil numq...\",\n            \"published_at\": \"2022-04-25 00:17:38\",\n            \"slug\": \"qui-dolor-alias-voluptas-consequatur-facere-sunt-nostrum-alias-illum-id-itaque-odio-laboriosam-neque-eum-officiis-molestias-mollitia-est-rerum\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 2,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u7f8a\\u820c\\u5049\",\n                \"email\": \"yujia.ru@example.net\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 1,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Pariatur veritatis at nam quam ut aut aut. Nam iure vitae consequuntur architecto illum. Labore sed eaque hic id officiis accusamus cupiditate.\",\n            \"content\": \"Eveniet voluptatem hic possimus possimus quo assum...\",\n            \"published_at\": \"2022-05-04 07:17:12\",\n            \"slug\": \"pariatur-veritatis-at-nam-quam-ut-aut-aut-nam-iure-vitae-consequuntur-architecto-illum-labore-sed-eaque-hic-id-officiis-accusamus-cupiditate\"\n        },\n        {\n            \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n            \"user\": {\n                \"id\": 2,\n                \"created_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"updated_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"name\": \"\\u7f8a\\u820c\\u5049\",\n                \"email\": \"yujia.ru@example.net\",\n                \"email_verified_at\": \"2022-05-23T12:29:46.000000Z\",\n                \"is_store\": 1,\n                \"login_type_id\": 1\n            },\n            \"store_id\": 1,\n            \"category_id\": 2,\n            \"title\": \"Magni magnam minus aspernatur. Beatae natus in sit soluta similique aut ea. Et consequatur quos quod eius beatae magnam. Magni voluptates deserunt reprehenderit et ab laboriosam.\",\n            \"content\": \"Inventore qui quisquam qui laudantium accusantium....\",\n            \"published_at\": \"2022-04-27 07:05:38\",\n            \"slug\": \"magni-magnam-minus-aspernatur-beatae-natus-in-sit-soluta-similique-aut-ea-et-consequatur-quos-quod-eius-beatae-magnam-magni-voluptates-deserunt-reprehenderit-et-ab-laboriosam\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=2\",\n        \"prev\": null,\n        \"next\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=2\"\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 2,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=2\",\n                \"label\": \"2\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=2\",\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\",\n        \"per_page\": 10,\n        \"to\": 10,\n        \"total\": 16\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"city_area_id\": \"{location-city-area-id}\",\n            \"category_id\": \"{location-category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -818,7 +1670,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"2022-07-18T06:58:02.000000Z\",\n        \"user\": {\n            \"id\": 34,\n            \"created_at\": \"2022-07-18T06:56:38.000000Z\",\n            \"updated_at\": \"2022-07-18T06:57:03.000000Z\",\n            \"name\": \"Han\",\n            \"email\": \"han@gmail.com\",\n            \"email_verified_at\": \"2022-07-18T06:57:03.000000Z\",\n            \"is_store\": 0,\n            \"login_type_id\": 1\n        },\n        \"store_id\": 6,\n        \"category_id\": 2,\n        \"title\": \"post\",\n        \"content\": \"test\",\n        \"published_at\": null,\n        \"slug\": \"post\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified post. Response #2",
@@ -926,7 +1778,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"2022-07-23T08:29:28.000000Z\",\n        \"user\": {\n            \"id\": 34,\n            \"created_at\": \"2022-07-18T06:56:38.000000Z\",\n            \"updated_at\": \"2022-07-18T15:02:00.000000Z\",\n            \"name\": \"Han\",\n            \"email\": \"han@gmail.com\",\n            \"email_verified_at\": \"2022-07-18T06:57:03.000000Z\",\n            \"is_store\": 0,\n            \"login_type_id\": 1\n        },\n        \"store_id\": 6,\n        \"category_id\": 1,\n        \"title\": \"Post\",\n        \"content\": \"Test\",\n        \"published_at\": null,\n        \"slug\": \"post\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location_id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created post in storage. Response #2",
@@ -996,7 +1848,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"store_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"category_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"title\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"location_id\": [\n            \"{validation-error-message}\"\n        ],\n        \"title\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -1081,7 +1933,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"2022-07-23T08:31:45.000000Z\",\n        \"user\": {\n            \"id\": 34,\n            \"created_at\": \"2022-07-18T06:56:38.000000Z\",\n            \"updated_at\": \"2022-07-18T15:02:00.000000Z\",\n            \"name\": \"Han\",\n            \"email\": \"han@gmail.com\",\n            \"email_verified_at\": \"2022-07-18T06:57:03.000000Z\",\n            \"is_store\": 0,\n            \"login_type_id\": 1\n        },\n        \"store_id\": 1,\n        \"category_id\": 3,\n        \"title\": \"0724Post\",\n        \"content\": \"0724Test\",\n        \"published_at\": \"2022-07-24 00:00:00\",\n        \"slug\": \"0724post\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified post in storage. Response #2",
@@ -1210,7 +2062,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"category_id\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"title\": [\n            \"{validation-error-message}\"\n        ],\n        \"published_at\": [\n            \"{validation-error-message}\"\n        ],\n        \"active\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -1376,7 +2228,7 @@
             ]
         },
         {
-            "name": "03. Comments",
+            "name": "04. Comments",
             "description": "",
             "item": [
                 {
@@ -1478,7 +2330,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": 34,\n            \"post_id\": 109,\n            \"content\": \"commentTest\"\n        },\n        {\n            \"user_id\": 34,\n            \"post_id\": 109,\n            \"content\": \"Test\"\n        },\n        {\n            \"user_id\": 34,\n            \"post_id\": 109,\n            \"content\": \"TestTest\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments\",\n        \"per_page\": 10,\n        \"to\": 3,\n        \"total\": 3\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"post_id\": \"{post-id}\",\n            \"content\": \"{content}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -1567,7 +2419,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": 34,\n        \"post_id\": 109,\n        \"content\": \"TestTest\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified comment. Response #2",
@@ -1742,7 +2594,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": 34,\n        \"post_id\": 109,\n        \"content\": \"commentTest\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created comment in storage. Response #2",
@@ -1968,7 +2820,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": 34,\n        \"post_id\": 109,\n        \"content\": \"0724Comment\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified comment in storage. Response #2",
@@ -2187,7 +3039,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "5",
+                                    "value": "16",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -2230,7 +3082,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "5",
+                                            "value": "16",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2276,7 +3128,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "5",
+                                            "value": "16",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2322,7 +3174,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "5",
+                                            "value": "16",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -2368,7 +3220,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "5",
+                                            "value": "16",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]

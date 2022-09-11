@@ -1,6 +1,12 @@
 {
     "data": {
-        "category_id": [
+        "title": [
+            "{validation-error-message}"
+        ],
+        "published_at": [
+            "{validation-error-message}"
+        ],
+        "active": [
             "{validation-error-message}"
         ]
     }

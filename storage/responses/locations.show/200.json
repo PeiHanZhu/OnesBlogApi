@@ -1,0 +1,12 @@
+{
+    "data": {
+        "user_id": 7,
+        "city_area_id": 86,
+        "category_id": 2,
+        "name": "{location-name}",
+        "address": "{location-address}",
+        "phone": "{location-phone}",
+        "avgScore": "{location-avgScore}",
+        "introduction": "{location-introduction}"
+    }
+}

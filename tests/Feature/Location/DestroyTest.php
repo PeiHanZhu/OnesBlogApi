@@ -16,11 +16,6 @@ class DestroyTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @var User
-     */
-    protected $user;
-
-    /**
      * @var CityArea
      */
     protected $cityArea;
@@ -32,16 +27,16 @@ class DestroyTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = Sanctum::actingAs(User::factory()->create(), ['*']);
         $this->seed(CityAndAreaSeeder::class);
-        $this->cityArea = CityArea::inrandomOrder()->first();
+        $this->cityArea = CityArea::inRandomOrder()->first();
     }
 
     public function testWhenLocationDelete()
     {
         // GIVEN
+        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
         $location = Location::factory()->create([
-            'user_id' => $this->user->id,
+            'user_id' => $user->id,
             'city_area_id' => $this->cityArea->id,
         ]);
 
@@ -51,45 +46,47 @@ class DestroyTest extends TestCase
 
         // WHEN
         $response = $this->deleteJson(route('locations.destroy', [
-            'location' => $location->id
+            'location' => $location->id,
         ]), $this->headers);
 
         // THEN
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
-    public function testWhenLocationNotFound()
+
+    public function testWithoutPersonalAccessToken()
     {
         // GIVEN
+        $user = User::factory()->create();
         $location = Location::factory()->create([
-            'user_id' => $this->user->id,
+            'user_id' => $user->id,
             'city_area_id' => $this->cityArea->id,
         ]);
 
         $expected = [
-            'data' => "Location(ID:{$location->id}) is not found."
+            'data' => 'Unauthenticated.',
         ];
-        $location->delete(); // Assume that the location had been deleted.
 
         // WHEN
         $response = $this->deleteJson(route('locations.destroy', [
-            'location' => $location->id
+            'location' => $location->id,
         ]), $this->headers);
 
         // THEN
-        $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)->assertJson($expected);
     }
 
-    public function testWhenLocationDeletedByWrongUser()
+    public function testWhenLocationUpdatedByWrongUser()
     {
         // GIVEN
-        $deletedUser = User::factory()->create();
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $locationUser = User::factory()->create();
         $location = Location::factory()->create([
-            'user_id' => $deletedUser->id,
+            'user_id' => $locationUser->id,
             'city_area_id' => $this->cityArea->id,
         ]);
 
         $expected = [
-            'data' => 'This action is unauthorized.'
+            'data' => 'This action is unauthorized.',
         ];
 
         // WHEN
@@ -99,5 +96,28 @@ class DestroyTest extends TestCase
 
         // THEN
         $response->assertStatus(Response::HTTP_FORBIDDEN)->assertJson($expected);
+    }
+
+    public function testWhenLocationNotFound()
+    {
+        // GIVEN
+        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
+        $location = Location::factory()->create([
+            'user_id' => $user->id,
+            'city_area_id' => $this->cityArea->id,
+        ]);
+
+        $expected = [
+            'data' => "Location(ID:{$location->id}) is not found.",
+        ];
+        $location->delete(); // Assume that the location had been deleted.
+
+        // WHEN
+        $response = $this->deleteJson(route('locations.destroy', [
+            'location' => $location->id,
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
     }
 }

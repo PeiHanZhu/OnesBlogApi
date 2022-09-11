@@ -46,7 +46,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 20 2022</li>
+            <li>Last updated: September 11 2022</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -132,9 +132,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }</code></pre>
 <blockquote>
@@ -264,18 +264,23 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "name": "han",
-        "email": "hanTest@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }</code></pre>
 <blockquote>
 <p>Example response (422, when verify incorrect.):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        "The code is incorrect."
-    ]
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
 }</code></pre>
 <div id="execution-results-POSTapi-verifyCode" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-verifyCode"></span>:</blockquote>
@@ -376,8 +381,8 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
+        "name": "{user-name}",
+        "email": "{user-email}",
         "token": "{personal-access-token}"
     }
 }</code></pre>
@@ -507,9 +512,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "name": "HanHan",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{user-token}"
     }
 }</code></pre>
 <blockquote>
@@ -529,6 +534,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
         "password": [
             "{validation-error-message}"
         ]
@@ -648,9 +656,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "name": "Han",
-        "email": "han@gmail.com",
-        "token": null
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": "{personal-access-token}"
     }
 }</code></pre>
 <blockquote>
@@ -686,7 +694,737 @@ response.json()</code></pre>
 The device's name of the user.
 </p>
 
-</form><h1>02. Posts</h1>
+</form><h1>02. Locations</h1>
+<h2>Display a listing of the locations.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://ones-blog-api.test/api/locations?category_id=2&amp;city_id=11&amp;random=1&amp;ranking=6&amp;limit=10&amp;page=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/locations"
+);
+
+let params = {
+    "category_id": "2",
+    "city_id": "11",
+    "random": "1",
+    "ranking": "6",
+    "limit": "10",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://ones-blog-api.test/api/locations',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'category_id'=&gt; '2',
+            'city_id'=&gt; '11',
+            'random'=&gt; '1',
+            'ranking'=&gt; '6',
+            'limit'=&gt; '10',
+            'page'=&gt; '1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/locations'
+params = {
+  'category_id': '2',
+  'city_id': '11',
+  'random': '1',
+  'ranking': '6',
+  'limit': '10',
+  'page': '1',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when locations displayed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "user_id": "{user-id}",
+            "city_area_id": "{city-area-id}",
+            "category_id": "{category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}"
+        }
+    ],
+    "links": {
+        "first": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;city_id=11&amp;page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;city_id=11&amp;page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;city_id=11&amp;page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/ones-blog-api.test\/api\/locations",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}</code></pre>
+<div id="execution-results-GETapi-locations" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-locations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-locations"></code></pre>
+</div>
+<div id="execution-error-GETapi-locations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-locations"></code></pre>
+</div>
+<form id="form-GETapi-locations" data-method="GET" data-path="api/locations" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-locations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/locations</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>category_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="category_id" data-endpoint="GETapi-locations" data-component="query"  hidden>
+<br>
+The id of the category.
+</p>
+<p>
+<b><code>city_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="city_id" data-endpoint="GETapi-locations" data-component="query"  hidden>
+<br>
+The id of the city.
+</p>
+<p>
+<b><code>random</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="1" data-endpoint="GETapi-locations" data-component="query" ><code>true</code></label>
+<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="0" data-endpoint="GETapi-locations" data-component="query" ><code>false</code></label>
+<br>
+Whether the results are in random order or not.
+</p>
+<p>
+<b><code>ranking</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="ranking" data-endpoint="GETapi-locations" data-component="query"  hidden>
+<br>
+The top amount of the results.
+</p>
+<p>
+<b><code>limit</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="limit" data-endpoint="GETapi-locations" data-component="query"  hidden>
+<br>
+The amount of results per page. Defaults to '10'.
+</p>
+<p>
+<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="page" data-endpoint="GETapi-locations" data-component="query"  hidden>
+<br>
+The page of the results. Defaults to '1'.
+</p>
+</form>
+<h2>Display the specified resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://ones-blog-api.test/api/locations/5" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/locations/5"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://ones-blog-api.test/api/locations/5',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/locations/5'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when location displayed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "user_id": 7,
+        "city_area_id": 86,
+        "category_id": 2,
+        "name": "{location-name}",
+        "address": "{location-address}",
+        "phone": "{location-phone}",
+        "avgScore": "{location-avgScore}",
+        "introduction": "{location-introduction}"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (404, when location not found.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Location(ID:{location-id}) is not found."
+}</code></pre>
+<div id="execution-results-GETapi-locations--location-" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-locations--location-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-locations--location-"></code></pre>
+</div>
+<div id="execution-error-GETapi-locations--location-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-locations--location-"></code></pre>
+</div>
+<form id="form-GETapi-locations--location-" data-method="GET" data-path="api/locations/{location}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-locations--location-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/locations/{location}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>location</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="location" data-endpoint="GETapi-locations--location-" data-component="url" required  hidden>
+<br>
+The id of the location.
+</p>
+</form>
+<h2>Store a newly created resource in storage.</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://ones-blog-api.test/api/locations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "token: Bearer {personal-access-token}" \
+    -d '{"city_area_id":153,"category_id":2,"name":"\u65b0\u4e9e\u6d32\u6c7d\u8eca","address":"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13","phone":"9110576179","introduction":"Introduction"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/locations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "token": "Bearer {personal-access-token}",
+};
+
+let body = {
+    "city_area_id": 153,
+    "category_id": 2,
+    "name": "\u65b0\u4e9e\u6d32\u6c7d\u8eca",
+    "address": "\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13",
+    "phone": "9110576179",
+    "introduction": "Introduction"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://ones-blog-api.test/api/locations',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+            'token' =&gt; 'Bearer {personal-access-token}',
+        ],
+        'json' =&gt; [
+            'city_area_id' =&gt; 153,
+            'category_id' =&gt; 2,
+            'name' =&gt; '新亞洲汽車',
+            'address' =&gt; '賢好街四段43巷434號75樓',
+            'phone' =&gt; '9110576179',
+            'introduction' =&gt; 'Introduction',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/locations'
+payload = {
+    "city_area_id": 153,
+    "category_id": 2,
+    "name": "\u65b0\u4e9e\u6d32\u6c7d\u8eca",
+    "address": "\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13",
+    "phone": "9110576179",
+    "introduction": "Introduction"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'token': 'Bearer {personal-access-token}'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (201, when location created.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "user_id": "{user-id}",
+        "city_area_id": "{city-area-id}",
+        "category_id": "{category-id}",
+        "name": "{location-name}",
+        "address": "{location-address}",
+        "phone": "{location-phone}",
+        "avgScore": "{location-avgScore}",
+        "introduction": "{location-introduction}"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (401, without personal access token.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Unauthenticated."
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "city_area_id": [
+            "{validation-error-message}"
+        ],
+        "category_id": [
+            "{validation-error-message}"
+        ],
+        "name": [
+            "{validation-error-message}"
+        ],
+        "address": [
+            "{validation-error-message}"
+        ],
+        "phone": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-POSTapi-locations" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-locations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-locations"></code></pre>
+</div>
+<div id="execution-error-POSTapi-locations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-locations"></code></pre>
+</div>
+<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/locations</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-locations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-locations" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>city_area_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="city_area_id" data-endpoint="POSTapi-locations" data-component="body" required  hidden>
+<br>
+The city area of the location.
+</p>
+<p>
+<b><code>category_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="category_id" data-endpoint="POSTapi-locations" data-component="body" required  hidden>
+<br>
+The category of the location.
+</p>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="name" data-endpoint="POSTapi-locations" data-component="body" required  hidden>
+<br>
+The name of the location.
+</p>
+<p>
+<b><code>address</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="address" data-endpoint="POSTapi-locations" data-component="body" required  hidden>
+<br>
+The address of the location.
+</p>
+<p>
+<b><code>phone</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="phone" data-endpoint="POSTapi-locations" data-component="body" required  hidden>
+<br>
+The phone of the location.
+</p>
+<p>
+<b><code>introduction</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="introduction" data-endpoint="POSTapi-locations" data-component="body"  hidden>
+<br>
+The introduction of the location.
+</p>
+
+</form>
+<h2>Update the specified resource in storage.</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://ones-blog-api.test/api/locations/5" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "token: Bearer {personal-access-token}" \
+    -d '{"city_area_id":153,"category_id":2,"name":"\u7d71\u4e00\u5a1b\u6a02","address":"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13","phone":"1335933680","introduction":"IntroductionTest"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/locations/5"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "token": "Bearer {personal-access-token}",
+};
+
+let body = {
+    "city_area_id": 153,
+    "category_id": 2,
+    "name": "\u7d71\u4e00\u5a1b\u6a02",
+    "address": "\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13",
+    "phone": "1335933680",
+    "introduction": "IntroductionTest"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;put(
+    'http://ones-blog-api.test/api/locations/5',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+            'token' =&gt; 'Bearer {personal-access-token}',
+        ],
+        'json' =&gt; [
+            'city_area_id' =&gt; 153,
+            'category_id' =&gt; 2,
+            'name' =&gt; '統一娛樂',
+            'address' =&gt; '豐裡二路180巷804弄601號49樓',
+            'phone' =&gt; '1335933680',
+            'introduction' =&gt; 'IntroductionTest',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/locations/5'
+payload = {
+    "city_area_id": 153,
+    "category_id": 2,
+    "name": "\u7d71\u4e00\u5a1b\u6a02",
+    "address": "\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13",
+    "phone": "1335933680",
+    "introduction": "IntroductionTest"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'token': 'Bearer {personal-access-token}'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when location displayed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "user_id": "{user-id}",
+        "city_area_id": "{city-area-id}",
+        "category_id": "{category-id}",
+        "name": "{location-name}",
+        "address": "{location-address}",
+        "phone": "{location-phone}",
+        "avgScore": "{location-avgScore}",
+        "introduction": "{location-introduction}"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (401, without personal access token.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Unauthenticated."
+}</code></pre>
+<blockquote>
+<p>Example response (403, when location updated by wrong user.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "This action is unauthorized."
+}</code></pre>
+<blockquote>
+<p>Example response (404, when location not found.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Location(ID:{location-id}) is not found."
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "city_area_id": [
+            "{validation-error-message}"
+        ],
+        "category_id": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-PUTapi-locations--location-" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-locations--location-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-locations--location-"></code></pre>
+</div>
+<div id="execution-error-PUTapi-locations--location-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-locations--location-"></code></pre>
+</div>
+<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/locations/{location}</code></b>
+</p>
+<p>
+<label id="auth-PUTapi-locations--location-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-locations--location-" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>location</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="location" data-endpoint="PUTapi-locations--location-" data-component="url" required  hidden>
+<br>
+The id of the location.
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>city_area_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="city_area_id" data-endpoint="PUTapi-locations--location-" data-component="body" required  hidden>
+<br>
+The city area of the location.
+</p>
+<p>
+<b><code>category_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="category_id" data-endpoint="PUTapi-locations--location-" data-component="body" required  hidden>
+<br>
+The category of the location.
+</p>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="name" data-endpoint="PUTapi-locations--location-" data-component="body" required  hidden>
+<br>
+The name of the location.
+</p>
+<p>
+<b><code>address</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="address" data-endpoint="PUTapi-locations--location-" data-component="body" required  hidden>
+<br>
+The address of the location.
+</p>
+<p>
+<b><code>phone</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="phone" data-endpoint="PUTapi-locations--location-" data-component="body" required  hidden>
+<br>
+The phone of the location.
+</p>
+<p>
+<b><code>introduction</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="introduction" data-endpoint="PUTapi-locations--location-" data-component="body"  hidden>
+<br>
+The introduction of the location.
+</p>
+
+</form>
+<h2>Remove the specified resource from storage.</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://ones-blog-api.test/api/locations/5" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "token: Bearer {personal-access-token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/locations/5"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "token": "Bearer {personal-access-token}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://ones-blog-api.test/api/locations/5',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+            'token' =&gt; 'Bearer {personal-access-token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/locations/5'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'token': 'Bearer {personal-access-token}'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when location deleted.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Success"
+}</code></pre>
+<blockquote>
+<p>Example response (401, without personal access token.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Unauthenticated."
+}</code></pre>
+<blockquote>
+<p>Example response (403, when location deleted by wrong user.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "This action is unauthorized."
+}</code></pre>
+<blockquote>
+<p>Example response (404, when location not found.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Location(ID:{location-id}) is not found."
+}</code></pre>
+<div id="execution-results-DELETEapi-locations--location-" hidden>
+    <blockquote>Received response<span id="execution-response-status-DELETEapi-locations--location-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-locations--location-"></code></pre>
+</div>
+<div id="execution-error-DELETEapi-locations--location-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-locations--location-"></code></pre>
+</div>
+<form id="form-DELETEapi-locations--location-" data-method="DELETE" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-red">DELETE</small>
+ <b><code>api/locations/{location}</code></b>
+</p>
+<p>
+<label id="auth-DELETEapi-locations--location-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="DELETEapi-locations--location-" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>location</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="location" data-endpoint="DELETEapi-locations--location-" data-component="url" required  hidden>
+<br>
+The id of the location.
+</p>
+</form><h1>03. Posts</h1>
 <h2>Display a listing of the posts.</h2>
 <blockquote>
 <p>Example request:</p>
@@ -755,206 +1493,26 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Tenetur dignissimos nostrum ad. Et numquam qui tenetur esse ut omnis consequatur. Soluta et esse cumque. Illum eos deleniti alias iure vel eos.",
-            "content": "Mollitia consequatur alias accusamus a rem. Explic...",
-            "published_at": "2022-05-05 17:57:31",
-            "slug": "tenetur-dignissimos-nostrum-ad-et-numquam-qui-tenetur-esse-ut-omnis-consequatur-soluta-et-esse-cumque-illum-eos-deleniti-alias-iure-vel-eos"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Cumque doloremque repudiandae occaecati alias autem. Et velit rerum recusandae illum unde cupiditate est.",
-            "content": "Ut sed eum odit distinctio aut. Rem id fugit conse...",
-            "published_at": "2022-05-17 07:04:48",
-            "slug": "cumque-doloremque-repudiandae-occaecati-alias-autem-et-velit-rerum-recusandae-illum-unde-cupiditate-est"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Officia omnis commodi quia adipisci eos. Quaerat quam maiores atque dolorem beatae omnis odio. Inventore quidem ut magnam pariatur alias ut ipsa. Aperiam in ratione libero expedita omnis nulla.",
-            "content": "Reiciendis et laborum quia eaque. Dolorem et ducim...",
-            "published_at": "2022-04-29 01:24:19",
-            "slug": "officia-omnis-commodi-quia-adipisci-eos-quaerat-quam-maiores-atque-dolorem-beatae-omnis-odio-inventore-quidem-ut-magnam-pariatur-alias-ut-ipsa-aperiam-in-ratione-libero-expedita-omnis-nulla"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Deleniti culpa optio autem vel. Aut explicabo qui sint rerum ea natus inventore. Est omnis vel omnis sed voluptatem a deleniti. Culpa aut ut illum voluptatem voluptatum nobis.",
-            "content": "Consequatur aliquam iste magnam quisquam consequat...",
-            "published_at": "2022-04-25 20:13:56",
-            "slug": "deleniti-culpa-optio-autem-vel-aut-explicabo-qui-sint-rerum-ea-natus-inventore-est-omnis-vel-omnis-sed-voluptatem-a-deleniti-culpa-aut-ut-illum-voluptatem-voluptatum-nobis"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Non voluptatem laudantium officia id porro est. Officiis officiis tempore nemo qui. Ut et qui est accusamus minima.",
-            "content": "Sed voluptatem praesentium autem omnis quo sunt pe...",
-            "published_at": "2022-05-16 10:12:50",
-            "slug": "non-voluptatem-laudantium-officia-id-porro-est-officiis-officiis-tempore-nemo-qui-ut-et-qui-est-accusamus-minima"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 3,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T14:43:09.000000Z",
-                "name": "酈霖銘",
-                "email": "ilu@example.com",
-                "email_verified_at": "2022-05-23T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Et explicabo ut deleniti et nemo illo. Maxime ut nihil deleniti vitae porro. Quas voluptatem sint labore numquam aut sed.",
-            "content": "Dicta quia ut distinctio velit ipsum placeat ipsum...",
-            "published_at": "2022-05-18 07:50:07",
-            "slug": "et-explicabo-ut-deleniti-et-nemo-illo-maxime-ut-nihil-deleniti-vitae-porro-quas-voluptatem-sint-labore-numquam-aut-sed"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 5,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "冷傑",
-                "email": "jgan@example.org",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Autem odio consequuntur ut architecto placeat enim. Et adipisci eligendi ut fuga debitis qui dicta. Fugiat eveniet adipisci aut ut.",
-            "content": "Qui asperiores consequatur harum aliquam rerum. Cu...",
-            "published_at": "2022-05-14 01:54:51",
-            "slug": "autem-odio-consequuntur-ut-architecto-placeat-enim-et-adipisci-eligendi-ut-fuga-debitis-qui-dicta-fugiat-eveniet-adipisci-aut-ut"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 1,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-24T14:11:09.000000Z",
-                "name": "計廷",
-                "email": "zsong@example.org",
-                "email_verified_at": "2022-05-17T04:29:46.000000Z",
-                "is_store": 0,
-                "login_type_id": 1
-            },
-            "store_id": 2,
-            "category_id": 2,
-            "title": "Qui dolor alias voluptas consequatur. Facere sunt nostrum alias illum id itaque odio laboriosam. Neque eum officiis molestias mollitia est rerum.",
-            "content": "Qui sunt aut excepturi dolor. Molestias nihil numq...",
-            "published_at": "2022-04-25 00:17:38",
-            "slug": "qui-dolor-alias-voluptas-consequatur-facere-sunt-nostrum-alias-illum-id-itaque-odio-laboriosam-neque-eum-officiis-molestias-mollitia-est-rerum"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 2,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "羊舌偉",
-                "email": "yujia.ru@example.net",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 1,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Pariatur veritatis at nam quam ut aut aut. Nam iure vitae consequuntur architecto illum. Labore sed eaque hic id officiis accusamus cupiditate.",
-            "content": "Eveniet voluptatem hic possimus possimus quo assum...",
-            "published_at": "2022-05-04 07:17:12",
-            "slug": "pariatur-veritatis-at-nam-quam-ut-aut-aut-nam-iure-vitae-consequuntur-architecto-illum-labore-sed-eaque-hic-id-officiis-accusamus-cupiditate"
-        },
-        {
-            "created_at": "2022-05-23T12:29:46.000000Z",
-            "user": {
-                "id": 2,
-                "created_at": "2022-05-23T12:29:46.000000Z",
-                "updated_at": "2022-05-23T12:29:46.000000Z",
-                "name": "羊舌偉",
-                "email": "yujia.ru@example.net",
-                "email_verified_at": "2022-05-23T12:29:46.000000Z",
-                "is_store": 1,
-                "login_type_id": 1
-            },
-            "store_id": 1,
-            "category_id": 2,
-            "title": "Magni magnam minus aspernatur. Beatae natus in sit soluta similique aut ea. Et consequatur quos quod eius beatae magnam. Magni voluptates deserunt reprehenderit et ab laboriosam.",
-            "content": "Inventore qui quisquam qui laudantium accusantium....",
-            "published_at": "2022-04-27 07:05:38",
-            "slug": "magni-magnam-minus-aspernatur-beatae-natus-in-sit-soluta-similique-aut-ea-et-consequatur-quos-quod-eius-beatae-magnam-magni-voluptates-deserunt-reprehenderit-et-ab-laboriosam"
+            "user_id": "{user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}"
         }
     ],
     "links": {
-        "first": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=1",
-        "last": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=2",
+        "first": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
         "prev": null,
-        "next": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=2"
+        "next": null
     },
     "meta": {
         "current_page": 1,
         "from": 1,
-        "last_page": 2,
+        "last_page": 1,
         "links": [
             {
                 "url": null,
@@ -962,25 +1520,20 @@ response.json()</code></pre>
                 "active": false
             },
             {
-                "url": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=1",
+                "url": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
                 "label": "1",
                 "active": true
             },
             {
-                "url": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=2",
-                "label": "2",
-                "active": false
-            },
-            {
-                "url": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=2",
+                "url": null,
                 "label": "pagination.next",
                 "active": false
             }
         ],
-        "path": "http:\/\/ones-blog-api.test\/api\/posts",
+        "path": "http:\/\/ones-blog-api.test\/api\/locations",
         "per_page": 10,
-        "to": 10,
-        "total": 16
+        "to": 1,
+        "total": 1
     }
 }</code></pre>
 <div id="execution-results-GETapi-posts" hidden>
@@ -1068,23 +1621,21 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "2022-07-18T06:58:02.000000Z",
+        "created_at": "{post-created-at}",
         "user": {
-            "id": 34,
-            "created_at": "2022-07-18T06:56:38.000000Z",
-            "updated_at": "2022-07-18T06:57:03.000000Z",
-            "name": "Han",
-            "email": "han@gmail.com",
-            "email_verified_at": "2022-07-18T06:57:03.000000Z",
-            "is_store": 0,
-            "login_type_id": 1
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}"
         },
-        "store_id": 6,
-        "category_id": 2,
-        "title": "post",
-        "content": "test",
-        "published_at": null,
-        "slug": "post"
+        "location_id": "{post-location-id}",
+        "title": "{post-title}",
+        "content": "{post-content}",
+        "published_at": "{post-published-at}",
+        "slug": "{post-slug}"
     }
 }</code></pre>
 <blockquote>
@@ -1196,23 +1747,21 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "2022-07-23T08:29:28.000000Z",
+        "created_at": "{post-created-at}",
         "user": {
-            "id": 34,
-            "created_at": "2022-07-18T06:56:38.000000Z",
-            "updated_at": "2022-07-18T15:02:00.000000Z",
-            "name": "Han",
-            "email": "han@gmail.com",
-            "email_verified_at": "2022-07-18T06:57:03.000000Z",
-            "is_store": 0,
-            "login_type_id": 1
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}"
         },
-        "store_id": 6,
-        "category_id": 1,
-        "title": "Post",
-        "content": "Test",
-        "published_at": null,
-        "slug": "post"
+        "location_id": "{post-location_id}",
+        "title": "{post-title}",
+        "content": "{post-content}",
+        "published_at": "{post-published-at}",
+        "slug": "{post-slug}"
     }
 }</code></pre>
 <blockquote>
@@ -1226,13 +1775,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": [
-            "{validation-error-message}"
-        ],
-        "store_id": [
-            "{validation-error-message}"
-        ],
-        "category_id": [
+        "location_id": [
             "{validation-error-message}"
         ],
         "title": [
@@ -1369,23 +1912,21 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "2022-07-23T08:31:45.000000Z",
+        "created_at": "{post-created-at}",
         "user": {
-            "id": 34,
-            "created_at": "2022-07-18T06:56:38.000000Z",
-            "updated_at": "2022-07-18T15:02:00.000000Z",
-            "name": "Han",
-            "email": "han@gmail.com",
-            "email_verified_at": "2022-07-18T06:57:03.000000Z",
-            "is_store": 0,
-            "login_type_id": 1
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}"
         },
-        "store_id": 1,
-        "category_id": 3,
-        "title": "0724Post",
-        "content": "0724Test",
-        "published_at": "2022-07-24 00:00:00",
-        "slug": "0724post"
+        "location_id": "{post-location-id}",
+        "title": "{post-title}",
+        "content": "{post-content}",
+        "published_at": "{post-published-at}",
+        "slug": "{post-slug}"
     }
 }</code></pre>
 <blockquote>
@@ -1405,7 +1946,13 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "category_id": [
+        "title": [
+            "{validation-error-message}"
+        ],
+        "published_at": [
+            "{validation-error-message}"
+        ],
+        "active": [
             "{validation-error-message}"
         ]
     }
@@ -1557,7 +2104,7 @@ response.json()</code></pre>
 <br>
 The id of the post.
 </p>
-</form><h1>03. Comments</h1>
+</form><h1>04. Comments</h1>
 <h2>Display a listing of the comments.</h2>
 <blockquote>
 <p>Example request:</p>
@@ -1623,19 +2170,9 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "commentTest"
-        },
-        {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "Test"
-        },
-        {
-            "user_id": 34,
-            "post_id": 109,
-            "content": "TestTest"
+            "user_id": "{user-id}",
+            "post_id": "{post-id}",
+            "content": "{content}"
         }
     ],
     "links": {
@@ -1667,8 +2204,8 @@ response.json()</code></pre>
         ],
         "path": "http:\/\/ones-blog-api.test\/api\/posts\/109\/comments",
         "per_page": 10,
-        "to": 3,
-        "total": 3
+        "to": 1,
+        "total": 1
     }
 }</code></pre>
 <div id="execution-results-GETapi-posts--post--comments" hidden>
@@ -1757,9 +2294,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "TestTest"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }</code></pre>
 <blockquote>
@@ -1871,9 +2408,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "commentTest"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }</code></pre>
 <blockquote>
@@ -2000,9 +2537,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": 34,
-        "post_id": 109,
-        "content": "0724Comment"
+        "user_id": "{user-id}",
+        "post_id": "{post-id}",
+        "content": "{content}"
     }
 }</code></pre>
 <blockquote>
@@ -2080,12 +2617,12 @@ The content of the comment.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/5" \
+    "http://ones-blog-api.test/api/posts/109/comments/16" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/5"
+    "http://ones-blog-api.test/api/posts/109/comments/16"
 );
 
 let headers = {
@@ -2101,7 +2638,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://ones-blog-api.test/api/posts/109/comments/5',
+    'http://ones-blog-api.test/api/posts/109/comments/16',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
@@ -2114,7 +2651,7 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-python">import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/5'
+url = 'http://ones-blog-api.test/api/posts/109/comments/16'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
