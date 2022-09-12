@@ -405,6 +405,9 @@ return [
     |
     */
     'extensions' => [
-
+        'media-manager' => [
+            'disk' => 'public',
+            'allowed_ext' => 'jpg,jpeg,png,pdf,doc,docx,zip',
+        ],
     ],
 ];

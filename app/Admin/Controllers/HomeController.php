@@ -12,6 +12,10 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
+        if (!auth('admin')->user()->isAdministrator()) {
+            return redirect()->route('admin.setting');
+        }
+
         return $content
             ->title('Dashboard')
             ->description('Description...')
