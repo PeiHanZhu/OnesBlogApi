@@ -144,6 +144,7 @@ return [
     'post_content' => '文章內容',
     'published_at' => '發佈時間',
     'post_title' => '文章標題',
+    'post_images' => '文章圖片',
 
     // Comment
     'comment_content' => '留言內容',

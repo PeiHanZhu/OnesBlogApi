@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->timestamp('published_at')->comment('發佈時間')->nullable()->index();
             $table->boolean('active')->comment('啟用狀態')->default(true)->index();
             $table->string('slug')->comment('自訂網址')->index();
+            $table->longText('images')->comment('圖片路徑')->nullable();
         });
     }
 

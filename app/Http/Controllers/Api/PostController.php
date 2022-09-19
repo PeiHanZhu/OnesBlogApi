@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Traits\FileHandler;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
  */
 class PostController extends Controller
 {
+    use FileHandler;
+
     /**
      * Display a listing of the posts.
      *
@@ -34,7 +37,7 @@ class PostController extends Controller
     {
         return (new PostCollection(
             Post::when($request->query('category_id'), function ($query, $categoryId) {
-                $query->whereHas('location', function($query) use ($categoryId){
+                $query->whereHas('location', function ($query) use ($categoryId) {
                     $query->where([
                         ['category_id', $categoryId],
                     ]);
@@ -57,6 +60,7 @@ class PostController extends Controller
      * @bodyParam content string The content of the post. Example: Test
      * @bodyParam published_at string The published time of the post. Example: 2022-07-23T08:31:45.000000Z
      * @bodyParam active boolean The state of the post. Example: 1
+     * @bodyParam images file[] The images of the post. Example: .jpg, .jpeg, .png
      * @responseFile 201 scenario="when post created." responses/posts.store/201.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 422 scenario="when any validation failed." responses/posts.store/422.json
@@ -72,23 +76,32 @@ class PostController extends Controller
             'content' => 'nullable',
             'published_at' => 'nullable|date',
             'active' => 'boolean',
+            'images.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:10240'],
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'data' => $validator->errors()->messages(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+        $post = Post::create(array_merge([
+            'user_id' => $request->user()->id
+        ], $request->only([
+            'location_id',
+            'title',
+            'content',
+            'published_at',
+            'active',
+        ])));
 
-        return new PostResource(
-            Post::create(array_merge(['user_id' => $request->user()->id], $request->only([
-                'location_id',
-                'title',
-                'content',
-                'published_at',
-                'active',
-            ])))->refresh(),
-            Response::HTTP_CREATED
-        );
+        $filePaths = [];
+        foreach ($request->file('images', []) as $file) {
+            (($path = $file->store("/posts/{$post->id}", 'public')) === false) ?:
+                $filePaths[] = $path;
+        }
+        $post->images = $filePaths;
+        $post->save();
+
+        return new PostResource($post, Response::HTTP_CREATED);
     }
 
     /**
@@ -122,6 +135,9 @@ class PostController extends Controller
      * @bodyParam content string The content of the post. Example: 0724Test
      * @bodyParam published_at string The published time of the post. Example: 20220724
      * @bodyParam active boolean The state of the post. Example: 1
+     * @bodyParam images file[] The images of the post. Example: .jpg, .jpeg, .png
+     * @bodyParam _method string Required if the <code><b>images</b></code> of the post are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>. Example: PUT
+
      * @responseFile 200 scenario="when post updated." responses/posts.update/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 404 scenario="when post not found." responses/posts.update/404.json
@@ -133,11 +149,30 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if (str_contains(
+            $request->header('content-type'),
+            $contentType = 'multipart/form-data;'
+        ) and $request->input('_method') !== Request::METHOD_PUT) {
+            return response()->json([
+                'data' => [
+                    '_method' => [
+                        sprintf(
+                            'Content type %s must be method:%s, with input _method:%s',
+                            $contentType,
+                            Request::METHOD_POST,
+                            Request::METHOD_PUT
+                        ),
+                    ],
+                ],
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'string|max:255',
             'content' => 'nullable',
             'published_at' => 'nullable|date',
             'active' => 'nullable|boolean',
+            'images.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:10240'],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -149,12 +184,23 @@ class PostController extends Controller
             throw new AuthorizationException();
         }
 
-        $post->update($request->only([
+        $input = $request->only([
             'title',
             'content',
             'published_at',
             'active',
-        ]));
+        ]);
+        if ($request->hasFile('images')) {
+            $filePaths = [];
+            empty($post->images) ?: static::deleteDirectory($post);
+            foreach ($request->file('images', []) as $file) {
+                (($path = $file->store("/posts/{$post->id}", 'public')) === false) ?:
+                    $filePaths[] = $path;
+            }
+            $input['images'] = $filePaths;
+        }
+
+        $post->update($input);
 
         return new PostResource($post->refresh());
     }

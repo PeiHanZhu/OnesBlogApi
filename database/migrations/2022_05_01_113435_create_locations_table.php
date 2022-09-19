@@ -24,6 +24,7 @@ class CreateLocationsTable extends Migration
             $table->string('phone')->comment('店家電話')->index();
             $table->float('avgScore')->comment('店家分數')->index();
             $table->longText('introduction')->comment('店家簡介')->nullable();
+            $table->longText('images')->comment('圖片路徑')->nullable();
         });
     }
 

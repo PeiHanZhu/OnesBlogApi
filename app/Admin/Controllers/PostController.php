@@ -9,6 +9,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends AdminController
 {
@@ -70,7 +71,9 @@ class PostController extends AdminController
                 0 => 'danger',
                 1 => 'success',
             ]);
-
+        $grid->column('images', __('admin.post_images'))->display(function ($filePaths) {
+            return !empty($filePaths) ? Storage::url(head($filePaths)) : '';
+        })->image(config('app.url'), 64, 64);
         return $grid;
     }
 
@@ -95,6 +98,7 @@ class PostController extends AdminController
         $show->field('published_at', __('admin.published_at'));
         $show->field('active', __('admin.active'))->using(__('admin.active_options'));
         $show->field('slug', __('admin.slug'));
+        $show->field('images', __('admin.post_images'))->image();
 
         return $show;
     }
@@ -130,8 +134,15 @@ class PostController extends AdminController
             'on' => ['value' => 1, 'text' => __('admin.active_options.1'), 'color' => 'success'],
             'off' => ['value' => 0, 'text' => __('admin.active_options.0'), 'color' => 'danger'],
         ]);
+        $post = $form->model()->find(request()->route('post'));
         if ($form->isEditing()) {
             $form->display('slug', __('admin.slug'));
+            $form->multipleImage('images', __('admin.post_images'))
+                ->move("posts/{$post->id}")
+                ->uniqueName()
+                ->options([
+                    'showClose' => false,
+            ]);
         }
 
         return $form;

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "bd24dfa5-6bbb-473d-8b9f-01bc13dad70f",
+        "_postman_id": "126fdcbd-9401-4d39-bfe9-85de4c5ca3f1",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -3708,7 +3708,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "14",
+                                    "value": "3",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -3751,7 +3751,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "14",
+                                            "value": "3",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3797,7 +3797,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "14",
+                                            "value": "3",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3843,7 +3843,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "14",
+                                            "value": "3",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3889,7 +3889,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "14",
+                                            "value": "3",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]

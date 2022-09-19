@@ -14,6 +14,16 @@ class Post extends Model
     /**
      * @inheritDoc
      */
+    protected static function booted()
+    {
+        static::deleted(function ($model) {
+            static::deleteDirectory($model);
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected $fillable = [
         'user_id',
         'location_id',
@@ -22,6 +32,14 @@ class Post extends Model
         'published_at',
         'active',
         'slug',
+        'images'
+    ];
+
+    /**
+     * @inheritDoc
+     */
+    protected $casts = [
+        'images' => 'array',
     ];
 
     /**
@@ -57,15 +75,5 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Get the post images for the post.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function postImages()
-    {
-        return $this->hasMany(PostImage::class);
     }
 }

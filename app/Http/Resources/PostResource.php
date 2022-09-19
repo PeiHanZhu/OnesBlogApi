@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostResource extends JsonResource
@@ -23,6 +24,10 @@ class PostResource extends JsonResource
             'content' => Str::limit($this->content, 50),
             'published_at' => $this->published_at,
             'slug' => $this->slug,
+            // 'images' => array_map(function ($filePath) {
+            //     return url(Storage::url($filePath));
+            // }, $this->images ?? []),
+            'images' => $this->images
         ];
     }
 }
