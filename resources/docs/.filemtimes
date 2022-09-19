@@ -1,14 +1,14 @@
 # GENERATED. YOU SHOULDN'T MODIFY OR DELETE THIS FILE.
 # Scribe uses this file to know when you change something manually in your docs.
-resources/docs/index.md=1662880297
-resources/docs/authentication.md=1662880297
+resources/docs/index.md=1663579829
+resources/docs/authentication.md=1663579829
 resources/docs/groups/01-authentication.md=1657889579
 resources/docs/groups/endpoints.md=1660964947
 resources/docs/groups/02-comment.md=1657872117
 resources/docs/groups/03-post.md=1657872117
 resources/docs/groups/02-posts.md=1660966064
 resources/docs/groups/03-comments.md=1660966064
-resources/docs/groups/01-authentication-and-user.md=1662880297
-resources/docs/groups/02-locations.md=1662880297
-resources/docs/groups/03-posts.md=1662880297
-resources/docs/groups/04-comments.md=1662880297
+resources/docs/groups/01-authentication-and-user.md=1663579829
+resources/docs/groups/02-locations.md=1663579829
+resources/docs/groups/03-posts.md=1663579829
+resources/docs/groups/04-comments.md=1663579829

@@ -132,6 +132,7 @@ return [
     'location_avgScore' => '店家分數',
     'location_city' => '縣市',
     'location_area' => '鄉鎮市區',
+    'location_images' => '店家圖片',
 
     // Post
     'post_id' => '文章編號',

@@ -1,8 +1,8 @@
 {
     "data": {
-        "user_id": 7,
-        "city_area_id": 86,
-        "category_id": 2,
+        "user_id": "{user-id}",
+        "city_area_id": "{city-area-id}",
+        "category_id": "{category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",

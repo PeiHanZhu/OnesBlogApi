@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class LocationResource extends JsonResource
@@ -24,6 +25,9 @@ class LocationResource extends JsonResource
             'phone' => $this->phone,
             'avgScore' => $this->avgScore,
             'introduction' => Str::limit($this->introduction, 20),
+            'images' => array_map(function ($filePath) {
+                return url(Storage::url($filePath));
+            }, $this->images ?? []),
         ];
     }
 }

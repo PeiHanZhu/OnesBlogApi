@@ -46,7 +46,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 11 2022</li>
+            <li>Last updated: September 19 2022</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -919,9 +919,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": 7,
-        "city_area_id": 86,
-        "category_id": 2,
+        "user_id": "{user-id}",
+        "city_area_id": "{city-area-id}",
+        "category_id": "{category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
@@ -966,34 +966,39 @@ The id of the location.
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://ones-blog-api.test/api/locations" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"city_area_id":153,"category_id":2,"name":"\u65b0\u4e9e\u6d32\u6c7d\u8eca","address":"\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13","phone":"9110576179","introduction":"Introduction"}'
-</code></pre>
+    -F "city_area_id=153" \
+    -F "category_id=2" \
+    -F "name=新亞洲汽車" \
+    -F "address=賢好街四段43巷434號75樓" \
+    -F "phone=9110576179" \
+    -F "introduction=Introduction" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR1Da1O" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations"
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "city_area_id": 153,
-    "category_id": 2,
-    "name": "\u65b0\u4e9e\u6d32\u6c7d\u8eca",
-    "address": "\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13",
-    "phone": "9110576179",
-    "introduction": "Introduction"
-}
+const body = new FormData();
+body.append('city_area_id', '153');
+body.append('category_id', '2');
+body.append('name', '新亞洲汽車');
+body.append('address', '賢好街四段43巷434號75樓');
+body.append('phone', '9110576179');
+body.append('introduction', 'Introduction');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
@@ -1004,13 +1009,35 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
             'token' =&gt; 'Bearer {personal-access-token}',
         ],
-        'json' =&gt; [
-            'city_area_id' =&gt; 153,
-            'category_id' =&gt; 2,
-            'name' =&gt; '新亞洲汽車',
-            'address' =&gt; '賢好街四段43巷434號75樓',
-            'phone' =&gt; '9110576179',
-            'introduction' =&gt; 'Introduction',
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'city_area_id',
+                'contents' =&gt; '153'
+            ],
+            [
+                'name' =&gt; 'category_id',
+                'contents' =&gt; '2'
+            ],
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; '新亞洲汽車'
+            ],
+            [
+                'name' =&gt; 'address',
+                'contents' =&gt; '賢好街四段43巷434號75樓'
+            ],
+            [
+                'name' =&gt; 'phone',
+                'contents' =&gt; '9110576179'
+            ],
+            [
+                'name' =&gt; 'introduction',
+                'contents' =&gt; 'Introduction'
+            ],
+            [
+                'name' =&gt; 'images[]',
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR1Da1O', 'r')
+            ],
         ],
     ]
 );
@@ -1020,6 +1047,9 @@ print_r(json_decode((string) $body));</code></pre>
 import json
 
 url = 'http://ones-blog-api.test/api/locations'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR1Da1O', 'rb')
+}
 payload = {
     "city_area_id": 153,
     "category_id": 2,
@@ -1029,12 +1059,12 @@ payload = {
     "introduction": "Introduction"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('POST', url, headers=headers, json=payload)
+response = requests.request('POST', url, headers=headers, files=files, data=payload)
 response.json()</code></pre>
 <blockquote>
 <p>Example response (201, when location created.):</p>
@@ -1087,7 +1117,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations"></code></pre>
 </div>
-<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
+<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1135,6 +1165,13 @@ The phone of the location.
 <br>
 The introduction of the location.
 </p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="POSTapi-locations" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="POSTapi-locations" data-component="body" hidden>
+<br>
+The images of the location.
+</p>
 
 </form>
 <h2>Update the specified resource in storage.</h2>
@@ -1144,34 +1181,41 @@ The introduction of the location.
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
     "http://ones-blog-api.test/api/locations/5" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"city_area_id":153,"category_id":2,"name":"\u7d71\u4e00\u5a1b\u6a02","address":"\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13","phone":"1335933680","introduction":"IntroductionTest"}'
-</code></pre>
+    -F "city_area_id=153" \
+    -F "category_id=2" \
+    -F "name=統一娛樂" \
+    -F "address=豐裡二路180巷804弄601號49樓" \
+    -F "phone=1335933680" \
+    -F "introduction=IntroductionTest" \
+    -F "_method=PUT" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phprJ7llI" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5"
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "city_area_id": 153,
-    "category_id": 2,
-    "name": "\u7d71\u4e00\u5a1b\u6a02",
-    "address": "\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13",
-    "phone": "1335933680",
-    "introduction": "IntroductionTest"
-}
+const body = new FormData();
+body.append('city_area_id', '153');
+body.append('category_id', '2');
+body.append('name', '統一娛樂');
+body.append('address', '豐裡二路180巷804弄601號49樓');
+body.append('phone', '1335933680');
+body.append('introduction', 'IntroductionTest');
+body.append('_method', 'PUT');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "PUT",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
@@ -1182,13 +1226,39 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
             'token' =&gt; 'Bearer {personal-access-token}',
         ],
-        'json' =&gt; [
-            'city_area_id' =&gt; 153,
-            'category_id' =&gt; 2,
-            'name' =&gt; '統一娛樂',
-            'address' =&gt; '豐裡二路180巷804弄601號49樓',
-            'phone' =&gt; '1335933680',
-            'introduction' =&gt; 'IntroductionTest',
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'city_area_id',
+                'contents' =&gt; '153'
+            ],
+            [
+                'name' =&gt; 'category_id',
+                'contents' =&gt; '2'
+            ],
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; '統一娛樂'
+            ],
+            [
+                'name' =&gt; 'address',
+                'contents' =&gt; '豐裡二路180巷804弄601號49樓'
+            ],
+            [
+                'name' =&gt; 'phone',
+                'contents' =&gt; '1335933680'
+            ],
+            [
+                'name' =&gt; 'introduction',
+                'contents' =&gt; 'IntroductionTest'
+            ],
+            [
+                'name' =&gt; '_method',
+                'contents' =&gt; 'PUT'
+            ],
+            [
+                'name' =&gt; 'images[]',
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phprJ7llI', 'r')
+            ],
         ],
     ]
 );
@@ -1198,21 +1268,25 @@ print_r(json_decode((string) $body));</code></pre>
 import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phprJ7llI', 'rb')
+}
 payload = {
     "city_area_id": 153,
     "category_id": 2,
     "name": "\u7d71\u4e00\u5a1b\u6a02",
     "address": "\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13",
     "phone": "1335933680",
-    "introduction": "IntroductionTest"
+    "introduction": "IntroductionTest",
+    "_method": "PUT"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('PUT', url, headers=headers, json=payload)
+response = requests.request('PUT', url, headers=headers, files=files, data=payload)
 response.json()</code></pre>
 <blockquote>
 <p>Example response (200, when location displayed.):</p>
@@ -1268,7 +1342,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-locations--location-"></code></pre>
 </div>
-<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
+<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1322,6 +1396,19 @@ The phone of the location.
 <input type="text" name="introduction" data-endpoint="PUTapi-locations--location-" data-component="body"  hidden>
 <br>
 The introduction of the location.
+</p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="PUTapi-locations--location-" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="PUTapi-locations--location-" data-component="body" hidden>
+<br>
+The images of the location.
+</p>
+<p>
+<b><code>_method</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="_method" data-endpoint="PUTapi-locations--location-" data-component="body"  hidden>
+<br>
+Required if the <code><b>images</b></code> of the location are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.
 </p>
 
 </form>
@@ -1675,33 +1762,37 @@ The id of the post.
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://ones-blog-api.test/api/posts" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"location_id":6,"title":"Post","content":"Test","published_at":"2022-07-23T08:31:45.000000Z","active":true}'
-</code></pre>
+    -F "location_id=6" \
+    -F "title=Post" \
+    -F "content=Test" \
+    -F "published_at=2022-07-23T08:31:45.000000Z" \
+    -F "active=1" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts"
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "location_id": 6,
-    "title": "Post",
-    "content": "Test",
-    "published_at": "2022-07-23T08:31:45.000000Z",
-    "active": true
-}
+const body = new FormData();
+body.append('location_id', '6');
+body.append('title', 'Post');
+body.append('content', 'Test');
+body.append('published_at', '2022-07-23T08:31:45.000000Z');
+body.append('active', '1');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
@@ -1712,12 +1803,31 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
             'token' =&gt; 'Bearer {personal-access-token}',
         ],
-        'json' =&gt; [
-            'location_id' =&gt; 6,
-            'title' =&gt; 'Post',
-            'content' =&gt; 'Test',
-            'published_at' =&gt; '2022-07-23T08:31:45.000000Z',
-            'active' =&gt; true,
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'location_id',
+                'contents' =&gt; '6'
+            ],
+            [
+                'name' =&gt; 'title',
+                'contents' =&gt; 'Post'
+            ],
+            [
+                'name' =&gt; 'content',
+                'contents' =&gt; 'Test'
+            ],
+            [
+                'name' =&gt; 'published_at',
+                'contents' =&gt; '2022-07-23T08:31:45.000000Z'
+            ],
+            [
+                'name' =&gt; 'active',
+                'contents' =&gt; '1'
+            ],
+            [
+                'name' =&gt; 'images[]',
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS', 'r')
+            ],
         ],
     ]
 );
@@ -1727,6 +1837,9 @@ print_r(json_decode((string) $body));</code></pre>
 import json
 
 url = 'http://ones-blog-api.test/api/posts'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS', 'rb')
+}
 payload = {
     "location_id": 6,
     "title": "Post",
@@ -1735,12 +1848,12 @@ payload = {
     "active": true
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('POST', url, headers=headers, json=payload)
+response = requests.request('POST', url, headers=headers, files=files, data=payload)
 response.json()</code></pre>
 <blockquote>
 <p>Example response (201, when post created.):</p>
@@ -1791,7 +1904,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts"></code></pre>
 </div>
-<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
+<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1834,6 +1947,13 @@ The published time of the post.
 <br>
 The state of the post.
 </p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="POSTapi-posts" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="POSTapi-posts" data-component="body" hidden>
+<br>
+The images of the post.
+</p>
 
 </form>
 <h2>Update the specified post in storage.</h2>
@@ -1843,32 +1963,37 @@ The state of the post.
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
     "http://ones-blog-api.test/api/posts/108" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"title":"0724Post","content":"0724Test","published_at":"20220724","active":true}'
-</code></pre>
+    -F "title=0724Post" \
+    -F "content=0724Test" \
+    -F "published_at=20220724" \
+    -F "active=1" \
+    -F "_method=PUT" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/108"
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "title": "0724Post",
-    "content": "0724Test",
-    "published_at": "20220724",
-    "active": true
-}
+const body = new FormData();
+body.append('title', '0724Post');
+body.append('content', '0724Test');
+body.append('published_at', '20220724');
+body.append('active', '1');
+body.append('_method', 'PUT');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "PUT",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
@@ -1879,11 +2004,31 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
             'token' =&gt; 'Bearer {personal-access-token}',
         ],
-        'json' =&gt; [
-            'title' =&gt; '0724Post',
-            'content' =&gt; '0724Test',
-            'published_at' =&gt; '20220724',
-            'active' =&gt; true,
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'title',
+                'contents' =&gt; '0724Post'
+            ],
+            [
+                'name' =&gt; 'content',
+                'contents' =&gt; '0724Test'
+            ],
+            [
+                'name' =&gt; 'published_at',
+                'contents' =&gt; '20220724'
+            ],
+            [
+                'name' =&gt; 'active',
+                'contents' =&gt; '1'
+            ],
+            [
+                'name' =&gt; '_method',
+                'contents' =&gt; 'PUT'
+            ],
+            [
+                'name' =&gt; 'images[]',
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov', 'r')
+            ],
         ],
     ]
 );
@@ -1893,19 +2038,23 @@ print_r(json_decode((string) $body));</code></pre>
 import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov', 'rb')
+}
 payload = {
     "title": "0724Post",
     "content": "0724Test",
     "published_at": "20220724",
-    "active": true
+    "active": true,
+    "_method": "PUT"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('PUT', url, headers=headers, json=payload)
+response = requests.request('PUT', url, headers=headers, files=files, data=payload)
 response.json()</code></pre>
 <blockquote>
 <p>Example response (200, when post updated.):</p>
@@ -1965,7 +2114,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
+<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2008,6 +2157,19 @@ The published time of the post.
 <label data-endpoint="PUTapi-posts--post-" hidden><input type="radio" name="active" value="false" data-endpoint="PUTapi-posts--post-" data-component="body" ><code>false</code></label>
 <br>
 The state of the post.
+</p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="PUTapi-posts--post-" data-component="body" hidden>
+<br>
+The images of the post.
+</p>
+<p>
+<b><code>_method</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="_method" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>
+<br>
+Required if the <code><b>images</b></code> of the post are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.
 </p>
 
 </form>
@@ -2617,12 +2779,12 @@ The content of the comment.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/16" \
+    "http://ones-blog-api.test/api/posts/109/comments/14" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/16"
+    "http://ones-blog-api.test/api/posts/109/comments/14"
 );
 
 let headers = {
@@ -2638,7 +2800,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://ones-blog-api.test/api/posts/109/comments/16',
+    'http://ones-blog-api.test/api/posts/109/comments/14',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
@@ -2651,7 +2813,7 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-python">import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/16'
+url = 'http://ones-blog-api.test/api/posts/109/comments/14'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

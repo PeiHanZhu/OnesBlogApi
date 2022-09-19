@@ -296,11 +296,15 @@ The id of the post.
 ```bash
 curl -X POST \
     "http://ones-blog-api.test/api/posts" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"location_id":6,"title":"Post","content":"Test","published_at":"2022-07-23T08:31:45.000000Z","active":true}'
-
+    -F "location_id=6" \
+    -F "title=Post" \
+    -F "content=Test" \
+    -F "published_at=2022-07-23T08:31:45.000000Z" \
+    -F "active=1" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS" 
 ```
 
 ```javascript
@@ -309,23 +313,23 @@ const url = new URL(
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "location_id": 6,
-    "title": "Post",
-    "content": "Test",
-    "published_at": "2022-07-23T08:31:45.000000Z",
-    "active": true
-}
+const body = new FormData();
+body.append('location_id', '6');
+body.append('title', 'Post');
+body.append('content', 'Test');
+body.append('published_at', '2022-07-23T08:31:45.000000Z');
+body.append('active', '1');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response => response.json());
 ```
 
@@ -339,12 +343,31 @@ $response = $client->post(
             'Accept' => 'application/json',
             'token' => 'Bearer {personal-access-token}',
         ],
-        'json' => [
-            'location_id' => 6,
-            'title' => 'Post',
-            'content' => 'Test',
-            'published_at' => '2022-07-23T08:31:45.000000Z',
-            'active' => true,
+        'multipart' => [
+            [
+                'name' => 'location_id',
+                'contents' => '6'
+            ],
+            [
+                'name' => 'title',
+                'contents' => 'Post'
+            ],
+            [
+                'name' => 'content',
+                'contents' => 'Test'
+            ],
+            [
+                'name' => 'published_at',
+                'contents' => '2022-07-23T08:31:45.000000Z'
+            ],
+            [
+                'name' => 'active',
+                'contents' => '1'
+            ],
+            [
+                'name' => 'images[]',
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS', 'r')
+            ],
         ],
     ]
 );
@@ -357,6 +380,9 @@ import requests
 import json
 
 url = 'http://ones-blog-api.test/api/posts'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpgpzSJS', 'rb')
+}
 payload = {
     "location_id": 6,
     "title": "Post",
@@ -365,12 +391,12 @@ payload = {
     "active": true
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('POST', url, headers=headers, json=payload)
+response = requests.request('POST', url, headers=headers, files=files, data=payload)
 response.json()
 ```
 
@@ -427,7 +453,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts"></code></pre>
 </div>
-<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
+<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -470,6 +496,13 @@ The published time of the post.
 <br>
 The state of the post.
 </p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="POSTapi-posts" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="POSTapi-posts" data-component="body" hidden>
+<br>
+The images of the post.
+</p>
 
 </form>
 
@@ -485,11 +518,15 @@ The state of the post.
 ```bash
 curl -X PUT \
     "http://ones-blog-api.test/api/posts/108" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"title":"0724Post","content":"0724Test","published_at":"20220724","active":true}'
-
+    -F "title=0724Post" \
+    -F "content=0724Test" \
+    -F "published_at=20220724" \
+    -F "active=1" \
+    -F "_method=PUT" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov" 
 ```
 
 ```javascript
@@ -498,22 +535,23 @@ const url = new URL(
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "title": "0724Post",
-    "content": "0724Test",
-    "published_at": "20220724",
-    "active": true
-}
+const body = new FormData();
+body.append('title', '0724Post');
+body.append('content', '0724Test');
+body.append('published_at', '20220724');
+body.append('active', '1');
+body.append('_method', 'PUT');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "PUT",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response => response.json());
 ```
 
@@ -527,11 +565,31 @@ $response = $client->put(
             'Accept' => 'application/json',
             'token' => 'Bearer {personal-access-token}',
         ],
-        'json' => [
-            'title' => '0724Post',
-            'content' => '0724Test',
-            'published_at' => '20220724',
-            'active' => true,
+        'multipart' => [
+            [
+                'name' => 'title',
+                'contents' => '0724Post'
+            ],
+            [
+                'name' => 'content',
+                'contents' => '0724Test'
+            ],
+            [
+                'name' => 'published_at',
+                'contents' => '20220724'
+            ],
+            [
+                'name' => 'active',
+                'contents' => '1'
+            ],
+            [
+                'name' => '_method',
+                'contents' => 'PUT'
+            ],
+            [
+                'name' => 'images[]',
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov', 'r')
+            ],
         ],
     ]
 );
@@ -544,19 +602,23 @@ import requests
 import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpaqb7Ov', 'rb')
+}
 payload = {
     "title": "0724Post",
     "content": "0724Test",
     "published_at": "20220724",
-    "active": true
+    "active": true,
+    "_method": "PUT"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('PUT', url, headers=headers, json=payload)
+response = requests.request('PUT', url, headers=headers, files=files, data=payload)
 response.json()
 ```
 
@@ -623,7 +685,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
+<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -666,6 +728,19 @@ The published time of the post.
 <label data-endpoint="PUTapi-posts--post-" hidden><input type="radio" name="active" value="false" data-endpoint="PUTapi-posts--post-" data-component="body" ><code>false</code></label>
 <br>
 The state of the post.
+</p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="PUTapi-posts--post-" data-component="body" hidden>
+<br>
+The images of the post.
+</p>
+<p>
+<b><code>_method</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="_method" data-endpoint="PUTapi-posts--post-" data-component="body"  hidden>
+<br>
+Required if the <code><b>images</b></code> of the post are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.
 </p>
 
 </form>

@@ -469,7 +469,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -522,7 +522,7 @@ paths:
             requestBody:
                 required: true
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -550,6 +550,11 @@ paths:
                                     type: string
                                     description: 'The introduction of the location.'
                                     example: Introduction
+                                images:
+                                    type: array
+                                    description: 'The images of the location.'
+                                    example: [null, null]
+                                    items: { type: file }
                             required:
                                 - city_area_id
                                 - category_id
@@ -583,9 +588,9 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: { user_id: 7, city_area_id: 86, category_id: 2, name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }
+                                    data: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' }
                                 properties:
-                                    data: { type: object, example: { user_id: 7, city_area_id: 86, category_id: 2, name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' } }
+                                    data: { type: object, example: { user_id: '{user-id}', city_area_id: '{city-area-id}', category_id: '{category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}' } }
                 404:
                     description: '404, when location not found.'
                     content:
@@ -607,7 +612,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -680,7 +685,7 @@ paths:
             requestBody:
                 required: true
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -708,6 +713,15 @@ paths:
                                     type: string
                                     description: 'The introduction of the location.'
                                     example: IntroductionTest
+                                images:
+                                    type: array
+                                    description: 'The images of the location.'
+                                    example: [null, null]
+                                    items: { type: file }
+                                _method:
+                                    type: string
+                                    description: 'Required if the <code><b>images</b></code> of the location are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.'
+                                    example: PUT
                             required:
                                 - city_area_id
                                 - category_id
@@ -866,7 +880,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -919,7 +933,7 @@ paths:
             requestBody:
                 required: true
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -943,6 +957,11 @@ paths:
                                     type: boolean
                                     description: 'The state of the post.'
                                     example: true
+                                images:
+                                    type: array
+                                    description: 'The images of the post.'
+                                    example: [null, null]
+                                    items: { type: file }
                             required:
                                 - location_id
                                 - title
@@ -997,7 +1016,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -1060,7 +1079,7 @@ paths:
             requestBody:
                 required: false
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -1080,6 +1099,15 @@ paths:
                                     type: boolean
                                     description: 'The state of the post.'
                                     example: true
+                                images:
+                                    type: array
+                                    description: 'The images of the post.'
+                                    example: [null, null]
+                                    items: { type: file }
+                                _method:
+                                    type: string
+                                    description: 'Required if the <code><b>images</b></code> of the post are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.'
+                                    example: PUT
         delete:
             summary: 'Remove the specified post from storage.'
             description: ''

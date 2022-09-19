@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\LocationCollection;
 use App\Http\Resources\LocationResource;
 use App\Models\Location;
+use App\Traits\FileHandler;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,6 +19,8 @@ use Illuminate\Validation\Rule;
  */
 class LocationController extends Controller
 {
+    use FileHandler;
+
     /**
      * Display a listing of the locations.
      *
@@ -35,10 +38,10 @@ class LocationController extends Controller
     public function index(Request $request)
     {
         return (new LocationCollection(
-            Location::when($request->query('category_id'), function($query, $categoryId) {
+            Location::when($request->query('category_id'), function ($query, $categoryId) {
                 $query->where('category_id', intval($categoryId));
-            })->when($request->query('city_id'), function($query, $city) {
-                $query->whereHas('cityArea', function($query) use ($city){
+            })->when($request->query('city_id'), function ($query, $city) {
+                $query->whereHas('cityArea', function ($query) use ($city) {
                     $query->where('city_id', $city);
                 });
             })->when($randomLimit = $request->query('random'), function ($query) {
@@ -61,6 +64,7 @@ class LocationController extends Controller
      * @bodyParam address string required The address of the location. Example: 賢好街四段43巷434號75樓
      * @bodyParam phone string required The phone of the location. Example: 9110576179
      * @bodyParam introduction string The introduction of the location. Example: Introduction
+     * @bodyParam images file[] The images of the location. Example: .jpg, .jpeg, .png
      * @responseFile 201 scenario="when location created." responses/locations.store/201.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 422 scenario="when any validation failed." responses/locations.store/422.json
@@ -77,23 +81,38 @@ class LocationController extends Controller
             'address' => 'required|string',
             'phone' => 'required|string',
             'introduction' => 'nullable',
+            'images.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:10240'],
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'data' => $validator->errors()->messages(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        return new LocationResource(
-            Location::firstOrCreate(['user_id' => $request->user()->id], array_merge(['avgScore' => 0], $request->only([
-                'city_area_id',
-                'category_id',
-                'name',
-                'address',
-                'phone',
-                'introduction',
-            ]))),
-            Response::HTTP_CREATED
-        );
+
+        if (!is_null($location = ($user = $request->user())->location)) {
+            return new LocationResource($location, Response::HTTP_OK);
+        }
+        $location = Location::create(array_merge([
+            'user_id' => $user->id,
+            'avgScore' => 0,
+        ], $request->only([
+            'city_area_id',
+            'category_id',
+            'name',
+            'address',
+            'phone',
+            'introduction',
+        ])));
+
+        $filePaths = [];
+        foreach ($request->file('images', []) as $file) {
+            (($path = $file->store("/locations/{$location->id}", 'public')) === false) ?:
+                $filePaths[] = $path;
+        }
+        $location->images = $filePaths;
+        $location->save();
+
+        return new LocationResource($location, Response::HTTP_CREATED);
     }
 
     /**
@@ -125,6 +144,8 @@ class LocationController extends Controller
      * @bodyParam address string required The address of the location. Example: 豐裡二路180巷804弄601號49樓
      * @bodyParam phone string required The phone of the location. Example: 1335933680
      * @bodyParam introduction string The introduction of the location. Example: IntroductionTest
+     * @bodyParam images file[] The images of the location. Example: .jpg, .jpeg, .png
+     * @bodyParam _method string Required if the <code><b>images</b></code> of the location are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>. Example: PUT
      * @responseFile 200 scenario="when location displayed." responses/locations.update/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 403 scenario="when location updated by wrong user." responses/403.json
@@ -137,6 +158,24 @@ class LocationController extends Controller
      */
     public function update(Request $request, Location $location)
     {
+        if (str_contains(
+            $request->header('content-type'),
+            $contentType = 'multipart/form-data;'
+        ) and $request->input('_method') !== Request::METHOD_PUT) {
+            return response()->json([
+                'data' => [
+                    '_method' => [
+                        sprintf(
+                            'Content type %s must be method:%s, with input _method:%s',
+                            $contentType,
+                            Request::METHOD_POST,
+                            Request::METHOD_PUT
+                        ),
+                    ],
+                ],
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         $validator = Validator::make($request->all(), [
             'city_area_id' => 'integer|exists:city_areas,id',
             'category_id' => ['integer', Rule::in(LocationCategoryEnum::getAllCategoryValues())],
@@ -144,6 +183,7 @@ class LocationController extends Controller
             'address' => 'string',
             'phone' => 'string',
             'introduction' => 'nullable',
+            'images.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:10240'],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -155,14 +195,25 @@ class LocationController extends Controller
             throw new AuthorizationException();
         }
 
-        $location->update($request->only([
+        $input = $request->only([
             'city_area_id',
             'category_id',
             'name',
             'address',
             'phone',
             'introduction',
-        ]));
+        ]);
+        if ($request->hasFile('images')) {
+            $filePaths = [];
+            empty($location->images) ?: static::deleteDirectory($location);
+            foreach ($request->file('images', []) as $file) {
+                (($path = $file->store("/locations/{$location->id}", 'public')) === false) ?:
+                    $filePaths[] = $path;
+            }
+            $input['images'] = $filePaths;
+        }
+
+        $location->update($input);
 
         return new LocationResource($location->refresh());
     }

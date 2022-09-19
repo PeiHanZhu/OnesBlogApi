@@ -604,7 +604,7 @@ The content of the comment.
 
 ```bash
 curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/16" \
+    "http://ones-blog-api.test/api/posts/109/comments/14" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"
@@ -612,7 +612,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/16"
+    "http://ones-blog-api.test/api/posts/109/comments/14"
 );
 
 let headers = {
@@ -632,7 +632,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://ones-blog-api.test/api/posts/109/comments/16',
+    'http://ones-blog-api.test/api/posts/109/comments/14',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -648,7 +648,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/16'
+url = 'http://ones-blog-api.test/api/posts/109/comments/14'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

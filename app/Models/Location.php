@@ -3,12 +3,23 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUser;
+use App\Traits\FileHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    use HasUser, HasFactory;
+    use HasUser, FileHandler, HasFactory;
+
+    /**
+     * @inheritDoc
+     */
+    protected static function booted()
+    {
+        static::deleted(function ($model) {
+            static::deleteDirectory($model);
+        });
+    }
 
     /**
      * @inheritDoc
@@ -22,6 +33,14 @@ class Location extends Model
         'phone',
         'avgScore',
         'introduction',
+        'images',
+    ];
+
+    /**
+     * @inheritDoc
+     */
+    protected $casts = [
+        'images' => 'array',
     ];
 
     /**

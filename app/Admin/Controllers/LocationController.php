@@ -11,6 +11,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Storage;
 
 class LocationController extends AdminController
 {
@@ -72,7 +73,9 @@ class LocationController extends AdminController
         $grid->column('phone', __('admin.location_phone'));
         $grid->column('avgScore', __('admin.location_avgScore'))->sortable();
         $grid->column('introduction', __('admin.location_introduction'))->limit(50);
-
+        $grid->column('images', __('admin.location_images'))->display(function ($filePaths) {
+            return !empty($filePaths) ? Storage::url(head($filePaths)) : '';
+        })->image(config('app.url'), 64, 64);
         return $grid;
     }
 
@@ -97,6 +100,7 @@ class LocationController extends AdminController
         $show->field('phone', __('admin.location_phone'));
         $show->field('avgScore', __('admin.location_avgScore'));
         $show->field('introduction', __('admin.location_introduction'));
+        $show->field('images', __('admin.location_images'))->image();
 
         return $show;
     }
@@ -142,13 +146,18 @@ class LocationController extends AdminController
         $form->hidden('avgScore', __('admin.location_avgScore'))->default(0);
         $form->textarea('introduction', __('admin.location_introduction'));
         if ($form->isEditing()) {
+            $form->multipleImage('images', __('admin.location_images'))
+                ->move("locations/{$location->id}")
+                ->uniqueName()
+                ->options([
+                    'showClose' => false,
+                ]);
             Admin::script(
                 <<<SCRIPT
                 $('select.city_id').trigger('change');
 SCRIPT
             );
         }
-
         return $form;
     }
 

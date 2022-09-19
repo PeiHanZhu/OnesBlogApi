@@ -56,7 +56,9 @@ class VerifyCodeTest extends TestCase
         ];
         $expected = [
             'data' => [
-                "The code is incorrect."
+                'email' => [
+                    'The code is incorrect.',
+                ],
             ],
         ];
 
