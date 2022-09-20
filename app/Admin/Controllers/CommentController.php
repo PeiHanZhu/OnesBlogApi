@@ -9,6 +9,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Storage;
 
 class CommentController extends AdminController
 {
@@ -59,6 +60,9 @@ class CommentController extends AdminController
                 return "<a href='$href' target='_blank'>$value</a>";
             })->sortable();
         $grid->column('content', __('admin.comment_content'))->limit(30)->sortable();
+        $grid->column('images', __('admin.comment_images'))->display(function ($filePaths) {
+            return !empty($filePaths) ? Storage::url(head($filePaths)) : '';
+        })->image(config('app.url'), 64, 64);
 
         return $grid;
     }
@@ -79,6 +83,7 @@ class CommentController extends AdminController
         $show->field('user.name', __('admin.user_name'));
         $show->field('post.title', __('admin.post_title'));
         $show->field('content', __('admin.comment_content'));
+        $show->field('images', __('admin.comment_images'))->image();
 
         return $show;
     }
@@ -101,6 +106,15 @@ class CommentController extends AdminController
             ->options(Post::pluck('title', 'id'))
             ->config('allowClear', false);
         $form->textarea('content', __('admin.comment_content'))->rules('required');
+        $comment = $form->model()->find(request()->route('comment'));
+        if ($form->isEditing()) {
+            $form->multipleImage('images', __('admin.comment_images'))
+                ->move("comments/{$comment->id}")
+                ->uniqueName()
+                ->options([
+                    'showClose' => false,
+                ]);
+        }
 
         return $form;
     }

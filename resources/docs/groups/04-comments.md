@@ -290,11 +290,11 @@ The id of the comment.
 ```bash
 curl -X POST \
     "http://ones-blog-api.test/api/posts/109/comments" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"content":"commentTest"}'
-
+    -F "content=commentTest" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi" 
 ```
 
 ```javascript
@@ -303,19 +303,19 @@ const url = new URL(
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "content": "commentTest"
-}
+const body = new FormData();
+body.append('content', 'commentTest');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response => response.json());
 ```
 
@@ -329,8 +329,15 @@ $response = $client->post(
             'Accept' => 'application/json',
             'token' => 'Bearer {personal-access-token}',
         ],
-        'json' => [
-            'content' => 'commentTest',
+        'multipart' => [
+            [
+                'name' => 'content',
+                'contents' => 'commentTest'
+            ],
+            [
+                'name' => 'images[]',
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi', 'r')
+            ],
         ],
     ]
 );
@@ -343,16 +350,19 @@ import requests
 import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi', 'rb')
+}
 payload = {
     "content": "commentTest"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('POST', url, headers=headers, json=payload)
+response = requests.request('POST', url, headers=headers, files=files, data=payload)
 response.json()
 ```
 
@@ -401,7 +411,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts--post--comments"></code></pre>
 </div>
-<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
+<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -426,6 +436,13 @@ The id of the post.
 <br>
 The content of the comment.
 </p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="POSTapi-posts--post--comments" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="POSTapi-posts--post--comments" data-component="body" hidden>
+<br>
+The images of the comment.
+</p>
 
 </form>
 
@@ -441,11 +458,12 @@ The content of the comment.
 ```bash
 curl -X PUT \
     "http://ones-blog-api.test/api/posts/109/comments/32" \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
-    -d '{"content":"0724Comment"}'
-
+    -F "content=0724Comment" \
+    -F "_method=PUT" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd" 
 ```
 
 ```javascript
@@ -454,19 +472,20 @@ const url = new URL(
 );
 
 let headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "token": "Bearer {personal-access-token}",
 };
 
-let body = {
-    "content": "0724Comment"
-}
+const body = new FormData();
+body.append('content', '0724Comment');
+body.append('_method', 'PUT');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
     method: "PUT",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response => response.json());
 ```
 
@@ -480,8 +499,19 @@ $response = $client->put(
             'Accept' => 'application/json',
             'token' => 'Bearer {personal-access-token}',
         ],
-        'json' => [
-            'content' => '0724Comment',
+        'multipart' => [
+            [
+                'name' => 'content',
+                'contents' => '0724Comment'
+            ],
+            [
+                'name' => '_method',
+                'contents' => 'PUT'
+            ],
+            [
+                'name' => 'images[]',
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd', 'r')
+            ],
         ],
     ]
 );
@@ -494,16 +524,20 @@ import requests
 import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
+files = {
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd', 'rb')
+}
 payload = {
-    "content": "0724Comment"
+    "content": "0724Comment",
+    "_method": "PUT"
 }
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
   'token': 'Bearer {personal-access-token}'
 }
 
-response = requests.request('PUT', url, headers=headers, json=payload)
+response = requests.request('PUT', url, headers=headers, files=files, data=payload)
 response.json()
 ```
 
@@ -559,7 +593,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post--comments--comment-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
+<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -590,6 +624,19 @@ The id of the comment.
 <br>
 The content of the comment.
 </p>
+<p>
+<b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
+<input type="file" name="images.0" data-endpoint="PUTapi-posts--post--comments--comment-" data-component="body"  hidden>
+<input type="file" name="images.1" data-endpoint="PUTapi-posts--post--comments--comment-" data-component="body" hidden>
+<br>
+The images of the comment.
+</p>
+<p>
+<b><code>_method</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="_method" data-endpoint="PUTapi-posts--post--comments--comment-" data-component="body"  hidden>
+<br>
+Required if the <code><b>images</b></code> of the comment are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.
+</p>
 
 </form>
 
@@ -604,7 +651,7 @@ The content of the comment.
 
 ```bash
 curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/3" \
+    "http://ones-blog-api.test/api/posts/109/comments/19" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"
@@ -612,7 +659,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/3"
+    "http://ones-blog-api.test/api/posts/109/comments/19"
 );
 
 let headers = {
@@ -632,7 +679,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://ones-blog-api.test/api/posts/109/comments/3',
+    'http://ones-blog-api.test/api/posts/109/comments/19',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -648,7 +695,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/3'
+url = 'http://ones-blog-api.test/api/posts/109/comments/19'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

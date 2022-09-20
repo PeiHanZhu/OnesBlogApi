@@ -1240,7 +1240,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -1303,7 +1303,7 @@ paths:
             requestBody:
                 required: false
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -1311,6 +1311,11 @@ paths:
                                     type: string
                                     description: 'The content of the comment.'
                                     example: commentTest
+                                images:
+                                    type: array
+                                    description: 'The images of the comment.'
+                                    example: [null, null]
+                                    items: { type: file }
         parameters:
             -
                 in: path
@@ -1371,7 +1376,7 @@ paths:
                     in: header
                     name: Content-Type
                     description: ''
-                    example: application/json
+                    example: multipart/form-data
                     schema:
                         type: string
                 -
@@ -1434,7 +1439,7 @@ paths:
             requestBody:
                 required: true
                 content:
-                    application/json:
+                    multipart/form-data:
                         schema:
                             type: object
                             properties:
@@ -1442,6 +1447,15 @@ paths:
                                     type: string
                                     description: 'The content of the comment.'
                                     example: 0724Comment
+                                images:
+                                    type: array
+                                    description: 'The images of the comment.'
+                                    example: [null, null]
+                                    items: { type: file }
+                                _method:
+                                    type: string
+                                    description: 'Required if the <code><b>images</b></code> of the comment are uploaded, must be <b>PUT</b> and request method must be <small class="badge badge-black">POST</small>.'
+                                    example: PUT
                             required:
                                 - content
         delete:

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class CommentResource extends JsonResource
 {
@@ -18,6 +19,9 @@ class CommentResource extends JsonResource
             'user_id' => $this->user_id,
             'post_id' => $this->post_id,
             'content' => $this->content,
+            'images' => array_map(function ($filePath) {
+                return url(Storage::url($filePath));
+            }, $this->images ?? []),
         ];
     }
 }

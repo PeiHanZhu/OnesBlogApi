@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')->comment('留言者')->constrained()->cascadeOnDelete();
             $table->foreignId('post_id')->comment('文章')->constrained()->cascadeOnDelete();
             $table->longText('content')->comment('留言內容');
+            $table->longText('images')->comment('圖片路徑')->nullable();
         });
     }
 

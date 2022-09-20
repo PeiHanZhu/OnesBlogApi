@@ -76,6 +76,7 @@ class LocationController extends AdminController
         $grid->column('images', __('admin.location_images'))->display(function ($filePaths) {
             return !empty($filePaths) ? Storage::url(head($filePaths)) : '';
         })->image(config('app.url'), 64, 64);
+        
         return $grid;
     }
 

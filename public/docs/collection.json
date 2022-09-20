@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "126fdcbd-9401-4d39-bfe9-85de4c5ca3f1",
+        "_postman_id": "0dfffc54-c120-4f3b-8344-dd949d3f11f4",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -3204,7 +3204,7 @@
                         "header": [
                             {
                                 "key": "Content-Type",
-                                "value": "application\/json"
+                                "value": "multipart\/form-data"
                             },
                             {
                                 "key": "Accept",
@@ -3216,8 +3216,19 @@
                             }
                         ],
                         "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"content\": \"commentTest\"\n}"
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "content",
+                                    "value": "commentTest",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "images[]",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
                         },
                         "description": ""
                     },
@@ -3244,7 +3255,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3256,8 +3267,19 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"commentTest\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "commentTest",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3287,7 +3309,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3299,8 +3321,19 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"commentTest\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "commentTest",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3330,7 +3363,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3342,8 +3375,19 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"commentTest\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "commentTest",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3373,7 +3417,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3385,8 +3429,19 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"commentTest\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "commentTest",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3424,7 +3479,7 @@
                         "header": [
                             {
                                 "key": "Content-Type",
-                                "value": "application\/json"
+                                "value": "multipart\/form-data"
                             },
                             {
                                 "key": "Accept",
@@ -3436,8 +3491,24 @@
                             }
                         ],
                         "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "content",
+                                    "value": "0724Comment",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "_method",
+                                    "value": "PUT",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "images[]",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
                         },
                         "description": ""
                     },
@@ -3470,7 +3541,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3482,8 +3553,24 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "0724Comment",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "_method",
+                                            "value": "PUT",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3519,7 +3606,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3531,8 +3618,24 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "0724Comment",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "_method",
+                                            "value": "PUT",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3568,7 +3671,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3580,8 +3683,24 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "0724Comment",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "_method",
+                                            "value": "PUT",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3617,7 +3736,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3629,8 +3748,24 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "0724Comment",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "_method",
+                                            "value": "PUT",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3666,7 +3801,7 @@
                                 "header": [
                                     {
                                         "key": "Content-Type",
-                                        "value": "application\/json"
+                                        "value": "multipart\/form-data"
                                     },
                                     {
                                         "key": "Accept",
@@ -3678,8 +3813,24 @@
                                     }
                                 ],
                                 "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"content\": \"0724Comment\"\n}"
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "content",
+                                            "value": "0724Comment",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "_method",
+                                            "value": "PUT",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "images[]",
+                                            "src": [],
+                                            "type": "file"
+                                        }
+                                    ]
                                 },
                                 "description": ""
                             },
@@ -3708,7 +3859,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "3",
+                                    "value": "19",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -3751,7 +3902,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "3",
+                                            "value": "19",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3797,7 +3948,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "3",
+                                            "value": "19",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3843,7 +3994,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "3",
+                                            "value": "19",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3889,7 +4040,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "3",
+                                            "value": "19",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]

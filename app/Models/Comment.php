@@ -3,12 +3,23 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUser;
+use App\Traits\FileHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use HasUser, HasFactory;
+    use HasUser, FileHandler, HasFactory;
+
+    /**
+     * @inheritDoc
+     */
+    protected static function booted()
+    {
+        static::deleted(function ($model) {
+            static::deleteDirectory($model);
+        });
+    }
 
     /**
      * @inheritDoc
@@ -17,6 +28,14 @@ class Comment extends Model
         'user_id',
         'post_id',
         'content',
+        'images',
+    ];
+
+    /**
+     * @inheritDoc
+     */
+    protected $casts = [
+        'images' => 'array',
     ];
 
     /**
@@ -27,15 +46,5 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
-    }
-
-    /**
-     * Get the comment images for the comment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function commentImages()
-    {
-        return $this->hasMany(commentImage::class);
     }
 }
