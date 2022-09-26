@@ -7,6 +7,8 @@ use App\Models\Location;
 use App\Models\User;
 use Database\Seeders\CityAndAreaSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -55,6 +57,32 @@ class UpdateTest extends TestCase
 
         // THEN
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
+    }
+
+    public function testWhenLocationUpdatedWithImages()
+    {
+        // GIVEN
+        $user = Sanctum::actingAs(User::factory()->create());
+        $location = Location::factory()->create([
+            'user_id' => $user->id,
+            'city_area_id' => $this->cityArea->id,
+        ]);
+        Storage::fake('public');
+        $data = [
+            '_method' => 'PUT',
+            'images' => [
+                $file = UploadedFile::fake()->image('sample.jpg'),
+            ],
+        ];
+
+        // WHEN
+        $response = $this->postJson(route('locations.update', [
+            'location' => $location->id,
+        ]), $data, $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_OK);
+        Storage::disk('public')->assertExists("/locations/{$location->id}/{$file->hashName()}");
     }
 
     public function testWithoutPersonalAccessToken()

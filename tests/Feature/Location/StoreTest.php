@@ -3,9 +3,12 @@
 namespace Tests\Feature\Location;
 
 use App\Models\CityArea;
+use App\Models\Location;
 use App\Models\User;
 use Database\Seeders\CityAndAreaSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -54,6 +57,33 @@ class StoreTest extends TestCase
 
         //THEN
         $response->assertStatus(Response::HTTP_CREATED)->assertJson($expected);
+    }
+
+    public function testWhenLocationCreatedWithImages()
+    {
+        // GIVEN
+        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
+
+        Storage::fake('public');
+        $data = [
+            'city_area_id' => $this->cityArea->id,
+            'category_id' => 2,
+            'name' => '巨小機械',
+            'address' => '鳳仁街九段243巷701號64樓',
+            'phone' => '12345678',
+            'images' => [
+                $file = UploadedFile::fake()->image('sample.jpg'),
+            ],
+        ];
+
+        // WHEN
+        $response = $this->postJson(route('locations.store'), $data, $this->headers);
+
+        //THEN
+        $response->assertStatus(Response::HTTP_CREATED);
+
+        $location = Location::where('user_id', $user->id)->first(['id']);
+        Storage::disk('public')->assertExists("/locations/{$location->id}/{$file->hashName()}");
     }
 
     public function testWithoutPersonalAccessToken()
