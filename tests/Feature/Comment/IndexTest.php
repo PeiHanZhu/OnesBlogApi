@@ -13,15 +13,13 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex()
+    public function testComments()
     {
         // GIVEN
         $locationUser = User::factory()->create();
         $location = Location::factory()->create(['user_id' => $locationUser->id]);
         $postUser = User::factory()->create();
-        $post = Post::factory()->create([
-            'user_id' => $postUser->id,
-            'location_id' => $location->id,
+        $post = Post::factory()->for($postUser)->for($location)->create([
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);

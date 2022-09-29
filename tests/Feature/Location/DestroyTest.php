@@ -33,14 +33,11 @@ class DestroyTest extends TestCase
         $this->cityArea = CityArea::inRandomOrder()->first();
     }
 
-    public function testWhenLocationDelete()
+    public function testWhenLocationDeleted()
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
 
         $expected = [
             'data' => 'Success',
@@ -55,15 +52,12 @@ class DestroyTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
 
-    public function testWhenLocationDeleteWithImages()
+    public function testWhenLocationDeletedWithImages()
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
         Storage::fake('public');
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
         $location->update([
             'images' => [
                 $filePath = UploadedFile::fake()->image('sample.jpg')
@@ -89,10 +83,7 @@ class DestroyTest extends TestCase
     {
         // GIVEN
         $user = User::factory()->create();
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
 
         $expected = [
             'data' => 'Unauthenticated.',
@@ -107,15 +98,12 @@ class DestroyTest extends TestCase
         $response->assertStatus(Response::HTTP_UNAUTHORIZED)->assertJson($expected);
     }
 
-    public function testWhenLocationUpdatedByWrongUser()
+    public function testWhenLocationDeletedByWrongUser()
     {
         // GIVEN
         Sanctum::actingAs(User::factory()->create(), ['*']);
         $locationUser = User::factory()->create();
-        $location = Location::factory()->create([
-            'user_id' => $locationUser->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($locationUser)->for($this->cityArea)->create();
 
         $expected = [
             'data' => 'This action is unauthorized.',
@@ -134,10 +122,7 @@ class DestroyTest extends TestCase
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
 
         $expected = [
             'data' => "Location(ID:{$location->id}) is not found.",

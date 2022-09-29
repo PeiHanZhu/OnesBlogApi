@@ -6,7 +6,9 @@ use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -18,7 +20,7 @@ class DestroyTest extends TestCase
     /**
      * @var User
      */
-    protected $user;
+    protected $locationUser;
 
     /**
      * @var Location
@@ -26,7 +28,7 @@ class DestroyTest extends TestCase
     protected $location;
 
     /**
-     *  @inheritDoc
+     * @inheritDoc
      */
     protected function setUp(): void
     {
@@ -34,19 +36,17 @@ class DestroyTest extends TestCase
 
         $this->locationUser = User::factory()->create();
         $this->location = Location::factory()->for($this->locationUser)->create();
-        $this->postUser = Sanctum::actingAs(User::factory()->create([
+    }
+
+    public function testWhenPostDeleted()
+    {
+        // GIVEN
+        $postUser = Sanctum::actingAs(User::factory()->create([
             'name' => 'GUO_XUN',
             'email' => 'saber@gmail.com',
             'password' => Hash::make('123456'),
         ]), ['*']);
-    }
-
-    public function testDestroy()
-    {
-        // GIVEN
-        $post = Post::factory()->create([
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $post = Post::factory()->for($postUser)->for($this->location)->create([
             'published_at' => now(),
             'active' => 1,
         ]);
@@ -64,12 +64,94 @@ class DestroyTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
 
-    public function testDestroyNotFound()
+    public function testWhenPostDeletedWithImages()
     {
         // GIVEN
-        $post = Post::factory()->create([
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $postUser = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
+        $post = Post::factory()->for($postUser)->for($this->location)->create([
+            'published_at' => now(),
+            'active' => 1,
+        ]);
+        Storage::fake('public');
+        $post->update([
+            'images' => [
+                $filePath = UploadedFile::fake()->image('sample.jpg')
+                    ->store("/posts/{$post->id}", 'public'),
+            ],
+        ]);
+
+        $expected = [
+            'data' => 'Success',
+        ];
+
+        // WHEN
+        $response = $this->deleteJson(route('posts.destroy', [
+            'post' => $post->id,
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
+        Storage::disk('public')->assertMissing($filePath);
+    }
+
+    public function testWithoutPersonalAccessToken()
+    {
+        // GIVEN
+        $postUser = User::factory()->create();
+        $post = Post::factory()->for($postUser)->for($this->location)->create([
+            'published_at' => now(),
+            'active' => 1,
+        ]);
+
+        $expected = [
+            'data' => 'Unauthenticated.',
+        ];
+
+        // WHEN
+        $response = $this->deleteJson(route('posts.destroy', [
+            'post' => $post->id,
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)->assertJson($expected);
+    }
+
+    public function testWhenPostDeletedByWrongUser()
+    {
+        // GIVEN
+        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $postUser = User::factory()->create();
+        $post = Post::factory()->for($postUser)->for($this->location)->create([
+            'published_at' => now(),
+            'active' => 1,
+        ]);
+
+        $expected = [
+            'data' => 'This action is unauthorized.',
+        ];
+
+        // WHEN
+        $response = $this->deleteJson(route('posts.destroy', [
+            'post' => $post->id
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_FORBIDDEN)->assertJson($expected);
+    }
+
+    public function testWhenPostNotFound()
+    {
+        // GIVEN
+        $postUser = Sanctum::actingAs(User::factory()->create([
+            'name' => 'GUO_XUN',
+            'email' => 'saber@gmail.com',
+            'password' => Hash::make('123456'),
+        ]), ['*']);
+        $post = Post::factory()->for($postUser)->for($this->location)->create([
             'title' => 'Test',
             'published_at' => now(),
             'active' => 1,

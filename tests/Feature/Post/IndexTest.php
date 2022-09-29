@@ -13,34 +13,13 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var Location
-     */
-    protected $location;
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->locationUser = User::factory()->create();
-        $this->location = Location::factory()->for($this->locationUser)->create();
-        $this->postUser = User::factory()->create();
-    }
-
-    public function testIndexQueriedByCategoryId()
+    public function testPostsQueriedByCategoryId()
     {
         // GIVEN
-        $post = Post::factory()->create($data = [
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $locationUser = User::factory()->create();
+        $location = Location::factory()->for($locationUser)->create();
+        $postUser = User::factory()->create();
+        $post = Post::factory()->for($postUser)->for($location)->create($data = [
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
@@ -53,7 +32,7 @@ class IndexTest extends TestCase
             'data' => [
                 array_merge(
                     $data,
-                    ['user' => ['id' => $this->postUser->id]]
+                    ['user' => ['id' => $postUser->id]]
                 ),
             ],
         ];

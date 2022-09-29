@@ -37,9 +37,7 @@ class UpdateTest extends TestCase
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create());
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
+        $location = Location::factory()->for($user)->for($this->cityArea)->create([
             'name' => '新亞洲汽車',
         ]);
         $data = [
@@ -63,10 +61,7 @@ class UpdateTest extends TestCase
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create());
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
         Storage::fake('public');
         $data = [
             '_method' => 'PUT',
@@ -89,9 +84,7 @@ class UpdateTest extends TestCase
     {
         // GIVEN
         $user = User::factory()->create();
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
+        $location = Location::factory()->for($user)->for($this->cityArea)->create([
             'name' => '新亞洲汽車',
         ]);
         $data = [
@@ -116,9 +109,7 @@ class UpdateTest extends TestCase
         // GIVEN
         Sanctum::actingAs(User::factory()->create());
         $locationUser = User::factory()->create();
-        $location = Location::factory()->create([
-            'user_id' => $locationUser->id,
-            'city_area_id' => $this->cityArea->id,
+        $location = Location::factory()->for($locationUser)->for($this->cityArea)->create([
             'name' => '新亞洲汽車',
         ]);
         $expected = [
@@ -137,7 +128,6 @@ class UpdateTest extends TestCase
     public function testWhenLocationNotFound()
     {
         // GIVEN
-        Sanctum::actingAs(User::factory()->create());
         $faker = \Faker\Factory::create();
         $locationId = $faker->numberBetween(100, 300);
 

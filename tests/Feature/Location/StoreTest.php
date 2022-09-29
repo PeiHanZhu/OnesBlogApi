@@ -88,6 +88,7 @@ class StoreTest extends TestCase
 
     public function testWithoutPersonalAccessToken()
     {
+        // GIVEN
         $user = User::factory()->create();
         $data = [
             'user_id' => $user->id,

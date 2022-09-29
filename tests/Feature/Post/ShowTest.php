@@ -24,6 +24,11 @@ class ShowTest extends TestCase
     protected $location;
 
     /**
+     * @var User
+     */
+    protected $postUser;
+
+    /**
      * @inheritDoc
      */
     protected function setUp(): void
@@ -35,12 +40,10 @@ class ShowTest extends TestCase
         $this->postUser = User::factory()->create();
     }
 
-    public function testShow()
+    public function testWhenPostDisplayed()
     {
         // GIVEN
-        $post = Post::factory()->create($data = [
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $post = Post::factory()->for($this->postUser)->for($this->location)->create($data = [
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
@@ -66,12 +69,10 @@ class ShowTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
 
-    public function testShowInactive()
+    public function testWhenPostShowInactive()
     {
         // GIVEN
-        $post = Post::factory()->create([
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $post = Post::factory()->for($this->postUser)->for($this->location)->create([
             'title' => 'Test',
             'active' => 0,
         ]);
@@ -89,12 +90,10 @@ class ShowTest extends TestCase
         $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
     }
 
-    public function testShowUnpublished()
+    public function testWhenPostUnpublished()
     {
         // GIVEN
-        $post = Post::factory()->create([
-            'user_id' => $this->postUser->id,
-            'location_id' => $this->location->id,
+        $post = Post::factory()->for($this->postUser)->for($this->location)->create([
             'title' => 'Test',
             'published_at' => now()->addHours(6),
         ]);
@@ -106,6 +105,25 @@ class ShowTest extends TestCase
         // WHEN
         $response = $this->getJson(route('posts.show', [
             'post' => $post->id,
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
+    }
+
+    public function testWhenPostNotFound()
+    {
+        // GIVEN
+        $faker = \Faker\Factory::create();
+        $postId = $faker->numberBetween(100, 300);
+
+        $expected = [
+            'data' => "Post(ID:{$postId}) is not found.",
+        ];
+
+        // WHEN
+        $response = $this->getJson(route('posts.show', [
+            'post' => $postId,
         ]), $this->headers);
 
         // THEN

@@ -17,7 +17,7 @@ class ShowTest extends TestCase
     /**
      * @var User
      */
-    protected $user;
+    protected $locationUser;
 
     /**
      * @var Location
@@ -25,26 +25,35 @@ class ShowTest extends TestCase
     protected $location;
 
     /**
+     * @var User
+     */
+    protected $user;
+
+    /**
      * @var Post
      */
     protected $post;
 
-    public function testShow()
+    /**
+     * @inheritDoc
+     */
+    protected function setUp(): void
     {
-        // GIVEN
-        $locationUser = User::factory()->create();
-        $location = Location::factory()->for($locationUser)->create();
-        $user = User::factory()->create();
+        parent::setUp();
 
-        $post = Post::factory()->create([
-            'user_id' => $user->id,
-            'location_id' => $location->id,
+        $this->locationUser = User::factory()->create();
+        $this->location = Location::factory()->for($this->locationUser)->create();
+        $this->user = User::factory()->create();
+        $this->post = Post::factory()->for($this->user)->for($this->location)->create([
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
-        $comment = Comment::factory()->create($data = [
-            'user_id' => $user->id,
-            'post_id' => $post->id,
+    }
+
+    public function testWhenCommentDisplayed()
+    {
+        // GIVEN
+        $comment = Comment::factory()->for($this->user)->for($this->post)->create($data = [
             'content' => 'test',
         ]);
         $expected = [
@@ -53,11 +62,31 @@ class ShowTest extends TestCase
 
         // WHEN
         $response = $this->getJson(route('comments.show', [
-            'post' => $post->id,
+            'post' => $this->post->id,
             'comment' => $comment->id
         ]), $this->headers);
 
         // THEN
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
+    }
+
+    public function testWhenCommentNotFound()
+    {
+        // GIVEN
+        $faker = \Faker\Factory::create();
+        $commentId = $faker->numberBetween(100, 300);
+
+        $expected = [
+            'data' => "Comment(ID:{$commentId}) is not found.",
+        ];
+
+        // WHEN
+        $response = $this->getJson(route('comments.show', [
+            'post' => $this->post->id,
+            'comment' => $commentId,
+        ]));
+
+        // THEN
+        $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
     }
 }

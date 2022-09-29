@@ -33,14 +33,11 @@ class IndexTest extends TestCase
         $this->cityArea = CityArea::inRandomOrder()->first();
     }
 
-    public function testLocationQueriedByCategoryIdAndCityId()
+    public function testLocationsQueriedByCategoryIdAndCityId()
     {
         // GIVEN
         $user = User::factory()->create();
-        $location = Location::factory()->create([
-            'user_id' => $user->id,
-            'city_area_id' => $this->cityArea->id,
-        ]);
+        $location = Location::factory()->for($user)->for($this->cityArea)->create();
 
         $expected = [
             'data' => [
@@ -58,7 +55,7 @@ class IndexTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
     }
 
-    public function testLocationQueriedByCategoryIdAndRanking()
+    public function testLocationsQueriedByCategoryIdAndRanking()
     {
         // GIVEN
         $locations = collect();
