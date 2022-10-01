@@ -41,11 +41,11 @@ class PostController extends Controller
                     $query->where([
                         ['category_id', $categoryId],
                     ]);
-                })->where([
-                    ['active', true],
-                    ['published_at', '<=', now()],
-                ]);
-            })->paginate($request->query('limit') ?? 10)
+                });
+            })->where([
+                ['active', true],
+                ['published_at', '<=', now()],
+            ])->paginate($request->query('limit') ?? 10)
         ))->preserveQuery();
     }
 

@@ -24,9 +24,9 @@ class PostResource extends JsonResource
             'content' => Str::limit($this->content, 50),
             'published_at' => $this->published_at,
             'slug' => $this->slug,
-            // 'images' => array_map(function ($filePath) {
-            //     return url(Storage::url($filePath));
-            // }, $this->images ?? []),
+            'images' => array_map(function ($filePath) {
+                return url(Storage::url($filePath));
+            }, $this->images ?? []),
             'images' => $this->images
         ];
     }
