@@ -148,6 +148,7 @@ return [
 
     // Comment
     'comment_content' => '留言內容',
+    'comment_images' => '留言圖片',
 
     // City
     'city_zip_code' => '郵遞區號',
