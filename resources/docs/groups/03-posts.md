@@ -304,7 +304,7 @@ curl -X POST \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpwEBhri" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpqPleiO" 
 ```
 
 ```javascript
@@ -366,7 +366,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpwEBhri', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpqPleiO', 'r')
             ],
         ],
     ]
@@ -381,7 +381,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpwEBhri', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpqPleiO', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -526,7 +526,7 @@ curl -X PUT \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpyiUBWY" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpzCnr1O" 
 ```
 
 ```javascript
@@ -588,7 +588,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpyiUBWY', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpzCnr1O', 'r')
             ],
         ],
     ]
@@ -603,7 +603,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpyiUBWY', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpzCnr1O', 'rb')
 }
 payload = {
     "title": "0724Post",

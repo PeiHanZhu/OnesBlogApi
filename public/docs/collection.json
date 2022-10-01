@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "0dfffc54-c120-4f3b-8344-dd949d3f11f4",
+        "_postman_id": "c996530e-46e8-4114-9d5c-c74848ed3154",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -4066,6 +4066,189 @@
                             "header": null,
                             "cookie": [],
                             "body": "{\n    \"data\": \"Comment(ID:{comment-id}) is not found.\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "05. Cities",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the cities.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cities",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cities"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display a listing of the cities. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/cities",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/cities"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{city-id}\",\n            \"created_at\": \"{city-created-at}\",\n            \"updated_at\": \"{city-updated-at}\",\n            \"city\": \"{city-city}\"\n        }\n    ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified city.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cities\/:city",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cities\/:city",
+                            "variable": [
+                                {
+                                    "id": "city",
+                                    "key": "city",
+                                    "value": "20",
+                                    "description": "The id of the city."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display the specified city. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/cities\/:city",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/cities\/:city",
+                                    "variable": [
+                                        {
+                                            "id": "city",
+                                            "key": "city",
+                                            "value": "20",
+                                            "description": "The id of the city."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": \"{city-id}\",\n        \"created_at\": \"{city-created-at}\",\n        \"updated_at\": \"{city-updated-at}\",\n        \"city\": \"{city-city}\",\n        \"city_areas\": [\n            {\n                \"id\": \"{city-area-id}\",\n                \"created_at\": \"{city-area-created-at}\",\n                \"updated_at\": \"{city-area-updated-at}\",\n                \"city_id\": \"{city-area-city-id}\",\n                \"city_area\": \"{city-area-city-area}\",\n                \"zip_code\": \"{city-area-zip-code}\"\n            }\n        ]\n    }\n}"
+                        },
+                        {
+                            "name": "Display the specified city. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/cities\/:city",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/cities\/:city",
+                                    "variable": [
+                                        {
+                                            "id": "city",
+                                            "key": "city",
+                                            "value": "20",
+                                            "description": "The id of the city."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"City(ID:{city-id}) is not found.\"\n}"
                         }
                     ]
                 }

@@ -294,7 +294,7 @@ curl -X POST \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
     -F "content=commentTest" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol" 
 ```
 
 ```javascript
@@ -336,7 +336,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol', 'r')
             ],
         ],
     ]
@@ -351,7 +351,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKI8Idi', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol', 'rb')
 }
 payload = {
     "content": "commentTest"
@@ -463,7 +463,7 @@ curl -X PUT \
     -H "token: Bearer {personal-access-token}" \
     -F "content=0724Comment" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx" 
 ```
 
 ```javascript
@@ -510,7 +510,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx', 'r')
             ],
         ],
     ]
@@ -525,7 +525,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpa0aGUd', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx', 'rb')
 }
 payload = {
     "content": "0724Comment",

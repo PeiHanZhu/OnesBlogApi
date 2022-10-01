@@ -326,7 +326,7 @@ curl -X POST \
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpYPfR9Z" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q" 
 ```
 
 ```javascript
@@ -393,7 +393,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpYPfR9Z', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q', 'r')
             ],
         ],
     ]
@@ -408,7 +408,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpYPfR9Z', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -563,7 +563,7 @@ curl -X PUT \
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKPpSlU" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF" 
 ```
 
 ```javascript
@@ -635,7 +635,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKPpSlU', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF', 'r')
             ],
         ],
     ]
@@ -650,7 +650,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKPpSlU', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF', 'rb')
 }
 payload = {
     "city_area_id": 153,

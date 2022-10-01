@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
@@ -52,3 +53,6 @@ Route::scopeBindings()->group(function () {
         Route::delete('posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     });
 });
+
+Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+Route::get('cities/{city}', [CityController::class, 'show'])->name('cities.show');

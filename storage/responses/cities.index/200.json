@@ -1,0 +1,10 @@
+{
+    "data": [
+        {
+            "id": "{city-id}",
+            "created_at": "{city-created-at}",
+            "updated_at": "{city-updated-at}",
+            "city": "{city-city}"
+        }
+    ]
+}

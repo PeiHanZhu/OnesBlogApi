@@ -1,0 +1,18 @@
+{
+    "data": {
+        "id": "{city-id}",
+        "created_at": "{city-created-at}",
+        "updated_at": "{city-updated-at}",
+        "city": "{city-city}",
+        "city_areas": [
+            {
+                "id": "{city-area-id}",
+                "created_at": "{city-area-created-at}",
+                "updated_at": "{city-area-updated-at}",
+                "city_id": "{city-area-city-id}",
+                "city_area": "{city-area-city-area}",
+                "zip_code": "{city-area-zip-code}"
+            }
+        ]
+    }
+}
