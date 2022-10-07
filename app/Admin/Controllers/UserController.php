@@ -52,7 +52,7 @@ class UserController extends AdminController
         $grid->column('name', __('admin.name'))->sortable();
         $grid->column('email', __('admin.email'));
         $grid->column('email_verified_at', __('admin.email_verified_at'))->display(function ($value) {
-            return date('Y-m-d H:i:s', strtotime($value));
+            return !is_null($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
         });
         $grid->column('location.name', __('admin.location_name'))->sortable();
         $grid->column('login_type_id', __('admin.login_type_id'))->using(__('admin.login_type_options'))->label([
@@ -96,7 +96,7 @@ class UserController extends AdminController
         $form->text('name', __('admin.name'))->rules('required');
         $form->email('email', __('admin.email'))->rules('required');
         $form->datetime('email_verified_at', __('admin.email_verified_at'))
-            ->default(date('Y-m-d H:i:s'));
+            ->default(!is_null($form->email_verified_at) ? date('Y-m-d H:i:s') : null);
         $form->password('password', __('admin.password'))->creationRules('required');
         !$form->isEditing() ?: $form->display('location.name', __('admin.location_name'));
         $form->saving(function (Form $form) {
