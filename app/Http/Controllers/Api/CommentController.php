@@ -86,7 +86,7 @@ class CommentController extends Controller
         $comment->images = $filePaths;
         $comment->save();
 
-        return new CommentResource($comment, Response::HTTP_CREATED);
+        return new CommentResource($comment);
     }
 
     /**

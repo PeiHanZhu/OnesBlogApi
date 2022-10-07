@@ -53,7 +53,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created location in storage.
      *
      * @group 02. Locations
      * @authenticated
@@ -112,11 +112,11 @@ class LocationController extends Controller
         $location->images = $filePaths;
         $location->save();
 
-        return new LocationResource($location, Response::HTTP_CREATED);
+        return new LocationResource($location);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified location.
      *
      * @group 02. Locations
      * @urlParam location integer required The id of the location. Example: 5
@@ -132,7 +132,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified location in storage.
      *
      * @group 02. Locations
      * @authenticated
@@ -219,7 +219,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified location from storage.
      *
      * @group 02. Locations
      * @authenticated

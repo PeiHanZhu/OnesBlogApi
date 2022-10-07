@@ -101,7 +101,7 @@ class PostController extends Controller
         $post->images = $filePaths;
         $post->save();
 
-        return new PostResource($post, Response::HTTP_CREATED);
+        return new PostResource($post);
     }
 
     /**
