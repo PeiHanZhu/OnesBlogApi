@@ -34,6 +34,7 @@ class DestroyTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('public');
         $this->locationUser = User::factory()->create();
         $this->location = Location::factory()->for($this->locationUser)->create();
     }
@@ -76,7 +77,6 @@ class DestroyTest extends TestCase
             'published_at' => now(),
             'active' => 1,
         ]);
-        Storage::fake('public');
         $post->update([
             'images' => [
                 $filePath = UploadedFile::fake()->image('sample.jpg')
