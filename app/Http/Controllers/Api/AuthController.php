@@ -13,13 +13,14 @@ use NextApps\VerificationCode\VerificationCode;
 
 /**
  * Class AuthController.
+ *
+ * @group 01. Authentication and Users
  */
 class AuthController extends Controller
 {
     /**
      * Register a user with a personal access token for the device.
      *
-     * @group 01. Authentication and User
      * @bodyParam name string required The name of the user. Example: Han
      * @bodyParam email string required The email of the user. Example: han@gmail.com
      * @bodyParam password string required The password of the user. Example: 123456
@@ -61,7 +62,6 @@ class AuthController extends Controller
     /**
      * Login a user with a new personal access token for the device.
      *
-     * @group 01. Authentication and User
      * @bodyParam email string required The email of the user. Example: han@gmail.com
      * @bodyParam password string required The password of the user. Example: 123456
      * @bodyParam device_name string required The device name of the user. Example: iPhone
@@ -105,7 +105,6 @@ class AuthController extends Controller
     /**
      * Logout a user with all the personal access tokens being revoked on the device.
      *
-     * @group 01. Authentication and User
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @bodyParam device_name string required The device's name of the user. Example: iPhone
@@ -135,7 +134,6 @@ class AuthController extends Controller
     /**
      * Verify a user with a code.
      *
-     * @group 01. Authentication and User
      * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
      * @bodyParam code string required The code of the user. Example: VYB6P9
      * @responseFile 200 scenario="when verify succeeded." responses/auth.verifyCode/200.json

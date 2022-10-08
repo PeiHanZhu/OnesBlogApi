@@ -10,13 +10,13 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "c996530e-46e8-4114-9d5c-c74848ed3154",
+        "_postman_id": "348ad3dc-9773-42aa-9304-2e3976722d50",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "01. Authentication and User",
+            "name": "01. Authentication and Users",
             "description": "",
             "item": [
                 {
@@ -782,7 +782,7 @@
                     ]
                 },
                 {
-                    "name": "Display the specified resource.",
+                    "name": "Display the specified location.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -818,7 +818,7 @@
                     },
                     "response": [
                         {
-                            "name": "Display the specified resource. Response #1",
+                            "name": "Display the specified location. Response #1",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -857,7 +857,7 @@
                             "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
                         },
                         {
-                            "name": "Display the specified resource. Response #2",
+                            "name": "Display the specified location. Response #2",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -898,7 +898,7 @@
                     ]
                 },
                 {
-                    "name": "Store a newly created resource in storage.",
+                    "name": "Store a newly created location in storage.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -966,7 +966,7 @@
                     },
                     "response": [
                         {
-                            "name": "Store a newly created resource in storage. Response #1",
+                            "name": "Store a newly created location in storage. Response #1",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1037,7 +1037,7 @@
                             "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
                         },
                         {
-                            "name": "Store a newly created resource in storage. Response #2",
+                            "name": "Store a newly created location in storage. Response #2",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1108,7 +1108,7 @@
                             "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
                         },
                         {
-                            "name": "Store a newly created resource in storage. Response #3",
+                            "name": "Store a newly created location in storage. Response #3",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1181,7 +1181,7 @@
                     ]
                 },
                 {
-                    "name": "Update the specified resource in storage.",
+                    "name": "Update the specified location in storage.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1262,7 +1262,7 @@
                     },
                     "response": [
                         {
-                            "name": "Update the specified resource in storage. Response #1",
+                            "name": "Update the specified location in storage. Response #1",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1346,7 +1346,7 @@
                             "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
                         },
                         {
-                            "name": "Update the specified resource in storage. Response #2",
+                            "name": "Update the specified location in storage. Response #2",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1430,7 +1430,7 @@
                             "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
                         },
                         {
-                            "name": "Update the specified resource in storage. Response #3",
+                            "name": "Update the specified location in storage. Response #3",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1514,7 +1514,7 @@
                             "body": "{\n    \"data\": \"This action is unauthorized.\"\n}"
                         },
                         {
-                            "name": "Update the specified resource in storage. Response #4",
+                            "name": "Update the specified location in storage. Response #4",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1598,7 +1598,7 @@
                             "body": "{\n    \"data\": \"Location(ID:{location-id}) is not found.\"\n}"
                         },
                         {
-                            "name": "Update the specified resource in storage. Response #5",
+                            "name": "Update the specified location in storage. Response #5",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1684,7 +1684,7 @@
                     ]
                 },
                 {
-                    "name": "Remove the specified resource from storage.",
+                    "name": "Remove the specified location from storage.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1721,7 +1721,7 @@
                     },
                     "response": [
                         {
-                            "name": "Remove the specified resource from storage. Response #1",
+                            "name": "Remove the specified location from storage. Response #1",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1761,7 +1761,7 @@
                             "body": "{\n    \"data\": \"Success\"\n}"
                         },
                         {
-                            "name": "Remove the specified resource from storage. Response #2",
+                            "name": "Remove the specified location from storage. Response #2",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1801,7 +1801,7 @@
                             "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
                         },
                         {
-                            "name": "Remove the specified resource from storage. Response #3",
+                            "name": "Remove the specified location from storage. Response #3",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1841,7 +1841,7 @@
                             "body": "{\n    \"data\": \"This action is unauthorized.\"\n}"
                         },
                         {
-                            "name": "Remove the specified resource from storage. Response #4",
+                            "name": "Remove the specified location from storage. Response #4",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
@@ -1885,7 +1885,338 @@
             ]
         },
         {
-            "name": "03. Posts",
+            "name": "03. LocationScores",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the location scores.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/location-scores",
+                            "query": [
+                                {
+                                    "key": "location_id",
+                                    "value": "3",
+                                    "description": "The id of the location.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "user_id",
+                                    "value": "31",
+                                    "description": "The id of the user.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10",
+                                    "description": "The amount of results per page. Defaults to '10'.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page of the results. Defaults to '1'.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/location-scores?location_id=3&user_id=31&limit=10&page=1"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display a listing of the location scores. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/location-scores",
+                                    "query": [
+                                        {
+                                            "key": "location_id",
+                                            "value": "3",
+                                            "description": "The id of the location.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "user_id",
+                                            "value": "31",
+                                            "description": "The id of the user.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/location-scores?location_id=3&user_id=31&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"location_id\": \"{location-id}\",\n            \"score\": \"{location-score}\"\n        }\n    ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/locations\/:location\/location-scores",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location\/location-scores",
+                            "variable": [
+                                {
+                                    "id": "location",
+                                    "key": "location",
+                                    "value": "et",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "token",
+                                "value": "Bearer {personal-access-token}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"score\": 3.8\n}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location\/location-scores",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location\/location-scores",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "et",
+                                            "description": ""
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"score\": 3.8\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"location_id\": \"{location-id}\",\n        \"score\": \"{user-location-score}\"\n    }\n}"
+                        },
+                        {
+                            "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location\/location-scores",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location\/location-scores",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "et",
+                                            "description": ""
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"score\": 3.8\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Location(ID:{location-id}) is not found.\"\n}"
+                        },
+                        {
+                            "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage. Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location\/location-scores",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location\/location-scores",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "et",
+                                            "description": ""
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"score\": 3.8\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
+                        },
+                        {
+                            "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage. Response #4",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/locations\/:location\/location-scores",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations\/:location\/location-scores",
+                                    "variable": [
+                                        {
+                                            "id": "location",
+                                            "key": "location",
+                                            "value": "et",
+                                            "description": ""
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "token",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"score\": 3.8\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"score\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "04. Posts",
             "description": "",
             "item": [
                 {
@@ -2897,7 +3228,7 @@
             ]
         },
         {
-            "name": "04. Comments",
+            "name": "05. Comments",
             "description": "",
             "item": [
                 {
@@ -3859,7 +4190,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "19",
+                                    "value": "12",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -3902,7 +4233,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "19",
+                                            "value": "12",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3948,7 +4279,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "19",
+                                            "value": "12",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -3994,7 +4325,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "19",
+                                            "value": "12",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -4040,7 +4371,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "19",
+                                            "value": "12",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -4072,7 +4403,7 @@
             ]
         },
         {
-            "name": "05. Cities",
+            "name": "06. Cities",
             "description": "",
             "item": [
                 {

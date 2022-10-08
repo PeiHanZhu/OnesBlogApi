@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LocationController;
-use App\Models\Location;
+use App\Http\Controllers\Api\LocationScoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,10 +30,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::get('locations', [LocationController::class, 'index'])->name('locations.index');
 Route::get('locations/{location}', [LocationController::class, 'show'])->name('locations.show');
+Route::get('location-scores', [LocationScoreController::class, 'index'])->name('location-scores.index');
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('locations', [LocationController::class, 'store'])->name('locations.store');
     Route::put('locations/{location}', [LocationController::class, 'update'])->name('locations.update');
     Route::delete('locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+
+    Route::post('locations/{location}/location-scores', [LocationScoreController::class, 'store'])->name('location-scores.store');
 });
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');

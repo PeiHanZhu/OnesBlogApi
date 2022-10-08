@@ -52,4 +52,14 @@ class Location extends Model
     {
         return $this->belongsTo(CityArea::class);
     }
+
+    /**
+     * Get the location scores for the location.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locationScores()
+    {
+        return $this->hasMany(LocationScore::class);
+    }
 }

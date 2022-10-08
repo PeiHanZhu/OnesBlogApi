@@ -82,4 +82,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Location::class);
     }
+
+    /**
+     * Get the location scores for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locationScores()
+    {
+        return $this->hasMany(LocationScore::class);
+    }
 }
