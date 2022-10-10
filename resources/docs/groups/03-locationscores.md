@@ -150,7 +150,7 @@ The page of the results. Defaults to '1'.
 
 ```bash
 curl -X POST \
-    "http://ones-blog-api.test/api/locations/et/location-scores" \
+    "http://ones-blog-api.test/api/locations/5/location-scores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
@@ -160,7 +160,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/locations/et/location-scores"
+    "http://ones-blog-api.test/api/locations/5/location-scores"
 );
 
 let headers = {
@@ -184,7 +184,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://ones-blog-api.test/api/locations/et/location-scores',
+    'http://ones-blog-api.test/api/locations/5/location-scores',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -203,7 +203,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/locations/et/location-scores'
+url = 'http://ones-blog-api.test/api/locations/5/location-scores'
 payload = {
     "score": 3.8
 }
@@ -275,10 +275,10 @@ response.json()
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
-<b><code>location</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="location" data-endpoint="POSTapi-locations--location--location-scores" data-component="url" required  hidden>
+<b><code>location</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="location" data-endpoint="POSTapi-locations--location--location-scores" data-component="url" required  hidden>
 <br>
-
+The id of the location.
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>

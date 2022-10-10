@@ -6,6 +6,7 @@ use App\Models\CityArea;
 use App\Models\Comment;
 use App\Models\Location;
 use App\Models\LocationScore;
+use App\Models\LocationServiceHour;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
+        LocationServiceHour::truncate();
         LocationScore::truncate();
         Comment::truncate();
         Post::truncate();
@@ -34,11 +36,14 @@ class DatabaseSeeder extends Seeder
         $locations = collect();
         $cityAreas = CityArea::all();
         $users = User::factory(30)->create()->map(function ($user) use ($locations, $cityAreas) {
-            !boolval(rand(0, 1)) ?: $locations->push(
-                Location::factory()->for($cityAreas->random())->create([
-                    'user_id' => $user->id,
-                ])
-            );
+            if (boolval(rand(0, 1))) {
+                $locations->push(
+                    $location = Location::factory()->for($cityAreas->random())->create([
+                        'user_id' => $user->id,
+                    ])
+                );
+                LocationServiceHour::factory()->for($location)->create();
+            }
             return $user;
         });
 

@@ -45,6 +45,7 @@ class LocationScoreController extends Controller
      *
      * @authenticated
      * @header token Bearer {personal-access-token}
+     * @urlParam location integer required The id of the location. Example: 5
      * @bodyParam score float required The location score of the location, <b>0</b> for deleting. Example: 3.8
      * @responseFile 200 scenario="when location score created, updated or deleted." responses/locationScores.store/200.json
      * @responseFile 404 scenario="when location not found." responses/locationScores.store/404.json

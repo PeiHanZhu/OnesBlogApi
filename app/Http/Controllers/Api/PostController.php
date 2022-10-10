@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 /**
  * Class PostController.
  *
- * @group 04. Posts
+ * @group 05. Posts
  */
 class PostController extends Controller
 {

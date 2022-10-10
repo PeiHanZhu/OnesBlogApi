@@ -62,4 +62,14 @@ class Location extends Model
     {
         return $this->hasMany(LocationScore::class);
     }
+
+    /**
+     * Get the location service hours for the location.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locationServiceHours()
+    {
+        return $this->hasMany(LocationServiceHour::class);
+    }
 }

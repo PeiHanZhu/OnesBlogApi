@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class CommentController.
  *
- * @group 05. Comments
+ * @group 06. Comments
  */
 class CommentController extends Controller
 {
@@ -74,7 +74,7 @@ class CommentController extends Controller
         }
         $comment = $post->comments()->create(array_merge([
             'user_id' => $request->user()->id
-        ],$request->only([
+        ], $request->only([
             'content',
         ])));
 

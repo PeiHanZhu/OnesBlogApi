@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * Class CityController.
  *
- * @group 06. Cities
+ * @group 07. Cities
  */
 class CityController extends Controller
 {
