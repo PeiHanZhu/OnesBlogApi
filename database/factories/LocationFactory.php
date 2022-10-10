@@ -23,7 +23,7 @@ class LocationFactory extends Factory
             'name' => $this->faker->company(),
             'address' => $this->faker->streetAddress(),
             'phone' => $this->faker->numerify('##########'),
-            'avgScore' => $this->faker->randomFloat(2, 1, 5),
+            'avgScore' => 0,
             'introduction' => $this->faker->text,
         ];
     }

@@ -35,6 +35,7 @@ class DestroyTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('public');
         $this->locationUser = User::factory()->create();
         $this->location = Location::factory()->for($this->locationUser)->create();
     }
@@ -82,7 +83,6 @@ class DestroyTest extends TestCase
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
-        Storage::fake('public');
         $comment = Comment::factory()->for($postUser)->for($post)->create(['content' => 'test']);
         $this->location->update([
             'images' => [

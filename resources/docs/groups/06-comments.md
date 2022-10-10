@@ -1,4 +1,4 @@
-# 04. Comments
+# 06. Comments
 
 
 ## Display a listing of the comments.
@@ -294,7 +294,7 @@ curl -X POST \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}" \
     -F "content=commentTest" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST" 
 ```
 
 ```javascript
@@ -336,7 +336,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST', 'r')
             ],
         ],
     ]
@@ -351,7 +351,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpd9Rkol', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST', 'rb')
 }
 payload = {
     "content": "commentTest"
@@ -463,7 +463,7 @@ curl -X PUT \
     -H "token: Bearer {personal-access-token}" \
     -F "content=0724Comment" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6" 
 ```
 
 ```javascript
@@ -510,7 +510,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6', 'r')
             ],
         ],
     ]
@@ -525,7 +525,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpAFixKx', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6', 'rb')
 }
 payload = {
     "content": "0724Comment",
@@ -651,7 +651,7 @@ Required if the <code><b>images</b></code> of the comment are uploaded, must be 
 
 ```bash
 curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/19" \
+    "http://ones-blog-api.test/api/posts/109/comments/2" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "token: Bearer {personal-access-token}"
@@ -659,7 +659,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/19"
+    "http://ones-blog-api.test/api/posts/109/comments/2"
 );
 
 let headers = {
@@ -679,7 +679,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://ones-blog-api.test/api/posts/109/comments/19',
+    'http://ones-blog-api.test/api/posts/109/comments/2',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -695,7 +695,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/19'
+url = 'http://ones-blog-api.test/api/posts/109/comments/2'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

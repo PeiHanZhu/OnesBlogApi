@@ -29,6 +29,7 @@ class DestroyTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('public');
         $this->seed(CityAndAreaSeeder::class);
         $this->cityArea = CityArea::inRandomOrder()->first();
     }
@@ -56,7 +57,6 @@ class DestroyTest extends TestCase
     {
         // GIVEN
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
-        Storage::fake('public');
         $location = Location::factory()->for($user)->for($this->cityArea)->create();
         $location->update([
             'images' => [

@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * Class UserController.
+ *
+ * @group 01. Authentication and Users
  */
 class UserController extends Controller
 {
     /**
      * Update the specified user in storage.
      *
-     * @group 01. Authentication and User
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam user integer required The id of the user. Example: 34

@@ -16,6 +16,8 @@ use Illuminate\Validation\Rule;
 
 /**
  * Class LocationController.
+ *
+ * @group 02. Locations
  */
 class LocationController extends Controller
 {
@@ -24,7 +26,6 @@ class LocationController extends Controller
     /**
      * Display a listing of the locations.
      *
-     * @group 02. Locations
      * @queryParam category_id integer The id of the category. Example: 2
      * @queryParam city_id integer The id of the city. Example: 11
      * @queryParam random bool Whether the results are in random order or not. Example: true
@@ -53,9 +54,8 @@ class LocationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created location in storage.
      *
-     * @group 02. Locations
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @bodyParam city_area_id integer required The city area of the location. Example: 153
@@ -112,13 +112,12 @@ class LocationController extends Controller
         $location->images = $filePaths;
         $location->save();
 
-        return new LocationResource($location, Response::HTTP_CREATED);
+        return new LocationResource($location);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified location.
      *
-     * @group 02. Locations
      * @urlParam location integer required The id of the location. Example: 5
      * @responseFile 200 scenario="when location displayed." responses/locations.show/200.json
      * @responseFile 404 scenario="when location not found." responses/locations.show/404.json
@@ -132,9 +131,8 @@ class LocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified location in storage.
      *
-     * @group 02. Locations
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
@@ -219,9 +217,8 @@ class LocationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified location from storage.
      *
-     * @group 02. Locations
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5

@@ -196,7 +196,7 @@ The page of the results. Defaults to '1'.
 </form>
 
 
-## Display the specified resource.
+## Display the specified location.
 
 
 
@@ -306,7 +306,7 @@ The id of the location.
 </form>
 
 
-## Store a newly created resource in storage.
+## Store a newly created location in storage.
 
 <small class="badge badge-darkred">requires authentication</small>
 
@@ -326,7 +326,7 @@ curl -X POST \
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg" 
 ```
 
 ```javascript
@@ -393,7 +393,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'r')
             ],
         ],
     ]
@@ -408,7 +408,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpD6hO6Q', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -542,7 +542,7 @@ The images of the location.
 </form>
 
 
-## Update the specified resource in storage.
+## Update the specified location in storage.
 
 <small class="badge badge-darkred">requires authentication</small>
 
@@ -563,7 +563,7 @@ curl -X PUT \
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B" 
 ```
 
 ```javascript
@@ -635,7 +635,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'r')
             ],
         ],
     ]
@@ -650,7 +650,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpmxHtFF', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -803,7 +803,7 @@ Required if the <code><b>images</b></code> of the location are uploaded, must be
 </form>
 
 
-## Remove the specified resource from storage.
+## Remove the specified location from storage.
 
 <small class="badge badge-darkred">requires authentication</small>
 

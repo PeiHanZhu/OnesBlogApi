@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CommentController.
+ *
+ * @group 06. Comments
  */
 class CommentController extends Controller
 {
@@ -24,7 +26,6 @@ class CommentController extends Controller
     /**
      * Display a listing of the comments.
      *
-     * @group 04. Comments
      * @urlParam post integer required The id of the post. Example: 109
      * @queryParam limit integer The amount of results per page. Example: 10
      * @queryParam page integer The page of the results. Example: 1
@@ -44,7 +45,6 @@ class CommentController extends Controller
     /**
      * Store a newly created comment in storage.
      *
-     * @group 04. Comments
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109
@@ -74,7 +74,7 @@ class CommentController extends Controller
         }
         $comment = $post->comments()->create(array_merge([
             'user_id' => $request->user()->id
-        ],$request->only([
+        ], $request->only([
             'content',
         ])));
 
@@ -86,13 +86,12 @@ class CommentController extends Controller
         $comment->images = $filePaths;
         $comment->save();
 
-        return new CommentResource($comment, Response::HTTP_CREATED);
+        return new CommentResource($comment);
     }
 
     /**
      * Display the specified comment.
      *
-     * @group 04. Comments
      * @urlParam post integer required The id of the post. Example: 109
      * @urlParam comment integer required The id of the comment. Example: 33
      * @responseFile 200 scenario="when comment displayed." responses/comments.show/200.json
@@ -111,7 +110,6 @@ class CommentController extends Controller
     /**
      * Update the specified comment in storage.
      *
-     * @group 04. Comments
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109
@@ -184,7 +182,6 @@ class CommentController extends Controller
     /**
      * Remove the specified comment from storage.
      *
-     * @group 04. Comments
      * @authenticated
      * @header token Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109

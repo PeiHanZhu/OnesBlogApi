@@ -1,4 +1,4 @@
-# 01. Authentication and User
+# 01. Authentication and Users
 
 
 ## Register a user with a personal access token for the device.

@@ -8,12 +8,16 @@ use App\Http\Resources\CityResource;
 use App\Models\City;
 use Illuminate\Http\Request;
 
+/**
+ * Class CityController.
+ *
+ * @group 07. Cities
+ */
 class CityController extends Controller
 {
     /**
      * Display a listing of the cities.
      *
-     * @group 05. Cities
      * @responseFile 200 scenario="when cities displayed." responses/cities.index/200.json
      *
      * @return \Illuminate\Http\Response
@@ -26,7 +30,6 @@ class CityController extends Controller
     /**
      * Display the specified city.
      *
-     * @group 05. Cities
      * @urlParam city integer required The id of the city. Example: 20
      * @responseFile 200 scenario="when city displayed." responses/cities.show/200.json
      * @responseFile 404 scenario="when city not found." responses/cities.show/404.json
