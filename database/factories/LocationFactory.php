@@ -25,6 +25,7 @@ class LocationFactory extends Factory
             'phone' => $this->faker->numerify('##########'),
             'avgScore' => 0,
             'introduction' => $this->faker->text,
+            'active' => $this->faker->boolean,
         ];
     }
 }

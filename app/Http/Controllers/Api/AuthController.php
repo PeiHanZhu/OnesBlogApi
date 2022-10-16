@@ -106,7 +106,7 @@ class AuthController extends Controller
      * Logout a user with all the personal access tokens being revoked on the device.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @bodyParam device_name string required The device's name of the user. Example: iPhone
      * @responseFile 200 scenario="when logout succeeded." responses/auth.logout/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json

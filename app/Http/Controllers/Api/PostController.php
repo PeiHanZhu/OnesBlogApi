@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 /**
  * Class PostController.
  *
- * @group 05. Posts
+ * @group 06. Posts
  */
 class PostController extends Controller
 {
@@ -43,6 +43,10 @@ class PostController extends Controller
                         ['category_id', $categoryId],
                     ]);
                 });
+            })->when($request->query('location_id'), function ($query, $locationId) {
+                $query->where('location_id', $locationId);
+            })->when($request->query('user_id'), function ($query, $userId) {
+                $query->where('user_id', $userId);
             })->where([
                 ['active', true],
                 ['published_at', '<=', now()],
@@ -54,7 +58,7 @@ class PostController extends Controller
      * Store a newly created post in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @bodyParam location_id integer required The location of the post. Example: 6
      * @bodyParam title string required The title of the post. Example: Post
      * @bodyParam content string The content of the post. Example: Test
@@ -127,7 +131,7 @@ class PostController extends Controller
      * Update the specified post in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 108
      * @bodyParam title string The title of the post. Example: 0724Post
      * @bodyParam content string The content of the post. Example: 0724Test
@@ -206,7 +210,7 @@ class PostController extends Controller
      * Remove the specified post from storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 108
      * @responseFile 200 scenario="when post deleted." responses/posts.destroy/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json

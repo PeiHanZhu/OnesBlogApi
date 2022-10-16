@@ -2,6 +2,7 @@
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{user-token}"
+        "login_type_id": "{user-login-type-id}",
+        "token": null
     }
 }

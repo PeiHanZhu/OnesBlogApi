@@ -6,8 +6,10 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\LocationLikeController;
 use App\Http\Controllers\Api\LocationScoreController;
 use App\Http\Controllers\Api\LocationServiceHourController;
+use App\Http\Controllers\Api\PostKeepController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('verifyCode', [AuthController::class, 'verifyCode'])->name('auth.verifyCode');
+Route::post('verify-code', [AuthController::class, 'verifyCode'])->name('auth.verify-code');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
@@ -46,6 +48,9 @@ Route::scopeBindings()->group(function () {
         Route::delete('locations/{location}/location-service-hours/{location_service_hour}', [LocationServiceHourController::class, 'destroy'])->name('location-service-hours.destroy');
     });
 });
+
+Route::get('location-likes', [LocationLikeController::class, 'index'])->name('location-likes.index');
+Route::get('post-keeps', [PostKeepController::class, 'index'])->name('post-keeps.index');
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');

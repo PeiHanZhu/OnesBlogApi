@@ -4,7 +4,7 @@ namespace Tests\Feature\Location;
 
 use App\Enums\LocationCategoryEnum;
 use App\Http\Resources\LocationCollection;
-use App\Http\Resources\LocationResource;
+use App\Models\City;
 use App\Models\CityArea;
 use App\Models\Location;
 use App\Models\User;
@@ -36,19 +36,25 @@ class IndexTest extends TestCase
     public function testLocationsQueriedByCategoryIdAndCityId()
     {
         // GIVEN
-        $user = User::factory()->create();
-        $location = Location::factory()->for($user)->for($this->cityArea)->create();
+        $locations = collect();
+        $categoryId = LocationCategoryEnum::RESTAURANTS;
+        $cityId = City::inRandomOrder();
+        User::factory(3)->create()->each(function ($user) use ($locations, $categoryId) {
+            $locations->push(Location::factory()->for($user)->create([
+                'category_id' => $categoryId,
+                'city_area_id' => $this->cityArea->id,
+                'active' => 1,
+            ]));
+        });
 
         $expected = [
-            'data' => [
-                (new LocationResource($location))->jsonSerialize(),
-            ],
+            'data' => (new LocationCollection($locations))->jsonSerialize()
         ];
 
         // WHEN
         $response = $this->getJson(route('locations.index') . '?' . http_build_query([
-            'category_id' => $location->category_id,
-            'city_id' => $location->cityArea->city_id,
+            'category_id' => $categoryId,
+            'city_id' => $cityId,
         ]), $this->headers);
 
         // THEN
@@ -64,6 +70,7 @@ class IndexTest extends TestCase
             $locations->push(Location::factory()->for($user)->create([
                 'category_id' => $categoryId,
                 'city_area_id' => $this->cityArea->id,
+                'active' => 1,
                 'avgScore' => $i + 1,
             ]));
         });

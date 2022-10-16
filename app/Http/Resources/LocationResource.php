@@ -25,6 +25,7 @@ class LocationResource extends JsonResource
             'phone' => $this->phone,
             'avgScore' => $this->avgScore,
             'introduction' => Str::limit($this->introduction, 20),
+            'active' => $this->active,
             'images' => array_map(function ($filePath) {
                 return url(Storage::url($filePath));
             }, $this->images ?? []),

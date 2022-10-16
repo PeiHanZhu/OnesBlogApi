@@ -1,0 +1,7 @@
+{
+    "data": {
+        "user_id": "{locatoin-score-user-id}",
+        "location_id": "{locatoin-score-location-id}",
+        "score": "{locatoin-score-user-location-score}"
+    }
+}

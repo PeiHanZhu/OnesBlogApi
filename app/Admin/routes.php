@@ -16,6 +16,7 @@ Route::group([
     $router->get('api/locations/without-user', 'PostController@indexLocationsWithoutUser')
         ->name('api.locations.index.without-user')
         ->withoutMiddleware($middleware);
+    $router->resource('location-scores', LocationScoreController::class);
     $router->resource('posts', PostController::class);
     $router->get('api/city-areas/belong-to-city', 'LocationController@indexCityAreasBelongToCity')
         ->name('api.city-areas.index.belong-to-city')

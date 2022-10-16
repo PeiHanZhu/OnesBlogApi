@@ -9,6 +9,7 @@ use App\Http\Resources\LocationResource;
 use App\Models\Location;
 use App\Traits\FileHandler;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class LocationController extends Controller
      *
      * @queryParam category_id integer The id of the category. Example: 2
      * @queryParam city_id integer The id of the city. Example: 11
-     * @queryParam random bool Whether the results are in random order or not. Example: true
+     * @queryParam random integer The random amount of the results. Example: 5
      * @queryParam ranking integer The top amount of the results. Example: 6
      * @queryParam limit integer The amount of results per page. Defaults to '10'. Example: 10
      * @queryParam page integer The page of the results. Defaults to '1'. Example: 1
@@ -49,7 +50,9 @@ class LocationController extends Controller
                 $query->inRandomOrder();
             })->when($rankingLimit = $request->query('ranking'), function ($query) {
                 $query->orderByDesc('avgScore');
-            })->paginate(intval($request->query('limit') ?? $randomLimit ?? $rankingLimit ?? 10))
+            })->where('active', true)->paginate(
+                intval($request->query('limit') ?? $randomLimit ?? $rankingLimit ?? 10)
+            )
         ))->preserveQuery();
     }
 
@@ -57,7 +60,7 @@ class LocationController extends Controller
      * Store a newly created location in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @bodyParam city_area_id integer required The city area of the location. Example: 153
      * @bodyParam category_id integer required The category of the location. Example: 2
      * @bodyParam name string required The name of the location. Example: 新亞洲汽車
@@ -112,6 +115,8 @@ class LocationController extends Controller
         $location->images = $filePaths;
         $location->save();
 
+        // TODO: 若有新的店家申請時，要寄信通知後台管理者去審核
+
         return new LocationResource($location);
     }
 
@@ -120,13 +125,16 @@ class LocationController extends Controller
      *
      * @urlParam location integer required The id of the location. Example: 5
      * @responseFile 200 scenario="when location displayed." responses/locations.show/200.json
-     * @responseFile 404 scenario="when location not found." responses/locations.show/404.json
+     * @responseFile 404 scenario="when location not found or unverified." responses/locations.show/404.json
      *
      * @param  \App\Models\Location  $location
      * @return \Illuminate\Http\Response
      */
     public function show(Location $location)
     {
+        if (!$location->active) {
+            throw (new ModelNotFoundException())->setModel($location, $location->id);
+        }
         return new LocationResource($location);
     }
 
@@ -134,7 +142,7 @@ class LocationController extends Controller
      * Update the specified location in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
      * @bodyParam city_area_id integer required The city area of the location. Example: 153
      * @bodyParam category_id integer required The category of the location. Example: 2
@@ -220,7 +228,7 @@ class LocationController extends Controller
      * Remove the specified location from storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
      * @responseFile 200 scenario="when location deleted." responses/locations.destroy/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json

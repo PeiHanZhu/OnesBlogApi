@@ -1,12 +1,14 @@
 {
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "active": "{location-active}",
+        "images": "{location-images}"
     }
 }

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class CommentController.
  *
- * @group 06. Comments
+ * @group 08. Comments
  */
 class CommentController extends Controller
 {
@@ -46,7 +46,7 @@ class CommentController extends Controller
      * Store a newly created comment in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109
      * @bodyParam content string The content of the comment. Example: commentTest
      * @bodyParam images file[] The images of the comment. Example: .jpg, .jpeg, .png
@@ -111,7 +111,7 @@ class CommentController extends Controller
      * Update the specified comment in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109
      * @urlParam comment integer required The id of the comment. Example: 32
      * @bodyParam content string required The content of the comment. Example: 0724Comment
@@ -183,7 +183,7 @@ class CommentController extends Controller
      * Remove the specified comment from storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam post integer required The id of the post. Example: 109
      * @urlParam comment integer required The id of the comment. Exmaple: 32
      * @responseFile 200 scenario="when comment deleted." responses/comments.destroy/200.json

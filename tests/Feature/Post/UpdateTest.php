@@ -127,7 +127,9 @@ class UpdateTest extends TestCase
         Sanctum::actingAs(User::factory()->create(), ['*']);
         $faker = \Faker\Factory::create();
         $postId = $faker->numberBetween(100, 300);
-
+        $data = [
+            'title' => 'Test',
+        ];
         $expected = [
             'data' => "Post(ID:{$postId}) is not found.",
         ];
@@ -135,7 +137,7 @@ class UpdateTest extends TestCase
         // WHEN
         $response = $this->putJson(route('posts.update', [
             'post' => $postId
-        ]), $this->headers);
+        ]), $data, $this->headers);
 
         // THEN
         $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);

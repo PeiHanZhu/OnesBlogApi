@@ -2,6 +2,6 @@
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "token": null
     }
 }

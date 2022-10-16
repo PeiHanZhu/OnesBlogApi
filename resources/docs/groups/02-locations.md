@@ -10,7 +10,7 @@
 
 ```bash
 curl -X GET \
-    -G "http://ones-blog-api.test/api/locations?category_id=2&city_id=11&random=1&ranking=6&limit=10&page=1" \
+    -G "http://ones-blog-api.test/api/locations?category_id=2&city_id=11&random=5&ranking=6&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -23,7 +23,7 @@ const url = new URL(
 let params = {
     "category_id": "2",
     "city_id": "11",
-    "random": "1",
+    "random": "5",
     "ranking": "6",
     "limit": "10",
     "page": "1",
@@ -55,7 +55,7 @@ $response = $client->get(
         'query' => [
             'category_id'=> '2',
             'city_id'=> '11',
-            'random'=> '1',
+            'random'=> '5',
             'ranking'=> '6',
             'limit'=> '10',
             'page'=> '1',
@@ -74,7 +74,7 @@ url = 'http://ones-blog-api.test/api/locations'
 params = {
   'category_id': '2',
   'city_id': '11',
-  'random': '1',
+  'random': '5',
   'ranking': '6',
   'limit': '10',
   'page': '1',
@@ -95,14 +95,16 @@ response.json()
 {
     "data": [
         {
-            "user_id": "{user-id}",
-            "city_area_id": "{city-area-id}",
-            "category_id": "{category-id}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
             "name": "{location-name}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}"
+            "introduction": "{location-introduction}",
+            "active": "{location-active}",
+            "images": "{location-images}"
         }
     ],
     "links": {
@@ -169,11 +171,10 @@ The id of the category.
 The id of the city.
 </p>
 <p>
-<b><code>random</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
-<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="1" data-endpoint="GETapi-locations" data-component="query" ><code>true</code></label>
-<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="0" data-endpoint="GETapi-locations" data-component="query" ><code>false</code></label>
+<b><code>random</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="random" data-endpoint="GETapi-locations" data-component="query"  hidden>
 <br>
-Whether the results are in random order or not.
+The random amount of the results.
 </p>
 <p>
 <b><code>ranking</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
@@ -262,18 +263,20 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "active": "{location-active}",
+        "images": "{location-images}"
     }
 }
 ```
-> Example response (404, when location not found.):
+> Example response (404, when location not found or unverified.):
 
 ```json
 {
@@ -319,14 +322,15 @@ curl -X POST \
     "http://ones-blog-api.test/api/locations" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "city_area_id=153" \
     -F "category_id=2" \
     -F "name=新亞洲汽車" \
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg" 
+    -F "active=1" \
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php12mhuv" 
 ```
 
 ```javascript
@@ -337,7 +341,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -347,6 +351,7 @@ body.append('name', '新亞洲汽車');
 body.append('address', '賢好街四段43巷434號75樓');
 body.append('phone', '9110576179');
 body.append('introduction', 'Introduction');
+body.append('active', '1');
 body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
 fetch(url, {
@@ -364,7 +369,7 @@ $response = $client->post(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'multipart' => [
             [
@@ -392,8 +397,12 @@ $response = $client->post(
                 'contents' => 'Introduction'
             ],
             [
+                'name' => 'active',
+                'contents' => '1'
+            ],
+            [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php12mhuv', 'r')
             ],
         ],
     ]
@@ -408,7 +417,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php12mhuv', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -416,12 +425,13 @@ payload = {
     "name": "\u65b0\u4e9e\u6d32\u6c7d\u8eca",
     "address": "\u8ce2\u597d\u8857\u56db\u6bb543\u5df7434\u865f75\u6a13",
     "phone": "9110576179",
-    "introduction": "Introduction"
+    "introduction": "Introduction",
+    "active": true
 }
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, files=files, data=payload)
@@ -434,14 +444,16 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "active": "{location-active}",
+        "images": "{location-images}"
     }
 }
 ```
@@ -483,7 +495,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations"></code></pre>
 </div>
-<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
+<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -532,6 +544,13 @@ The phone of the location.
 The introduction of the location.
 </p>
 <p>
+<b><code>active</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="POSTapi-locations" hidden><input type="radio" name="active" value="true" data-endpoint="POSTapi-locations" data-component="body" ><code>true</code></label>
+<label data-endpoint="POSTapi-locations" hidden><input type="radio" name="active" value="false" data-endpoint="POSTapi-locations" data-component="body" ><code>false</code></label>
+<br>
+The state of the location.
+</p>
+<p>
 <b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
 <input type="file" name="images.0" data-endpoint="POSTapi-locations" data-component="body"  hidden>
 <input type="file" name="images.1" data-endpoint="POSTapi-locations" data-component="body" hidden>
@@ -555,15 +574,16 @@ curl -X PUT \
     "http://ones-blog-api.test/api/locations/5" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "city_area_id=153" \
     -F "category_id=2" \
     -F "name=統一娛樂" \
     -F "address=豐裡二路180巷804弄601號49樓" \
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
+    -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR6Y3Xw" 
 ```
 
 ```javascript
@@ -574,7 +594,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -584,6 +604,7 @@ body.append('name', '統一娛樂');
 body.append('address', '豐裡二路180巷804弄601號49樓');
 body.append('phone', '1335933680');
 body.append('introduction', 'IntroductionTest');
+body.append('active', '1');
 body.append('_method', 'PUT');
 body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
 
@@ -602,7 +623,7 @@ $response = $client->put(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'multipart' => [
             [
@@ -630,12 +651,16 @@ $response = $client->put(
                 'contents' => 'IntroductionTest'
             ],
             [
+                'name' => 'active',
+                'contents' => '1'
+            ],
+            [
                 'name' => '_method',
                 'contents' => 'PUT'
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR6Y3Xw', 'r')
             ],
         ],
     ]
@@ -650,7 +675,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR6Y3Xw', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -659,12 +684,13 @@ payload = {
     "address": "\u8c50\u88e1\u4e8c\u8def180\u5df7804\u5f04601\u865f49\u6a13",
     "phone": "1335933680",
     "introduction": "IntroductionTest",
+    "active": true,
     "_method": "PUT"
 }
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, files=files, data=payload)
@@ -677,14 +703,15 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "images": "{location-images}"
     }
 }
 ```
@@ -731,7 +758,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-locations--location-"></code></pre>
 </div>
-<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
+<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -787,6 +814,13 @@ The phone of the location.
 The introduction of the location.
 </p>
 <p>
+<b><code>active</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="PUTapi-locations--location-" hidden><input type="radio" name="active" value="true" data-endpoint="PUTapi-locations--location-" data-component="body" ><code>true</code></label>
+<label data-endpoint="PUTapi-locations--location-" hidden><input type="radio" name="active" value="false" data-endpoint="PUTapi-locations--location-" data-component="body" ><code>false</code></label>
+<br>
+The state of the location.
+</p>
+<p>
 <b><code>images</code></b>&nbsp;&nbsp;<small>file[]</small>     <i>optional</i> &nbsp;
 <input type="file" name="images.0" data-endpoint="PUTapi-locations--location-" data-component="body"  hidden>
 <input type="file" name="images.1" data-endpoint="PUTapi-locations--location-" data-component="body" hidden>
@@ -816,7 +850,7 @@ curl -X DELETE \
     "http://ones-blog-api.test/api/locations/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"
+    -H "Authorization: Bearer {personal-access-token}"
 ```
 
 ```javascript
@@ -827,7 +861,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 
@@ -845,7 +879,7 @@ $response = $client->delete(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -861,7 +895,7 @@ url = 'http://ones-blog-api.test/api/locations/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -905,7 +939,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-locations--location-"></code></pre>
 </div>
-<form id="form-DELETEapi-locations--location-" data-method="DELETE" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location-', this);">
+<form id="form-DELETEapi-locations--location-" data-method="DELETE" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>

@@ -14,6 +14,7 @@
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }

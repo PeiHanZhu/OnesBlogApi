@@ -128,6 +128,7 @@ class UpdateTest extends TestCase
     public function testWhenLocationNotFound()
     {
         // GIVEN
+        Sanctum::actingAs(User::factory()->create(), ['*']);
         $faker = \Faker\Factory::create();
         $locationId = $faker->numberBetween(100, 300);
 
@@ -136,11 +137,39 @@ class UpdateTest extends TestCase
         ];
 
         // WHEN
-        $response = $this->getJson(route('locations.show', [
+        $response = $this->putJson(route('locations.update', [
             'location' => $locationId,
-        ]), $this->headers);
+        ]), [], $this->headers);
 
         // THEN
         $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
+    }
+
+    public function testWhenAnyValidationFailed()
+    {
+        // GIVEN
+        $user = Sanctum::actingAs(User::factory()->create(), ['*']);
+        $location = Location::factory()->for($user)->create();
+        $data = [
+            'category_id' =>  7,
+        ];
+
+        $expected = [
+            'data' => [
+                'category_id' => [
+                    __('validation.in', [
+                        'attribute' => 'category id'
+                    ])
+                ],
+            ]
+        ];
+
+        // WHEN
+        $response = $this->putJson(route('locations.update', [
+            'location' => $location->id
+        ]), $data, $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
 }

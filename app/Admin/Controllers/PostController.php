@@ -35,19 +35,19 @@ class PostController extends AdminController
             $filter->equal('user_id', __('admin.user_name'))
                 ->select(User::pluck('name', 'id'));
             $filter->like('location.name', __('admin.location_name'));
-            $filter->equal('location.category_id', __('admin.category_id'))
-                ->select(__('admin.category_options'));
+            $filter->equal('location.category_id', __('admin.location_category_id'))
+                ->select(__('admin.location_category_options'));
             $filter->like('title', __('admin.post_title'));
-            $filter->between('published_at', __('admin.published_at'))->datetime();
-            $filter->equal('active', __('admin.active'))->radio(__('admin.active_options'));
+            $filter->between('published_at', __('admin.post_published_at'))->datetime();
+            $filter->equal('active', __('admin.post_active'))->radio(__('admin.post_active_options'));
         });
 
         $grid->column('id', __('Id'))->sortable();
-        $grid->column('created_at', __('admin.created_at'))->display(function () {
-            return date('Y-m-d H:i:s');
+        $grid->column('created_at', __('admin.created_at'))->display(function ($value) {
+            return date('Y-m-d H:i:s', strtotime($value));
         });
-        $grid->column('updated_at', __('admin.updated_at'))->display(function () {
-            return date('Y-m-d H:i:s');
+        $grid->column('updated_at', __('admin.updated_at'))->display(function ($value) {
+            return date('Y-m-d H:i:s', strtotime($value));
         });
         $grid->column('user.name', __('admin.user_name'))->display(function ($value) {
             $href = route('admin.users.show', [
@@ -56,17 +56,17 @@ class PostController extends AdminController
             return "<a href='$href' target='_blank'>$value</a>";
         })->sortable();
         $grid->column('location.name', __('admin.location_name'))->sortable();
-        $grid->column('location.category_id', __('admin.category_id'))
-            ->using(__('admin.category_options'))
+        $grid->column('location.category_id', __('admin.location_category_id'))
+            ->using(__('admin.location_category_options'))
             ->dot([
                 1 => 'warning',
                 2 => 'success',
                 3 => 'danger',
             ])->sortable();
         $grid->column('title', __('admin.post_title'))->limit(50);
-        $grid->column('published_at', __('admin.published_at'));
-        $grid->column('active', __('admin.active'))
-            ->using(__('admin.active_options'))
+        $grid->column('published_at', __('admin.post_published_at'));
+        $grid->column('active', __('admin.post_active'))
+            ->using(__('admin.post_active_options'))
             ->label([
                 0 => 'danger',
                 1 => 'success',
@@ -92,11 +92,11 @@ class PostController extends AdminController
         $show->field('updated_at', __('admin.updated_at'));
         $show->field('user.name', __('admin.user_name'));
         $show->field('location.name', __('admin.location_name'));
-        $show->field('location.category_id', __('admin.category_id'))->using(__('admin.category_options'));
+        $show->field('location.category_id', __('admin.location_category_id'))->using(__('admin.location_category_options'));
         $show->field('title', __('admin.post_title'));
         $show->field('content', __('admin.post_content'));
-        $show->field('published_at', __('admin.published_at'));
-        $show->field('active', __('admin.active'))->using(__('admin.active_options'));
+        $show->field('published_at', __('admin.post_published_at'));
+        $show->field('active', __('admin.post_active'))->using(__('admin.post_active_options'));
         $show->field('slug', __('admin.slug'));
         $show->field('images', __('admin.post_images'))->image();
 
@@ -115,9 +115,9 @@ class PostController extends AdminController
         if ($form->isEditing()) {
             $form->display('user.name', __('admin.user_name'));
             $form->display('location.name', __('admin.location_name'));
-            $form->display('location.category_id', __('admin.category_id'))
+            $form->display('location.category_id', __('admin.location_category_id'))
                 ->with(function ($value) {
-                    return __('admin.category_options')[$value];
+                    return __('admin.location_category_options')[$value];
                 });
         } else {
             $form->select('user_id', __('admin.user_name'))
@@ -129,10 +129,10 @@ class PostController extends AdminController
         }
         $form->text('title', __('admin.post_title'))->rules('required');
         $form->textarea('content', __('admin.post_content'));
-        $form->datetime('published_at', __('admin.published_at'))->default(date('Y-m-d H:i:s'));
-        $form->switch('active', __('admin.active'))->states([
-            'on' => ['value' => 1, 'text' => __('admin.active_options.1'), 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => __('admin.active_options.0'), 'color' => 'danger'],
+        $form->datetime('published_at', __('admin.post_published_at'))->default(date('Y-m-d H:i:s'));
+        $form->switch('active', __('admin.post_active'))->states([
+            'on' => ['value' => 1, 'text' => __('admin.post_active_options.1'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('admin.post_active_options.0'), 'color' => 'danger'],
         ]);
         $post = $form->model()->find(request()->route('post'));
         if ($form->isEditing()) {

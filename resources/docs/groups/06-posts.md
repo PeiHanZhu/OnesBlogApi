@@ -1,4 +1,4 @@
-# 05. Posts
+# 06. Posts
 
 
 ## Display a listing of the posts.
@@ -86,19 +86,27 @@ response.json()
 {
     "data": [
         {
-            "user_id": "{user-id}",
-            "city_area_id": "{location-city-area-id}",
-            "category_id": "{location-category-id}",
-            "name": "{location-name}",
-            "address": "{location-address}",
-            "phone": "{location-phone}",
-            "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}"
+            "created_at": "{post-created-at}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}"
+            },
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
         }
     ],
     "links": {
-        "first": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&cuty=5&page=1",
-        "last": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&cuty=5&page=1",
+        "first": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&page=1",
         "prev": null,
         "next": null
     },
@@ -113,7 +121,7 @@ response.json()
                 "active": false
             },
             {
-                "url": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&cuty=5&page=1",
+                "url": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&page=1",
                 "label": "1",
                 "active": true
             },
@@ -123,7 +131,7 @@ response.json()
                 "active": false
             }
         ],
-        "path": "http:\/\/ones-blog-api.test\/api\/locations",
+        "path": "http:\/\/ones-blog-api.test\/api\/posts",
         "per_page": 10,
         "to": 1,
         "total": 1
@@ -248,7 +256,8 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }
 ```
@@ -298,13 +307,13 @@ curl -X POST \
     "http://ones-blog-api.test/api/posts" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "location_id=6" \
     -F "title=Post" \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX" 
 ```
 
 ```javascript
@@ -315,7 +324,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -341,7 +350,7 @@ $response = $client->post(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'multipart' => [
             [
@@ -366,7 +375,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX', 'r')
             ],
         ],
     ]
@@ -381,7 +390,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -393,7 +402,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, files=files, data=payload)
@@ -420,7 +429,8 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }
 ```
@@ -453,7 +463,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts"></code></pre>
 </div>
-<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
+<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -520,13 +530,13 @@ curl -X PUT \
     "http://ones-blog-api.test/api/posts/108" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "title=0724Post" \
     -F "content=0724Test" \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36" 
 ```
 
 ```javascript
@@ -537,7 +547,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -563,7 +573,7 @@ $response = $client->put(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'multipart' => [
             [
@@ -588,7 +598,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36', 'r')
             ],
         ],
     ]
@@ -603,7 +613,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36', 'rb')
 }
 payload = {
     "title": "0724Post",
@@ -615,7 +625,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, files=files, data=payload)
@@ -642,7 +652,8 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }
 ```
@@ -685,7 +696,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
+<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -759,7 +770,7 @@ curl -X DELETE \
     "http://ones-blog-api.test/api/posts/108" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"
+    -H "Authorization: Bearer {personal-access-token}"
 ```
 
 ```javascript
@@ -770,7 +781,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 
@@ -788,7 +799,7 @@ $response = $client->delete(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -804,7 +815,7 @@ url = 'http://ones-blog-api.test/api/posts/108'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -841,7 +852,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-posts--post-"></code></pre>
 </div>
-<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
+<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>

@@ -25,7 +25,7 @@ class LocationScoreController extends Controller
      * @queryParam user_id integer The id of the user. Example: 31
      * @queryParam limit integer The amount of results per page. Defaults to '10'. Example: 10
      * @queryParam page integer The page of the results. Defaults to '1'. Example: 1
-     * @responseFile 200 scenario="when location scores displayed." responses/locationScores.index/200.json
+     * @responseFile 200 scenario="when location scores displayed." responses/location_scores.index/200.json
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,13 +44,13 @@ class LocationScoreController extends Controller
      * Store a newly created or update the specified location score in storage, or remove the specified location score from storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
      * @bodyParam score float required The location score of the location, <b>0</b> for deleting. Example: 3.8
-     * @responseFile 200 scenario="when location score created, updated or deleted." responses/locationScores.store/200.json
-     * @responseFile 404 scenario="when location not found." responses/locationScores.store/404.json
+     * @responseFile 200 scenario="when location score created, updated or deleted." responses/location_scores.store/200.json
+     * @responseFile 404 scenario="when location not found." responses/location_scores.store/404.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
-     * @responseFile 422 scenario="when any validation failed." responses/locationScores.store/422.json
+     * @responseFile 422 scenario="when any validation failed." responses/location_scores.store/422.json
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  Location $location
@@ -78,12 +78,12 @@ class LocationScoreController extends Controller
             $locationScore = LocationScore::updateOrCreate($conditions, $value);
         } else {
             $request->user()->locationScores()->where('location_id', $location->id)->delete();
+            // Due to not going through LocationScoreObserver@deleted.
+            $location->update([
+                'avgScore' => $location->locationScores()->avg('score'),
+            ]);
             $locationScore = new LocationScore(array_merge($conditions, $value));
         }
-
-        $location->update([
-            'avgScore' => LocationScore::where('location_id', $location->id)->avg('score'),
-        ]);
 
         // @see https://stackoverflow.com/questions/66542534/test-api-returns-201-instead-200
         return (new LocationScoreResource($locationScore))->toResponse($request)->setStatusCode(Response::HTTP_OK);

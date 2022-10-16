@@ -90,7 +90,7 @@ response.json()
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "token": null
     }
 }
 ```
@@ -168,7 +168,7 @@ The device name of the user.
 
 ```bash
 curl -X POST \
-    "http://ones-blog-api.test/api/verifyCode" \
+    "http://ones-blog-api.test/api/verify-code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"hanTest@gmail.com","code":"VYB6P9"}'
@@ -177,7 +177,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/verifyCode"
+    "http://ones-blog-api.test/api/verify-code"
 );
 
 let headers = {
@@ -201,7 +201,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://ones-blog-api.test/api/verifyCode',
+    'http://ones-blog-api.test/api/verify-code',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -220,7 +220,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/verifyCode'
+url = 'http://ones-blog-api.test/api/verify-code'
 payload = {
     "email": "hanTest@gmail.com",
     "code": "VYB6P9"
@@ -242,7 +242,7 @@ response.json()
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "token": null
     }
 }
 ```
@@ -260,32 +260,32 @@ response.json()
     }
 }
 ```
-<div id="execution-results-POSTapi-verifyCode" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-verifyCode"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-verifyCode"></code></pre>
+<div id="execution-results-POSTapi-verify-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-verify-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-verify-code"></code></pre>
 </div>
-<div id="execution-error-POSTapi-verifyCode" hidden>
+<div id="execution-error-POSTapi-verify-code" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-verifyCode"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-verify-code"></code></pre>
 </div>
-<form id="form-POSTapi-verifyCode" data-method="POST" data-path="api/verifyCode" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-verifyCode', this);">
+<form id="form-POSTapi-verify-code" data-method="POST" data-path="api/verify-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-verify-code', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/verifyCode</code></b>
+ <b><code>api/verify-code</code></b>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="email" data-endpoint="POSTapi-verifyCode" data-component="body" required  hidden>
+<input type="text" name="email" data-endpoint="POSTapi-verify-code" data-component="body" required  hidden>
 <br>
 The email of the user.
 </p>
 <p>
 <b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="code" data-endpoint="POSTapi-verifyCode" data-component="body" required  hidden>
+<input type="text" name="code" data-endpoint="POSTapi-verify-code" data-component="body" required  hidden>
 <br>
 The code of the user.
 </p>
@@ -452,7 +452,7 @@ curl -X PUT \
     "http://ones-blog-api.test/api/users/34" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -d '{"name":"Han","email":"han@gmail.com","password":"1234567890"}'
 
 ```
@@ -465,7 +465,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
@@ -489,7 +489,7 @@ $response = $client->put(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'json' => [
             'name' => 'Han',
@@ -515,7 +515,7 @@ payload = {
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, json=payload)
@@ -570,7 +570,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-users--user-"></code></pre>
 </div>
-<form id="form-PUTapi-users--user-" data-method="PUT" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-users--user-', this);">
+<form id="form-PUTapi-users--user-" data-method="PUT" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-users--user-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -624,7 +624,7 @@ curl -X POST \
     "http://ones-blog-api.test/api/logout" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -d '{"device_name":"iPhone"}'
 
 ```
@@ -637,7 +637,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
@@ -659,7 +659,7 @@ $response = $client->post(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'json' => [
             'device_name' => 'iPhone',
@@ -681,7 +681,7 @@ payload = {
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -696,7 +696,7 @@ response.json()
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "token": null
     }
 }
 ```
@@ -715,7 +715,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-logout"></code></pre>
 </div>
-<form id="form-POSTapi-logout" data-method="POST" data-path="api/logout" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
+<form id="form-POSTapi-logout" data-method="POST" data-path="api/logout" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>

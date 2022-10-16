@@ -111,4 +111,35 @@ class StoreTest extends TestCase
         //THEN
         $response->assertStatus(Response::HTTP_UNAUTHORIZED)->assertJson($expected);
     }
+
+    public function testWhenAnyValidationFailed()
+    {
+        // GIVEN
+        Sanctum::actingAs( User::factory()->create(), ['*']);
+
+        $expected = [
+            'data' => [
+                'city_area_id' => [
+                    __('validation.required')
+                ],
+                'category_id' => [
+                    __('validation.required')
+                ],
+                'name' => [
+                    __('validation.required')
+                ],
+                'address' => [
+                    __('validation.required')
+                ],
+                'phone' => [
+                    __('validation.required')
+                ]
+            ]
+        ];
+        // WHEN
+        $response = $this->postJson(route('locations.store'), [], $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+    }
 }

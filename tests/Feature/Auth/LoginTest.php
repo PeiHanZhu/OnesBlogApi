@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,6 +12,9 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @inheritDoc
+     */
     public function setUp(): void
     {
         parent::setUp();

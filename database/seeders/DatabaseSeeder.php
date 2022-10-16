@@ -5,9 +5,11 @@ namespace Database\Seeders;
 use App\Models\CityArea;
 use App\Models\Comment;
 use App\Models\Location;
+use App\Models\LocationLike;
 use App\Models\LocationScore;
 use App\Models\LocationServiceHour;
 use App\Models\Post;
+use App\Models\PostKeep;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -28,6 +30,8 @@ class DatabaseSeeder extends Seeder
         Post::truncate();
         Location::truncate();
         User::truncate();
+        LocationLike::truncate();
+        PostKeep::truncate();
 
         $this->call([
             CityAndAreaSeeder::class
@@ -42,7 +46,9 @@ class DatabaseSeeder extends Seeder
                         'user_id' => $user->id,
                     ])
                 );
-                LocationServiceHour::factory()->for($location)->create();
+                foreach (range(1, 3) as $i) {
+                    LocationServiceHour::factory()->for($location)->create();
+                }
             }
             return $user;
         });
@@ -50,7 +56,7 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 15) as $i) {
             LocationScore::factory()->for($location = $locations->random())
                 ->for($users->where('id', '!=', $location->user_id)->random())
-                ->create();
+                ->createQuietly();
         }
 
         $locationAvgScores = LocationScore::selectRaw('AVG(score) as avgScore, location_id')
@@ -71,6 +77,14 @@ class DatabaseSeeder extends Seeder
             foreach (range(1, 3) as $j) {
                 Comment::factory()->for($users->random())->for($post)->create();
             }
+        }
+
+        foreach (range(1, 10) as $i) {
+            $user = User::inRandomOrder()->first();
+            $location = Location::inRandomOrder()->first();
+            $post = Post::inRandomOrder()->first();
+            LocationLike::factory()->for($user)->for($location)->create();
+            PostKeep::factory()->for($user)->for($post)->create();
         }
         Schema::enableForeignKeyConstraints();
     }

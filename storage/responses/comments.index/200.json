@@ -1,9 +1,10 @@
 {
     "data": [
         {
-            "user_id": "{user-id}",
-            "post_id": "{post-id}",
-            "content": "{content}"
+            "user_id": "{comment-user-id}",
+            "post_id": "{comment-post-id}",
+            "content": "{comment-content}",
+            "images": "{comment-images}"
         }
     ],
     "links": {
