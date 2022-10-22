@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "created_at": "{post-created-at}",
+            "id": "{post-id}",
             "user": {
                 "id": "{user-id}",
                 "created_at": "{user-created-at}",
@@ -15,6 +15,7 @@
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
             "slug": "{post-slug}",
             "images": "{post-images}"
         }
