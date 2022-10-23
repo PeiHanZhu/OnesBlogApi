@@ -55,7 +55,11 @@ class UserController extends AdminController
             return !is_null($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
         });
         $grid->column('location', __('admin.location_name'))->display(function ($location) {
-            return sprintf('<span class="text-%s">%s</span>', $location['active'] ? 'green' : 'red', $location['name']);
+            return !is_null($location) ? sprintf(
+                '<span class="text-%s">%s</span>',
+                $location['active'] ? 'green' : 'red',
+                $location['name']
+            ) : '';
         });
         $grid->column('login_type_id', __('admin.login_type_id'))->display(function ($loginTypeId) {
             return __("admin.login_type_options.$loginTypeId");
