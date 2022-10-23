@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\ResetCodePassword;
 use App\Models\User;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use NextApps\VerificationCode\Support\CodeGenerator;
 use NextApps\VerificationCode\VerificationCode;
 
 /**
@@ -132,7 +136,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Verify a user with a code.
+     * After registration, verify the user's email with a code.
      *
      * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
      * @bodyParam code string required The code of the user. Example: VYB6P9
@@ -165,5 +169,145 @@ class AuthController extends Controller
         }
 
         return new UserResource($user);
+    }
+
+    /**
+     * After registration, resend verification code to verify the user's email.
+     *
+     * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
+     * @responseFile 200 scenario="when verification code successfully resended." responses/auth.verifyCode/200.json
+     * @responseFile 422 scenario="when any validation failed." responses/auth.verifyCode/422.json
+     */
+    public function resendVerificationCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'data' => $validator->errors()->messages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        VerificationCode::send($request->input('email'));
+
+        return response()->json([
+            'data' => 'Success'
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * When a user forgot password, send a verification code to the user.
+     *
+     * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
+     * @responseFile 200 scenario="when email successfully sended." responses/auth.forgotPassword/200.json
+     * @responseFile 422 scenario="when any validation failed." responses/auth.forgotPassword/422.json
+     */
+    public function forgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'data' => $validator->errors()->messages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (is_null(User::where('email', $request->input('email'))->value('email_verified_at'))) {
+            return response()->json([
+                'data' => [
+                    'email' => __('auth.failed')
+                ],
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        ResetCodePassword::create([
+            'email' => $request->input('email'),
+            'code' => Hash::make($code = app(CodeGenerator::class)->generate()),
+        ]);
+        Notification::route('mail', $request->input('email'))->notify(new ResetPasswordNotification($code));
+
+        return response()->json([
+            'data' => 'Success'
+        ]);
+    }
+
+    /**
+     * During forgetting password, verify the user's email with a code.
+     *
+     * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
+     * @bodyParam code string required The code of the user. Example: VYB6P9
+     * @responseFile 200 scenario="when password successfully updated." responses/auth.checkCode/200.json
+     * @responseFile 422 scenario="when any validation failed." responses/auth.checkCode/422.json
+     */
+    public function checkCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'code' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'data' => $validator->errors()->messages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (is_null($resetCodePassword = ResetCodePassword::where([
+            ['email', $request->input('email')],
+            ['expires_at', '>=', now()],
+        ])->first(['code'])) or !Hash::check($request->input('code'), $resetCodePassword->code)) {
+            return response()->json([
+                'data' => __('auth.code')
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        return response()->json([
+            'data' => 'Success'
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * After the user verified during forgetting password, reset password in storage.
+     *
+     * @bodyParam email string required The email of the user. Example: hanTest@gmail.com
+     * @bodyParam code string required The code of the user. Example: VYB6P9
+     * @bodyParam password string required The password of the user. Example: 123456
+     * @responseFile 200 scenario="when verify succeeded." responses/auth.verifyCode/200.json
+     * @responseFile 422 scenario="when any validation failed." responses/auth.verifyCode/422.json
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'code' => 'required|string',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'data' => $validator->errors()->messages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        $record = ResetCodePassword::where([
+            ['email', $request->input('email')],
+            ['expires_at', '>=', now()],
+        ]);
+        if (is_null($record->first(['code']))){
+            return response()->json([
+                'data' => __('auth.failed')
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        } else {
+            $user = User::where('email', $request->input('email'));
+            $user->update(['password' => Hash::make($request->input('password'))]);
+            $record->delete();
+        }
+
+        return response()->json([
+            'data' => 'Success'
+        ], Response::HTTP_OK);
     }
 }

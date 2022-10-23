@@ -50,14 +50,14 @@ class UserController extends Controller
                 'data' => $validator->errors()->messages()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        if ($request->input('login_type_id') == UserLoginTypeIdEnum::LOCATION) {
-            if (is_null($user->location) or !$user->location->active) {
-                return response()->json([
-                    'data' => [
-                        'email' => __('auth.none_location_user')
-                    ]
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
+
+        $user = $request->user();
+        if ($request->input('login_type_id') == UserLoginTypeIdEnum::LOCATION and !($user->location->active ?? false)) {
+            return response()->json([
+                'data' => [
+                    'email' => __('auth.none_location_user')
+                ]
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $data = $request->only([
@@ -67,7 +67,7 @@ class UserController extends Controller
         ]);
         !isset($data['password']) ?: $data['password'] = Hash::make($data['password']);
 
-        ($user = $request->user())->update($data);
+        $user->update($data);
 
         return new UserResource($user->refresh());
     }

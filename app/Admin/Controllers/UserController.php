@@ -54,11 +54,12 @@ class UserController extends AdminController
         $grid->column('email_verified_at', __('admin.email_verified_at'))->display(function ($value) {
             return !is_null($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
         });
-        $grid->column('location.name', __('admin.location_name'))->sortable();
-        $grid->column('login_type_id', __('admin.login_type_id'))->using(__('admin.login_type_options'))->label([
-            1 => 'danger',
-            2 => 'success',
-        ])->sortable();
+        $grid->column('location', __('admin.location_name'))->display(function ($location) {
+            return sprintf('<span class="text-%s">%s</span>', $location['active'] ? 'green' : 'red', $location['name']);
+        });
+        $grid->column('login_type_id', __('admin.login_type_id'))->display(function ($loginTypeId) {
+            return __("admin.login_type_options.$loginTypeId");
+        });
 
         return $grid;
     }
@@ -98,7 +99,16 @@ class UserController extends AdminController
         $form->datetime('email_verified_at', __('admin.email_verified_at'))
             ->default(!is_null($form->email_verified_at) ? date('Y-m-d H:i:s') : null);
         $form->password('password', __('admin.password'))->creationRules('required');
-        !$form->isEditing() ?: $form->display('location.name', __('admin.location_name'));
+        if ($form->isEditing()) {
+            $user = $form->model()->find(request()->route('user'));
+            if (!is_null($user->location) and $user->location->active) {
+                $form->switch('login_type_id', __('admin.login_type_id'))->states([
+                    'on' => ['value' => 1, 'text' => __('admin.login_type_options.1'), 'color' => 'success'],
+                    'off' => ['value' => 2, 'text' => __('admin.login_type_options.2'), 'color' => 'danger'],
+                ]);
+                $form->display('location.name', __('admin.location_name'));
+            }
+        }
         $form->saving(function (Form $form) {
             !is_null($form->login_type_id) ?: $form->login_type_id = 1;
             $form->password = Hash::make($form->password ?? $form->model()->password);

@@ -83,6 +83,7 @@ response.json()
 {
     "data": [
         {
+            "id": "{comment-id}",
             "user_id": "{comment-user-id}",
             "post_id": "{comment-post-id}",
             "content": "{comment-content}",
@@ -228,6 +229,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{comment-id}",
         "user_id": "{comment-user-id}",
         "post_id": "{comment-post-id}",
         "content": "{comment-content}",
@@ -296,7 +298,7 @@ curl -X POST \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {personal-access-token}" \
     -F "content=commentTest" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php6g4pIp" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm" 
 ```
 
 ```javascript
@@ -338,7 +340,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php6g4pIp', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'r')
             ],
         ],
     ]
@@ -353,7 +355,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php6g4pIp', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'rb')
 }
 payload = {
     "content": "commentTest"
@@ -374,6 +376,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{comment-id}",
         "user_id": "{comment-user-id}",
         "post_id": "{comment-post-id}",
         "content": "{comment-content}",
@@ -466,7 +469,7 @@ curl -X PUT \
     -H "Authorization: Bearer {personal-access-token}" \
     -F "content=0724Comment" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpIDNWaT" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF" 
 ```
 
 ```javascript
@@ -513,7 +516,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpIDNWaT', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'r')
             ],
         ],
     ]
@@ -528,7 +531,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpIDNWaT', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'rb')
 }
 payload = {
     "content": "0724Comment",
@@ -550,6 +553,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{comment-id}",
         "user_id": "{comment-user-id}",
         "post_id": "{comment-post-id}",
         "content": "{comment-content}",
@@ -655,7 +659,7 @@ Required if the <code><b>images</b></code> of the comment are uploaded, must be 
 
 ```bash
 curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/3" \
+    "http://ones-blog-api.test/api/posts/109/comments/9" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {personal-access-token}"
@@ -663,7 +667,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/3"
+    "http://ones-blog-api.test/api/posts/109/comments/9"
 );
 
 let headers = {
@@ -683,7 +687,7 @@ fetch(url, {
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://ones-blog-api.test/api/posts/109/comments/3',
+    'http://ones-blog-api.test/api/posts/109/comments/9',
     [
         'headers' => [
             'Accept' => 'application/json',
@@ -699,7 +703,7 @@ print_r(json_decode((string) $body));
 import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/3'
+url = 'http://ones-blog-api.test/api/posts/109/comments/9'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

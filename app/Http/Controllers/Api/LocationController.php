@@ -50,6 +50,8 @@ class LocationController extends Controller
                 $query->inRandomOrder();
             })->when($rankingLimit = $request->query('ranking'), function ($query) {
                 $query->orderByDesc('avgScore');
+            })->when($request->query('keyword'), function ($query, $keyword) {
+                $query->where('name', 'like', "%{$keyword}%");
             })->where('active', true)->paginate(
                 intval($request->query('limit') ?? $randomLimit ?? $rankingLimit ?? 10)
             )

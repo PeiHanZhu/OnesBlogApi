@@ -88,8 +88,11 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location": null,
         "token": null
     }
 }
@@ -159,7 +162,7 @@ The device name of the user.
 </form>
 
 
-## Verify a user with a code.
+## After registration, verify the user&#039;s email with a code.
 
 
 
@@ -240,6 +243,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
         "token": null
@@ -288,6 +292,524 @@ The email of the user.
 <input type="text" name="code" data-endpoint="POSTapi-verify-code" data-component="body" required  hidden>
 <br>
 The code of the user.
+</p>
+
+</form>
+
+
+## After registration, resend verification code to verify the user&#039;s email.
+
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://ones-blog-api.test/api/resend-verification-code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/resend-verification-code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://ones-blog-api.test/api/resend-verification-code',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'email' => 'hanTest@gmail.com',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/resend-verification-code'
+payload = {
+    "email": "hanTest@gmail.com"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()
+```
+
+
+> Example response (200, when verification code successfully resended.):
+
+```json
+{
+    "data": {
+        "id": "{user-id}",
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": null
+    }
+}
+```
+> Example response (422, when any validation failed.):
+
+```json
+{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}
+```
+<div id="execution-results-POSTapi-resend-verification-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-resend-verification-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-resend-verification-code"></code></pre>
+</div>
+<div id="execution-error-POSTapi-resend-verification-code" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-resend-verification-code"></code></pre>
+</div>
+<form id="form-POSTapi-resend-verification-code" data-method="POST" data-path="api/resend-verification-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-resend-verification-code', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/resend-verification-code</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-resend-verification-code" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+
+</form>
+
+
+## When a user forgot password, send a verification code to the user.
+
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://ones-blog-api.test/api/forgot-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/forgot-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://ones-blog-api.test/api/forgot-password',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'email' => 'hanTest@gmail.com',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/forgot-password'
+payload = {
+    "email": "hanTest@gmail.com"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()
+```
+
+
+> Example response (200, when email successfully sended.):
+
+```json
+{
+    "data": "Success"
+}
+```
+> Example response (422, when any validation failed.):
+
+```json
+{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ]
+    }
+}
+```
+<div id="execution-results-POSTapi-forgot-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-forgot-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-forgot-password"></code></pre>
+</div>
+<div id="execution-error-POSTapi-forgot-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-forgot-password"></code></pre>
+</div>
+<form id="form-POSTapi-forgot-password" data-method="POST" data-path="api/forgot-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-forgot-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/forgot-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-forgot-password" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+
+</form>
+
+
+## During forgetting password, verify the user&#039;s email with a code.
+
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://ones-blog-api.test/api/check-code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com","code":"VYB6P9"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/check-code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://ones-blog-api.test/api/check-code',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'email' => 'hanTest@gmail.com',
+            'code' => 'VYB6P9',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/check-code'
+payload = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()
+```
+
+
+> Example response (200, when password successfully updated.):
+
+```json
+{
+    "data": "Success"
+}
+```
+> Example response (422, when any validation failed.):
+
+```json
+{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}
+```
+<div id="execution-results-POSTapi-check-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-check-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-check-code"></code></pre>
+</div>
+<div id="execution-error-POSTapi-check-code" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-check-code"></code></pre>
+</div>
+<form id="form-POSTapi-check-code" data-method="POST" data-path="api/check-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-check-code', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/check-code</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-check-code" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="code" data-endpoint="POSTapi-check-code" data-component="body" required  hidden>
+<br>
+The code of the user.
+</p>
+
+</form>
+
+
+## After the user verified during forgetting password, reset password in storage.
+
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://ones-blog-api.test/api/reset-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com","code":"VYB6P9","password":"123456"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/reset-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9",
+    "password": "123456"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://ones-blog-api.test/api/reset-password',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'email' => 'hanTest@gmail.com',
+            'code' => 'VYB6P9',
+            'password' => '123456',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/reset-password'
+payload = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9",
+    "password": "123456"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()
+```
+
+
+> Example response (200, when verify succeeded.):
+
+```json
+{
+    "data": {
+        "id": "{user-id}",
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": null
+    }
+}
+```
+> Example response (422, when any validation failed.):
+
+```json
+{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}
+```
+<div id="execution-results-POSTapi-reset-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-reset-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-reset-password"></code></pre>
+</div>
+<div id="execution-error-POSTapi-reset-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-reset-password"></code></pre>
+</div>
+<form id="form-POSTapi-reset-password" data-method="POST" data-path="api/reset-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reset-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/reset-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="code" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The code of the user.
+</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="password" name="password" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The password of the user.
 </p>
 
 </form>
@@ -377,8 +899,11 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location": "{user-location}",
         "token": "{personal-access-token}"
     }
 }
@@ -453,7 +978,7 @@ curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {personal-access-token}" \
-    -d '{"name":"Han","email":"han@gmail.com","password":"1234567890"}'
+    -d '{"name":"Han","login_type_id":1,"password":"1234567890"}'
 
 ```
 
@@ -470,7 +995,7 @@ let headers = {
 
 let body = {
     "name": "Han",
-    "email": "han@gmail.com",
+    "login_type_id": 1,
     "password": "1234567890"
 }
 
@@ -493,7 +1018,7 @@ $response = $client->put(
         ],
         'json' => [
             'name' => 'Han',
-            'email' => 'han@gmail.com',
+            'login_type_id' => 1,
             'password' => '1234567890',
         ],
     ]
@@ -509,7 +1034,7 @@ import json
 url = 'http://ones-blog-api.test/api/users/34'
 payload = {
     "name": "Han",
-    "email": "han@gmail.com",
+    "login_type_id": 1,
     "password": "1234567890"
 }
 headers = {
@@ -530,7 +1055,8 @@ response.json()
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{user-token}"
+        "login_type_id": "{user-login-type-id}",
+        "token": null
     }
 }
 ```
@@ -557,6 +1083,17 @@ response.json()
             "{validation-error-message}"
         ],
         "password": [
+            "{validation-error-message}"
+        ]
+    }
+}
+```
+> Example response (422, when user without location.):
+
+```json
+{
+    "data": {
+        "email": [
             "{validation-error-message}"
         ]
     }
@@ -596,10 +1133,10 @@ The id of the user.
 The name of the user.
 </p>
 <p>
-<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-<input type="text" name="email" data-endpoint="PUTapi-users--user-" data-component="body"  hidden>
+<b><code>login_type_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="login_type_id" data-endpoint="PUTapi-users--user-" data-component="body"  hidden>
 <br>
-The email of the user.
+The login type id of the user.
 </p>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
@@ -694,8 +1231,11 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location": "{user-location}",
         "token": null
     }
 }

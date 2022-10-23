@@ -14,11 +14,16 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $this->loadMissing(['location' => function ($query) {
+            $query->where('active', true);
+        }]);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'login_type_id' => $this->login_type_id,
+            'location' => $this->location,
             'token' => $this->token,
         ];
     }

@@ -25,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('verify-code', [AuthController::class, 'verifyCode'])->name('auth.verify-code');
+Route::post('resend-verification-code', [AuthController::class, 'resendVerificationCode'])->name('auth.resend-verification-code');
+Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot-password');
+Route::post('check-code', [AuthController::class, 'checkCode'])->name('auth.check-code');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('auth.reset-password');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');

@@ -68,6 +68,7 @@ response.json()
 {
     "data": [
         {
+            "id": "{location-service-hour-id}",
             "location_id": "{location-service-hour-location-id}",
             "opened_at": "{location-service-hour-opened-at}",
             "closed_at": "{location-service-hour-closed-at}",
@@ -200,6 +201,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -324,6 +326,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -456,6 +459,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",

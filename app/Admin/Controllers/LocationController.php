@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Enums\UserLoginTypeIdEnum;
 use App\Models\City;
 use App\Models\CityArea;
 use App\Models\Location;
@@ -173,6 +174,7 @@ class LocationController extends AdminController
             'on' => ['value' => 1, 'text' => __('admin.location_active_options.1'), 'color' => 'success'],
             'off' => ['value' => 0, 'text' => __('admin.location_active_options.0'), 'color' => 'danger'],
         ]);
+
         if ($form->isEditing()) {
             $form->multipleImage('images', __('admin.location_images'))
                 ->move("locations/{$location->id}")
@@ -186,6 +188,15 @@ class LocationController extends AdminController
 SCRIPT
             );
         }
+
+        $form->saving(function ($form) {
+            if ($form->model()->active and $form->active === 'off') {
+                $form->model()->user()->update([
+                    'login_type_id' => UserLoginTypeIdEnum::USER,
+                ]);
+            }
+        });
+
         return $form;
     }
 

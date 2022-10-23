@@ -133,6 +133,7 @@ response.json()
 {
     "data": [
         {
+            "id": "{location-id}",
             "user_id": "{location-user-id}",
             "city_area_id": "{location-city-area-id}",
             "category_id": "{location-category-id}",

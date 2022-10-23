@@ -133,7 +133,7 @@ response.json()
 {
     "data": [
         {
-            "created_at": "{post-created-at}",
+            "id": "{post-id}",
             "user": {
                 "id": "{user-id}",
                 "created_at": "{user-created_at}",
@@ -147,6 +147,7 @@ response.json()
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
             "active": "{post-active}",
             "slug": "{post-slug}",
             "images": "{post-images}"

@@ -86,7 +86,7 @@ response.json()
 {
     "data": [
         {
-            "created_at": "{post-created-at}",
+            "id": "{post-id}",
             "user": {
                 "id": "{user-id}",
                 "created_at": "{user-created-at}",
@@ -100,6 +100,7 @@ response.json()
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
             "slug": "{post-slug}",
             "images": "{post-images}"
         }
@@ -242,7 +243,7 @@ response.json()
 ```json
 {
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -256,6 +257,7 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
+        "created_at": "{post-created-at}",
         "slug": "{post-slug}",
         "images": "{post-images}"
     }
@@ -313,7 +315,7 @@ curl -X POST \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk" 
 ```
 
 ```javascript
@@ -375,7 +377,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'r')
             ],
         ],
     ]
@@ -390,7 +392,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php3RFBDX', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -415,7 +417,7 @@ response.json()
 ```json
 {
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -429,6 +431,7 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
+        "created_at": "{post-created-at}",
         "slug": "{post-slug}",
         "images": "{post-images}"
     }
@@ -536,7 +539,7 @@ curl -X PUT \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp" 
 ```
 
 ```javascript
@@ -598,7 +601,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'r')
             ],
         ],
     ]
@@ -613,7 +616,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpVqPs36', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'rb')
 }
 payload = {
     "title": "0724Post",
@@ -638,7 +641,7 @@ response.json()
 ```json
 {
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -652,6 +655,7 @@ response.json()
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
+        "created_at": "{post-created-at}",
         "slug": "{post-slug}",
         "images": "{post-images}"
     }

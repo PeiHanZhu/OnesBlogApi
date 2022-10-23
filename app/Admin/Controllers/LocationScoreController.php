@@ -45,13 +45,13 @@ class LocationScoreController extends AdminController
         $grid->column('updated_at', __('admin.updated_at'))->display(function ($value) {
             return date('Y-m-d H:i:s', strtotime($value));
         });
-        $grid->column('user.name', __('admin.user_name'))->display(function($value) {
+        $grid->column('user.name', __('admin.user_name'))->display(function ($value) {
             $href = route('admin.users.show', [
                 'user' => $this->user_id,
             ]);
             return "<a href='$href' target='_blank'>$value</a>";
         })->sortable();
-        $grid->column('location.name', __('admin.location_name'))->display(function($value) {
+        $grid->column('location.name', __('admin.location_name'))->display(function ($value) {
             $href = route('admin.locations.show', [
                 'location' => $this->location_id,
             ]);
@@ -96,7 +96,15 @@ class LocationScoreController extends AdminController
             ->config('allowClear', false)
             ->rules('required');
         $form->select('location_id', __('admin.location_name'))
-            ->options(Location::pluck('name', 'id'))
+            ->options(
+                Location::get(['name', 'id', 'active'])->mapWithKeys(function ($location) {
+                    return [$location->id => sprintf(
+                        '(%s)%s',
+                        __("admin.location_active_options.{$location->active}"),
+                        $location->name
+                    )];
+                })
+            )
             ->config('allowClear', false)
             ->rules('required');
         $form->decimal('score', __('admin.location_score'))
