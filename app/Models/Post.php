@@ -77,4 +77,14 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get the post keeps for the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function postKeeps()
+    {
+        return $this->hasMany(PostKeep::class);
+    }
 }

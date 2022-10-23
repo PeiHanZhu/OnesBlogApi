@@ -1,19 +1,28 @@
 {
     "data": [
         {
-            "user_id": "{user-id}",
-            "city_area_id": "{location-city-area-id}",
-            "category_id": "{location-category-id}",
-            "name": "{location-name}",
-            "address": "{location-address}",
-            "phone": "{location-phone}",
-            "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}"
+            "id": "{post-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}"
+            },
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
         }
     ],
     "links": {
-        "first": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
-        "last": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
+        "first": "http://ones-blog-api.test/api/posts?category_id=2&page=1",
+        "last": "http://ones-blog-api.test/api/posts?category_id=2&page=1",
         "prev": null,
         "next": null
     },
@@ -28,7 +37,7 @@
                 "active": false
             },
             {
-                "url": "http://ones-blog-api.test/api/locations?category_id=1&cuty=5&page=1",
+                "url": "http://ones-blog-api.test/api/posts?category_id=2&page=1",
                 "label": "1",
                 "active": true
             },
@@ -38,7 +47,7 @@
                 "active": false
             }
         ],
-        "path": "http://ones-blog-api.test/api/locations",
+        "path": "http://ones-blog-api.test/api/posts",
         "per_page": 10,
         "to": 1,
         "total": 1

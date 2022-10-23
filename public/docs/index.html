@@ -46,7 +46,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: October 10 2022</li>
+            <li>Last updated: October 23 2022</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -132,9 +132,12 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "login_type_id": "{user-login-type-id}",
+        "location": null,
+        "token": null
     }
 }</code></pre>
 <blockquote>
@@ -199,18 +202,18 @@ The device name of the user.
 </p>
 
 </form>
-<h2>Verify a user with a code.</h2>
+<h2>After registration, verify the user&#039;s email with a code.</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://ones-blog-api.test/api/verifyCode" \
+    "http://ones-blog-api.test/api/verify-code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"hanTest@gmail.com","code":"VYB6P9"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://ones-blog-api.test/api/verifyCode"
+    "http://ones-blog-api.test/api/verify-code"
 );
 
 let headers = {
@@ -231,7 +234,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://ones-blog-api.test/api/verifyCode',
+    'http://ones-blog-api.test/api/verify-code',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
@@ -247,7 +250,7 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-python">import requests
 import json
 
-url = 'http://ones-blog-api.test/api/verifyCode'
+url = 'http://ones-blog-api.test/api/verify-code'
 payload = {
     "email": "hanTest@gmail.com",
     "code": "VYB6P9"
@@ -264,9 +267,10 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "token": null
     }
 }</code></pre>
 <blockquote>
@@ -282,34 +286,472 @@ response.json()</code></pre>
         ]
     }
 }</code></pre>
-<div id="execution-results-POSTapi-verifyCode" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-verifyCode"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-verifyCode"></code></pre>
+<div id="execution-results-POSTapi-verify-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-verify-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-verify-code"></code></pre>
 </div>
-<div id="execution-error-POSTapi-verifyCode" hidden>
+<div id="execution-error-POSTapi-verify-code" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-verifyCode"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-verify-code"></code></pre>
 </div>
-<form id="form-POSTapi-verifyCode" data-method="POST" data-path="api/verifyCode" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-verifyCode', this);">
+<form id="form-POSTapi-verify-code" data-method="POST" data-path="api/verify-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-verify-code', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/verifyCode</code></b>
+ <b><code>api/verify-code</code></b>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="email" data-endpoint="POSTapi-verifyCode" data-component="body" required  hidden>
+<input type="text" name="email" data-endpoint="POSTapi-verify-code" data-component="body" required  hidden>
 <br>
 The email of the user.
 </p>
 <p>
 <b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="code" data-endpoint="POSTapi-verifyCode" data-component="body" required  hidden>
+<input type="text" name="code" data-endpoint="POSTapi-verify-code" data-component="body" required  hidden>
 <br>
 The code of the user.
+</p>
+
+</form>
+<h2>After registration, resend verification code to verify the user&#039;s email.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://ones-blog-api.test/api/resend-verification-code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/resend-verification-code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://ones-blog-api.test/api/resend-verification-code',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'hanTest@gmail.com',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/resend-verification-code'
+payload = {
+    "email": "hanTest@gmail.com"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when verification code successfully resended.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "id": "{user-id}",
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": null
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-POSTapi-resend-verification-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-resend-verification-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-resend-verification-code"></code></pre>
+</div>
+<div id="execution-error-POSTapi-resend-verification-code" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-resend-verification-code"></code></pre>
+</div>
+<form id="form-POSTapi-resend-verification-code" data-method="POST" data-path="api/resend-verification-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-resend-verification-code', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/resend-verification-code</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-resend-verification-code" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+
+</form>
+<h2>When a user forgot password, send a verification code to the user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://ones-blog-api.test/api/forgot-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/forgot-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://ones-blog-api.test/api/forgot-password',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'hanTest@gmail.com',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/forgot-password'
+payload = {
+    "email": "hanTest@gmail.com"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when email successfully sended.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Success"
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-POSTapi-forgot-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-forgot-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-forgot-password"></code></pre>
+</div>
+<div id="execution-error-POSTapi-forgot-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-forgot-password"></code></pre>
+</div>
+<form id="form-POSTapi-forgot-password" data-method="POST" data-path="api/forgot-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-forgot-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/forgot-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-forgot-password" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+
+</form>
+<h2>During forgetting password, verify the user&#039;s email with a code.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://ones-blog-api.test/api/check-code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com","code":"VYB6P9"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/check-code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://ones-blog-api.test/api/check-code',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'hanTest@gmail.com',
+            'code' =&gt; 'VYB6P9',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/check-code'
+payload = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when password successfully updated.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "Success"
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-POSTapi-check-code" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-check-code"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-check-code"></code></pre>
+</div>
+<div id="execution-error-POSTapi-check-code" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-check-code"></code></pre>
+</div>
+<form id="form-POSTapi-check-code" data-method="POST" data-path="api/check-code" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-check-code', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/check-code</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-check-code" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="code" data-endpoint="POSTapi-check-code" data-component="body" required  hidden>
+<br>
+The code of the user.
+</p>
+
+</form>
+<h2>After the user verified during forgetting password, reset password in storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://ones-blog-api.test/api/reset-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"hanTest@gmail.com","code":"VYB6P9","password":"123456"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/reset-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9",
+    "password": "123456"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://ones-blog-api.test/api/reset-password',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'hanTest@gmail.com',
+            'code' =&gt; 'VYB6P9',
+            'password' =&gt; '123456',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/reset-password'
+payload = {
+    "email": "hanTest@gmail.com",
+    "code": "VYB6P9",
+    "password": "123456"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when verify succeeded.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "id": "{user-id}",
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "token": null
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422, when any validation failed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
+<div id="execution-results-POSTapi-reset-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-reset-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-reset-password"></code></pre>
+</div>
+<div id="execution-error-POSTapi-reset-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-reset-password"></code></pre>
+</div>
+<form id="form-POSTapi-reset-password" data-method="POST" data-path="api/reset-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reset-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/reset-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>code</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="code" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The code of the user.
+</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="password" name="password" data-endpoint="POSTapi-reset-password" data-component="body" required  hidden>
+<br>
+The password of the user.
 </p>
 
 </form>
@@ -381,8 +823,11 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location": "{user-location}",
         "token": "{personal-access-token}"
     }
 }</code></pre>
@@ -448,8 +893,8 @@ The device name of the user.
     "http://ones-blog-api.test/api/users/34" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
-    -d '{"name":"Han","email":"han@gmail.com","password":"1234567890"}'
+    -H "Authorization: Bearer {personal-access-token}" \
+    -d '{"name":"Han","login_type_id":1,"password":"1234567890"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/users/34"
@@ -458,12 +903,12 @@ The device name of the user.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
     "name": "Han",
-    "email": "han@gmail.com",
+    "login_type_id": 1,
     "password": "1234567890"
 }
 
@@ -479,11 +924,11 @@ $response = $client-&gt;put(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'json' =&gt; [
             'name' =&gt; 'Han',
-            'email' =&gt; 'han@gmail.com',
+            'login_type_id' =&gt; 1,
             'password' =&gt; '1234567890',
         ],
     ]
@@ -496,13 +941,13 @@ import json
 url = 'http://ones-blog-api.test/api/users/34'
 payload = {
     "name": "Han",
-    "email": "han@gmail.com",
+    "login_type_id": 1,
     "password": "1234567890"
 }
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, json=payload)
@@ -514,7 +959,8 @@ response.json()</code></pre>
     "data": {
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{user-token}"
+        "login_type_id": "{user-login-type-id}",
+        "token": null
     }
 }</code></pre>
 <blockquote>
@@ -542,6 +988,16 @@ response.json()</code></pre>
         ]
     }
 }</code></pre>
+<blockquote>
+<p>Example response (422, when user without location.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ]
+    }
+}</code></pre>
 <div id="execution-results-PUTapi-users--user-" hidden>
     <blockquote>Received response<span id="execution-response-status-PUTapi-users--user-"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-PUTapi-users--user-"></code></pre>
@@ -550,7 +1006,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-users--user-"></code></pre>
 </div>
-<form id="form-PUTapi-users--user-" data-method="PUT" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-users--user-', this);">
+<form id="form-PUTapi-users--user-" data-method="PUT" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-users--user-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -576,10 +1032,10 @@ The id of the user.
 The name of the user.
 </p>
 <p>
-<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-<input type="text" name="email" data-endpoint="PUTapi-users--user-" data-component="body"  hidden>
+<b><code>login_type_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="login_type_id" data-endpoint="PUTapi-users--user-" data-component="body"  hidden>
 <br>
-The email of the user.
+The login type id of the user.
 </p>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
@@ -598,7 +1054,7 @@ The password of the user.
     "http://ones-blog-api.test/api/logout" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -d '{"device_name":"iPhone"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -608,7 +1064,7 @@ The password of the user.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
@@ -627,7 +1083,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'json' =&gt; [
             'device_name' =&gt; 'iPhone',
@@ -646,7 +1102,7 @@ payload = {
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -656,9 +1112,12 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "login_type_id": "{user-login-type-id}",
+        "location": "{user-location}",
+        "token": null
     }
 }</code></pre>
 <blockquote>
@@ -675,7 +1134,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-logout"></code></pre>
 </div>
-<form id="form-POSTapi-logout" data-method="POST" data-path="api/logout" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
+<form id="form-POSTapi-logout" data-method="POST" data-path="api/logout" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -700,7 +1159,7 @@ The device's name of the user.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://ones-blog-api.test/api/locations?category_id=2&amp;city_id=11&amp;random=1&amp;ranking=6&amp;limit=10&amp;page=1" \
+    -G "http://ones-blog-api.test/api/locations?category_id=2&amp;city_id=11&amp;random=5&amp;ranking=6&amp;limit=10&amp;page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -710,7 +1169,7 @@ The device's name of the user.
 let params = {
     "category_id": "2",
     "city_id": "11",
-    "random": "1",
+    "random": "5",
     "ranking": "6",
     "limit": "10",
     "page": "1",
@@ -738,7 +1197,7 @@ $response = $client-&gt;get(
         'query' =&gt; [
             'category_id'=&gt; '2',
             'city_id'=&gt; '11',
-            'random'=&gt; '1',
+            'random'=&gt; '5',
             'ranking'=&gt; '6',
             'limit'=&gt; '10',
             'page'=&gt; '1',
@@ -754,7 +1213,7 @@ url = 'http://ones-blog-api.test/api/locations'
 params = {
   'category_id': '2',
   'city_id': '11',
-  'random': '1',
+  'random': '5',
   'ranking': '6',
   'limit': '10',
   'page': '1',
@@ -772,14 +1231,17 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": "{user-id}",
-            "city_area_id": "{city-area-id}",
-            "category_id": "{category-id}",
+            "id": "{location-id}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
             "name": "{location-name}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}"
+            "introduction": "{location-introduction}",
+            "active": "{location-active}",
+            "images": "{location-images}"
         }
     ],
     "links": {
@@ -845,11 +1307,10 @@ The id of the category.
 The id of the city.
 </p>
 <p>
-<b><code>random</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
-<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="1" data-endpoint="GETapi-locations" data-component="query" ><code>true</code></label>
-<label data-endpoint="GETapi-locations" hidden><input type="radio" name="random" value="0" data-endpoint="GETapi-locations" data-component="query" ><code>false</code></label>
+<b><code>random</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="random" data-endpoint="GETapi-locations" data-component="query"  hidden>
 <br>
-Whether the results are in random order or not.
+The random amount of the results.
 </p>
 <p>
 <b><code>ranking</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
@@ -919,18 +1380,21 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "id": "{location-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "active": "{location-active}",
+        "images": "{location-images}"
     }
 }</code></pre>
 <blockquote>
-<p>Example response (404, when location not found.):</p>
+<p>Example response (404, when location not found or unverified.):</p>
 </blockquote>
 <pre><code class="language-json">{
     "data": "Location(ID:{location-id}) is not found."
@@ -968,14 +1432,14 @@ The id of the location.
     "http://ones-blog-api.test/api/locations" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "city_area_id=153" \
     -F "category_id=2" \
     -F "name=新亞洲汽車" \
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations"
 );
@@ -983,7 +1447,7 @@ The id of the location.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -1007,7 +1471,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -1036,7 +1500,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'r')
             ],
         ],
     ]
@@ -1048,7 +1512,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpUux8pg', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -1061,7 +1525,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, files=files, data=payload)
@@ -1071,14 +1535,17 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "id": "{location-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "active": "{location-active}",
+        "images": "{location-images}"
     }
 }</code></pre>
 <blockquote>
@@ -1117,7 +1584,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations"></code></pre>
 </div>
-<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
+<form id="form-POSTapi-locations" data-method="POST" data-path="api/locations" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1183,7 +1650,7 @@ The images of the location.
     "http://ones-blog-api.test/api/locations/5" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "city_area_id=153" \
     -F "category_id=2" \
     -F "name=統一娛樂" \
@@ -1191,7 +1658,7 @@ The images of the location.
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5"
 );
@@ -1199,7 +1666,7 @@ The images of the location.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -1224,7 +1691,7 @@ $response = $client-&gt;put(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -1257,7 +1724,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'r')
             ],
         ],
     ]
@@ -1269,7 +1736,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpKda15B', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -1283,7 +1750,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, files=files, data=payload)
@@ -1293,14 +1760,16 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "city_area_id": "{city-area-id}",
-        "category_id": "{category-id}",
+        "id": "{location-id}",
+        "user_id": "{location-user-id}",
+        "city_area_id": "{location-city-area-id}",
+        "category_id": "{location-category-id}",
         "name": "{location-name}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
-        "introduction": "{location-introduction}"
+        "introduction": "{location-introduction}",
+        "images": "{location-images}"
     }
 }</code></pre>
 <blockquote>
@@ -1342,7 +1811,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-locations--location-"></code></pre>
 </div>
-<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
+<form id="form-PUTapi-locations--location-" data-method="PUT" data-path="api/locations/{location}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1421,7 +1890,7 @@ Required if the <code><b>images</b></code> of the location are uploaded, must be
     "http://ones-blog-api.test/api/locations/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5"
 );
@@ -1429,7 +1898,7 @@ Required if the <code><b>images</b></code> of the location are uploaded, must be
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -1443,7 +1912,7 @@ $response = $client-&gt;delete(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -1456,7 +1925,7 @@ url = 'http://ones-blog-api.test/api/locations/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -1493,7 +1962,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-locations--location-"></code></pre>
 </div>
-<form id="form-DELETEapi-locations--location-" data-method="DELETE" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location-', this);">
+<form id="form-DELETEapi-locations--location-" data-method="DELETE" data-path="api/locations/{location}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1583,9 +2052,9 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": "{user-id}",
-            "location_id": "{location-id}",
-            "score": "{location-score}"
+            "user_id": "{locatoin-score-user-id}",
+            "location_id": "{locatoin-score-location-id}",
+            "score": "{locatoin-score-user-location-score}"
         }
     ]
 }</code></pre>
@@ -1640,7 +2109,7 @@ The page of the results. Defaults to '1'.
     "http://ones-blog-api.test/api/locations/5/location-scores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -d '{"score":3.8}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -1650,7 +2119,7 @@ The page of the results. Defaults to '1'.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
@@ -1669,7 +2138,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'json' =&gt; [
             'score' =&gt; 3.8,
@@ -1688,7 +2157,7 @@ payload = {
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -1698,9 +2167,9 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "location_id": "{location-id}",
-        "score": "{user-location-score}"
+        "user_id": "{locatoin-score-user-id}",
+        "location_id": "{locatoin-score-location-id}",
+        "score": "{locatoin-score-user-location-score}"
     }
 }</code></pre>
 <blockquote>
@@ -1733,7 +2202,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations--location--location-scores"></code></pre>
 </div>
-<form id="form-POSTapi-locations--location--location-scores" data-method="POST" data-path="api/locations/{location}/location-scores" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-scores', this);">
+<form id="form-POSTapi-locations--location--location-scores" data-method="POST" data-path="api/locations/{location}/location-scores" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-scores', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -1810,6 +2279,7 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
+            "id": "{location-service-hour-id}",
             "location_id": "{location-service-hour-location-id}",
             "opened_at": "{location-service-hour-opened-at}",
             "closed_at": "{location-service-hour-closed-at}",
@@ -1922,6 +2392,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -1979,7 +2450,7 @@ The id of the location service hour.
     "http://ones-blog-api.test/api/locations/5/location-service-hours" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5/location-service-hours"
 );
@@ -1987,7 +2458,7 @@ The id of the location service hour.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -2001,7 +2472,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -2014,7 +2485,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers)
@@ -2024,6 +2495,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -2060,7 +2532,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations--location--location-service-hours"></code></pre>
 </div>
-<form id="form-POSTapi-locations--location--location-service-hours" data-method="POST" data-path="api/locations/{location}/location-service-hours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-service-hours', this);">
+<form id="form-POSTapi-locations--location--location-service-hours" data-method="POST" data-path="api/locations/{location}/location-service-hours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-service-hours', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2088,7 +2560,7 @@ The id of the location.
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5"
 );
@@ -2096,7 +2568,7 @@ The id of the location.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -2110,7 +2582,7 @@ $response = $client-&gt;put(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -2123,7 +2595,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers)
@@ -2133,6 +2605,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -2181,7 +2654,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-locations--location--location-service-hours--location_service_hour-"></code></pre>
 </div>
-<form id="form-PUTapi-locations--location--location-service-hours--location_service_hour-" data-method="PUT" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location--location-service-hours--location_service_hour-', this);">
+<form id="form-PUTapi-locations--location--location-service-hours--location_service_hour-" data-method="PUT" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location--location-service-hours--location_service_hour-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2215,7 +2688,7 @@ The id of the location service hour.
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5"
 );
@@ -2223,7 +2696,7 @@ The id of the location service hour.
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -2237,7 +2710,7 @@ $response = $client-&gt;delete(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -2250,7 +2723,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -2293,7 +2766,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-locations--location--location-service-hours--location_service_hour-"></code></pre>
 </div>
-<form id="form-DELETEapi-locations--location--location-service-hours--location_service_hour-" data-method="DELETE" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location--location-service-hours--location_service_hour-', this);">
+<form id="form-DELETEapi-locations--location--location-service-hours--location_service_hour-" data-method="DELETE" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location--location-service-hours--location_service_hour-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2317,7 +2790,203 @@ The id of the location.
 <br>
 The id of the location service hour.
 </p>
-</form><h1>05. Posts</h1>
+</form><h1>05. LocationLikes</h1>
+<h2>Display a listing of the location.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://ones-blog-api.test/api/location-likes?user_id=2&amp;limit=10&amp;page=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/location-likes"
+);
+
+let params = {
+    "user_id": "2",
+    "limit": "10",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://ones-blog-api.test/api/location-likes',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'user_id'=&gt; '2',
+            'limit'=&gt; '10',
+            'page'=&gt; '1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/location-likes'
+params = {
+  'user_id': '2',
+  'limit': '10',
+  'page': '1',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when location likes displayed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "id": "{location-like-id}",
+            "created_at": "{location-like-created-at}",
+            "updated_at": "{location-like-updated-at}",
+            "user_id": "{location-like-user-id}",
+            "location_id": "{location-like-location-id}"
+        }
+    ],
+    "links": {
+        "first": "http:\/\/ones-blog-api.test\/api\/location-likes?page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/location-likes?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/ones-blog-api.test\/api\/location-likes?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/ones-blog-api.test\/api\/location-likes",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200, when location likes displayed queried by user&#039;s id.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "id": "{location-id}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "active": "{location-active}",
+            "images": "{location-images}"
+        }
+    ],
+    "links": {
+        "first": "http:\/\/ones-blog-api.test\/api\/location-likes?user_id=11&amp;page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/location-likes?user_id=11&amp;page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/ones-blog-api.test\/api\/location-likes?user_id=11&amp;page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/ones-blog-api.test\/api\/location-likes",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}</code></pre>
+<div id="execution-results-GETapi-location-likes" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-location-likes"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-location-likes"></code></pre>
+</div>
+<div id="execution-error-GETapi-location-likes" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-location-likes"></code></pre>
+</div>
+<form id="form-GETapi-location-likes" data-method="GET" data-path="api/location-likes" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-location-likes', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/location-likes</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="user_id" data-endpoint="GETapi-location-likes" data-component="query"  hidden>
+<br>
+The id of the user.
+</p>
+<p>
+<b><code>limit</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="limit" data-endpoint="GETapi-location-likes" data-component="query"  hidden>
+<br>
+The amount of results per page. Defaults to '10'.
+</p>
+<p>
+<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="page" data-endpoint="GETapi-location-likes" data-component="query"  hidden>
+<br>
+The page of the results. Defaults to '1'.
+</p>
+</form><h1>06. Posts</h1>
 <h2>Display a listing of the posts.</h2>
 <blockquote>
 <p>Example request:</p>
@@ -2386,19 +3055,28 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": "{user-id}",
-            "city_area_id": "{location-city-area-id}",
-            "category_id": "{location-category-id}",
-            "name": "{location-name}",
-            "address": "{location-address}",
-            "phone": "{location-phone}",
-            "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}"
+            "id": "{post-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}"
+            },
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
         }
     ],
     "links": {
-        "first": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
-        "last": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
+        "first": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=1",
         "prev": null,
         "next": null
     },
@@ -2413,7 +3091,7 @@ response.json()</code></pre>
                 "active": false
             },
             {
-                "url": "http:\/\/ones-blog-api.test\/api\/locations?category_id=1&amp;cuty=5&amp;page=1",
+                "url": "http:\/\/ones-blog-api.test\/api\/posts?category_id=2&amp;page=1",
                 "label": "1",
                 "active": true
             },
@@ -2423,7 +3101,7 @@ response.json()</code></pre>
                 "active": false
             }
         ],
-        "path": "http:\/\/ones-blog-api.test\/api\/locations",
+        "path": "http:\/\/ones-blog-api.test\/api\/posts",
         "per_page": 10,
         "to": 1,
         "total": 1
@@ -2514,7 +3192,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -2528,7 +3206,9 @@ response.json()</code></pre>
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "created_at": "{post-created-at}",
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }</code></pre>
 <blockquote>
@@ -2570,13 +3250,13 @@ The id of the post.
     "http://ones-blog-api.test/api/posts" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "location_id=6" \
     -F "title=Post" \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts"
 );
@@ -2584,7 +3264,7 @@ The id of the post.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -2607,7 +3287,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -2632,7 +3312,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'r')
             ],
         ],
     ]
@@ -2644,7 +3324,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpjgkJmh', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -2656,7 +3336,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, files=files, data=payload)
@@ -2666,7 +3346,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -2680,7 +3360,9 @@ response.json()</code></pre>
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "created_at": "{post-created-at}",
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }</code></pre>
 <blockquote>
@@ -2710,7 +3392,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts"></code></pre>
 </div>
-<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
+<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2771,13 +3453,13 @@ The images of the post.
     "http://ones-blog-api.test/api/posts/108" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "title=0724Post" \
     -F "content=0724Test" \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/108"
 );
@@ -2785,7 +3467,7 @@ The images of the post.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -2808,7 +3490,7 @@ $response = $client-&gt;put(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -2833,7 +3515,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'r')
             ],
         ],
     ]
@@ -2845,7 +3527,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpem60WX', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'rb')
 }
 payload = {
     "title": "0724Post",
@@ -2857,7 +3539,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, files=files, data=payload)
@@ -2867,7 +3549,7 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "created_at": "{post-created-at}",
+        "id": "{post-id}",
         "user": {
             "id": "{user-id}",
             "created_at": "{user-created-at}",
@@ -2881,7 +3563,9 @@ response.json()</code></pre>
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
-        "slug": "{post-slug}"
+        "created_at": "{post-created-at}",
+        "slug": "{post-slug}",
+        "images": "{post-images}"
     }
 }</code></pre>
 <blockquote>
@@ -2920,7 +3604,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
+<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -2988,7 +3672,7 @@ Required if the <code><b>images</b></code> of the post are uploaded, must be <b>
     "http://ones-blog-api.test/api/posts/108" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/108"
 );
@@ -2996,7 +3680,7 @@ Required if the <code><b>images</b></code> of the post are uploaded, must be <b>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -3010,7 +3694,7 @@ $response = $client-&gt;delete(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -3023,7 +3707,7 @@ url = 'http://ones-blog-api.test/api/posts/108'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -3054,7 +3738,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-posts--post-"></code></pre>
 </div>
-<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
+<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -3072,7 +3756,210 @@ response.json()</code></pre>
 <br>
 The id of the post.
 </p>
-</form><h1>06. Comments</h1>
+</form><h1>07. PostKeeps</h1>
+<h2>Display a listing of the post.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://ones-blog-api.test/api/post-keeps?user_id=2&amp;limit=10&amp;page=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://ones-blog-api.test/api/post-keeps"
+);
+
+let params = {
+    "user_id": "2",
+    "limit": "10",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://ones-blog-api.test/api/post-keeps',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'user_id'=&gt; '2',
+            'limit'=&gt; '10',
+            'page'=&gt; '1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://ones-blog-api.test/api/post-keeps'
+params = {
+  'user_id': '2',
+  'limit': '10',
+  'page': '1',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>Example response (200, when post keeps displayed.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "id": "{post-keep-id}",
+            "created_at": "{post-keep-created-at}",
+            "updated_at": "{post-keep-updated-at}",
+            "user_id": "{post-keep-user-id}",
+            "post_id": "{post-keep-post-id}"
+        }
+    ],
+    "links": {
+        "first": "http:\/\/ones-blog-api.test\/api\/post-keeps?page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/post-keeps?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/ones-blog-api.test\/api\/post-keeps?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/ones-blog-api.test\/api\/post-keeps",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200, when post keeps displayed queried by user&#039;s id.):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "id": "{post-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created_at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}"
+            },
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "created_at": "{post-created-at}",
+            "active": "{post-active}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
+        }
+    ],
+    "links": {
+        "first": "http:\/\/ones-blog-api.test\/api\/post-keeps?user_id=12&amp;page=1",
+        "last": "http:\/\/ones-blog-api.test\/api\/post-keeps?user_id=12&amp;page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/ones-blog-api.test\/api\/post-keeps?user_id=12&amp;page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/ones-blog-api.test\/api\/post-keeps",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}</code></pre>
+<div id="execution-results-GETapi-post-keeps" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-post-keeps"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-post-keeps"></code></pre>
+</div>
+<div id="execution-error-GETapi-post-keeps" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-post-keeps"></code></pre>
+</div>
+<form id="form-GETapi-post-keeps" data-method="GET" data-path="api/post-keeps" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-post-keeps', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/post-keeps</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="user_id" data-endpoint="GETapi-post-keeps" data-component="query"  hidden>
+<br>
+The id of the user.
+</p>
+<p>
+<b><code>limit</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="limit" data-endpoint="GETapi-post-keeps" data-component="query"  hidden>
+<br>
+The amount of results per page. Defaults to '10'.
+</p>
+<p>
+<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="page" data-endpoint="GETapi-post-keeps" data-component="query"  hidden>
+<br>
+The page of the results. Defaults to '1'.
+</p>
+</form><h1>08. Comments</h1>
 <h2>Display a listing of the comments.</h2>
 <blockquote>
 <p>Example request:</p>
@@ -3138,9 +4025,11 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": "{user-id}",
-            "post_id": "{post-id}",
-            "content": "{content}"
+            "id": "{comment-id}",
+            "user_id": "{comment-user-id}",
+            "post_id": "{comment-post-id}",
+            "content": "{comment-content}",
+            "images": "{comment-images}"
         }
     ],
     "links": {
@@ -3262,9 +4151,11 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "post_id": "{post-id}",
-        "content": "{content}"
+        "id": "{comment-id}",
+        "user_id": "{comment-user-id}",
+        "post_id": "{comment-post-id}",
+        "content": "{comment-content}",
+        "images": "{comment-images}"
     }
 }</code></pre>
 <blockquote>
@@ -3318,9 +4209,9 @@ The id of the comment.
     "http://ones-blog-api.test/api/posts/109/comments" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "content=commentTest" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/109/comments"
 );
@@ -3328,7 +4219,7 @@ The id of the comment.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -3347,7 +4238,7 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -3356,7 +4247,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'r')
             ],
         ],
     ]
@@ -3368,7 +4259,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpxHU0ST', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'rb')
 }
 payload = {
     "content": "commentTest"
@@ -3376,7 +4267,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, files=files, data=payload)
@@ -3386,9 +4277,11 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "post_id": "{post-id}",
-        "content": "{content}"
+        "id": "{comment-id}",
+        "user_id": "{comment-user-id}",
+        "post_id": "{comment-post-id}",
+        "content": "{comment-content}",
+        "images": "{comment-images}"
     }
 }</code></pre>
 <blockquote>
@@ -3421,7 +4314,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts--post--comments"></code></pre>
 </div>
-<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
+<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -3464,10 +4357,10 @@ The images of the comment.
     "http://ones-blog-api.test/api/posts/109/comments/32" \
     -H "Content-Type: multipart/form-data" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -F "content=0724Comment" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/109/comments/32"
 );
@@ -3475,7 +4368,7 @@ The images of the comment.
 let headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 const body = new FormData();
@@ -3495,7 +4388,7 @@ $response = $client-&gt;put(
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
         'multipart' =&gt; [
             [
@@ -3508,7 +4401,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'r')
             ],
         ],
     ]
@@ -3520,7 +4413,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpQBlhf6', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'rb')
 }
 payload = {
     "content": "0724Comment",
@@ -3529,7 +4422,7 @@ payload = {
 headers = {
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers, files=files, data=payload)
@@ -3539,9 +4432,11 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{user-id}",
-        "post_id": "{post-id}",
-        "content": "{content}"
+        "id": "{comment-id}",
+        "user_id": "{comment-user-id}",
+        "post_id": "{comment-post-id}",
+        "content": "{comment-content}",
+        "images": "{comment-images}"
     }
 }</code></pre>
 <blockquote>
@@ -3580,7 +4475,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post--comments--comment-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
+<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -3632,18 +4527,18 @@ Required if the <code><b>images</b></code> of the comment are uploaded, must be 
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/2" \
+    "http://ones-blog-api.test/api/posts/109/comments/9" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"</code></pre>
+    -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/2"
+    "http://ones-blog-api.test/api/posts/109/comments/9"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 fetch(url, {
@@ -3653,11 +4548,11 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://ones-blog-api.test/api/posts/109/comments/2',
+    'http://ones-blog-api.test/api/posts/109/comments/9',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
-            'token' =&gt; 'Bearer {personal-access-token}',
+            'Authorization' =&gt; 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -3666,11 +4561,11 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-python">import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/2'
+url = 'http://ones-blog-api.test/api/posts/109/comments/9'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -3707,7 +4602,7 @@ response.json()</code></pre>
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-posts--post--comments--comment-"></code></pre>
 </div>
-<form id="form-DELETEapi-posts--post--comments--comment-" data-method="DELETE" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post--comments--comment-', this);">
+<form id="form-DELETEapi-posts--post--comments--comment-" data-method="DELETE" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post--comments--comment-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -3731,7 +4626,7 @@ The id of the post.
 <br>
 The id of the comment. Exmaple: 32
 </p>
-</form><h1>07. Cities</h1>
+</form><h1>09. Cities</h1>
 <h2>Display a listing of the cities.</h2>
 <blockquote>
 <p>Example request:</p>

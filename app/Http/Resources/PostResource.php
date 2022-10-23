@@ -17,17 +17,18 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'created_at' => $this->created_at,
+            'id' => $this->id,
             'user' => $this->user,
             'location_id' => $this->location_id,
             'title' => $this->title,
             'content' => Str::limit($this->content, 50),
             'published_at' => $this->published_at,
+            'created_at' => $this->created_at,
+            'active' => $this->active,
             'slug' => $this->slug,
             'images' => array_map(function ($filePath) {
                 return url(Storage::url($filePath));
             }, $this->images ?? []),
-            'images' => $this->images
         ];
     }
 }

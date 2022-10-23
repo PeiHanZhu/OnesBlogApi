@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -13,6 +13,9 @@ class LogoutTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @inheritDoc
+     */
     public function setUp():void
     {
         parent::setUp();

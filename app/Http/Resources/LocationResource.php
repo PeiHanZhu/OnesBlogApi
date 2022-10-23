@@ -17,6 +17,7 @@ class LocationResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'user_id' => $this->user_id,
             'city_area_id' => $this->city_area_id,
             'category_id' => $this->category_id,
@@ -25,6 +26,7 @@ class LocationResource extends JsonResource
             'phone' => $this->phone,
             'avgScore' => $this->avgScore,
             'introduction' => Str::limit($this->introduction, 20),
+            'active' => $this->active,
             'images' => array_map(function ($filePath) {
                 return url(Storage::url($filePath));
             }, $this->images ?? []),

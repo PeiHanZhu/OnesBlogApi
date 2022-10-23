@@ -1,8 +1,0 @@
-{
-    "data": {
-        "location_id": "{location-service-hour-location-id}",
-        "opened_at": "{location-service-hour-opened-at}",
-        "closed_at": "{location-service-hour-closed-at}",
-        "weekday": "{location-service-hour-weekday}"
-    }
-}

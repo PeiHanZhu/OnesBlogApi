@@ -37,10 +37,16 @@ class ShowTest extends TestCase
         $location = Location::factory()->create($data = [
             'user_id' => $user->id,
             'city_area_id' => $this->cityArea->id,
+            'active' => 1,
         ]);
 
         $expected = [
-            'data' => $data,
+            'data' => array_diff_key(
+                $data,
+                array_flip([
+                    'active'
+                ]),
+            )
         ];
 
         // WHEN
@@ -50,6 +56,27 @@ class ShowTest extends TestCase
 
         // THEN
         $response->assertStatus(Response::HTTP_OK)->assertJson($expected);
+    }
+
+    public function testWhenLocationUnverified()
+    {
+        // GIVEN
+        $user = User::factory()->create();
+        $location = Location::factory()->for($user)->create([
+            'active' => 0,
+        ]);
+
+        $expected = [
+            'data' => "Location(ID:{$location->id}) is not found.",
+        ];
+
+        // WHEN
+        $response = $this->getJson(route('locations.show', [
+            'location' => $location->id,
+        ]), $this->headers);
+
+        // THEN
+        $response->assertStatus(Response::HTTP_NOT_FOUND)->assertJson($expected);
     }
 
     public function testWhenLocationNotFound()

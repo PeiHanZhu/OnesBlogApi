@@ -89,9 +89,9 @@ response.json()
 {
     "data": [
         {
-            "user_id": "{user-id}",
-            "location_id": "{location-id}",
-            "score": "{location-score}"
+            "user_id": "{locatoin-score-user-id}",
+            "location_id": "{locatoin-score-location-id}",
+            "score": "{locatoin-score-user-location-score}"
         }
     ]
 }
@@ -153,7 +153,7 @@ curl -X POST \
     "http://ones-blog-api.test/api/locations/5/location-scores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}" \
+    -H "Authorization: Bearer {personal-access-token}" \
     -d '{"score":3.8}'
 
 ```
@@ -166,7 +166,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 let body = {
@@ -188,7 +188,7 @@ $response = $client->post(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
         'json' => [
             'score' => 3.8,
@@ -210,7 +210,7 @@ payload = {
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -223,9 +223,9 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": "{user-id}",
-        "location_id": "{location-id}",
-        "score": "{user-location-score}"
+        "user_id": "{locatoin-score-user-id}",
+        "location_id": "{locatoin-score-location-id}",
+        "score": "{locatoin-score-user-location-score}"
     }
 }
 ```
@@ -262,7 +262,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations--location--location-scores"></code></pre>
 </div>
-<form id="form-POSTapi-locations--location--location-scores" data-method="POST" data-path="api/locations/{location}/location-scores" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-scores', this);">
+<form id="form-POSTapi-locations--location--location-scores" data-method="POST" data-path="api/locations/{location}/location-scores" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-scores', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>

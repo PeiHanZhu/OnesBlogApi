@@ -105,14 +105,8 @@ return [
     'quick_create'           => '快速創建',
 
     // General
-    'active' => '狀態',
-    'active_options' => [
-        1 => '公開',
-        0 => '未公開',
-    ],
     'user_name' => '使用者名稱',
     'location_name' => '店家名稱',
-    'validation.required' => '必填',
 
     // User
     'email' => '電子信箱',
@@ -124,26 +118,41 @@ return [
     ],
 
     // Location
-    'category_id' => '店家分類',
-    'location_name' => '店家名稱',
-    'location_address' => '店家地址',
-    'location_phone' => '店家電話',
-    'location_introduction' => '店家簡介',
-    'location_avgScore' => '店家分數',
-    'location_city' => '縣市',
-    'location_area' => '鄉鎮市區',
-    'location_images' => '店家圖片',
-
-    // Post
-    'post_id' => '文章編號',
-    'category_options' => [
+    'location_category_id' => '店家分類',
+    'location_category_options' => [
         1 => '餐廳',
         2 => '景點',
         3 => '旅宿',
     ],
+    'location_name' => '店家名稱',
+    'location_address' => '店家地址',
+    'location_phone' => '店家電話',
+    'location_introduction' => '店家簡介',
+    'location_avgScore' => '店家平均分數',
+    'location_score' => '店家分數',
+    'location_city' => '縣市',
+    'location_area' => '鄉鎮市區',
+    'location_active' => '狀態',
+    'location_active_options' => [
+        1 => '已驗證',
+        0 => '未驗證',
+    ],
+    'location_images' => '店家圖片',
+    'location_service_hour' => '店家營業時間',
+    'location_service_hour_weekday' => '星期',
+    'location_service_hour_opened_at' => '開始營業時間',
+    'location_service_hour_closed_at' => '結束營業時間',
+
+    // Post
+    'post_id' => '文章編號',
     'post_content' => '文章內容',
-    'published_at' => '發佈時間',
+    'post_published_at' => '發佈時間',
     'post_title' => '文章標題',
+    'post_active' => '狀態',
+    'post_active_options' => [
+        1 => '公開',
+        0 => '未公開',
+    ],
     'post_images' => '文章圖片',
 
     // Comment

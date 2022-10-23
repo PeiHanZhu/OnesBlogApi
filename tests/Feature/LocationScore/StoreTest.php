@@ -85,9 +85,9 @@ class StoreTest extends TestCase
         // GIVEN
         $location = Location::factory()->for($this->locationUser)->create();
         $scores = [];
-        foreach ($times = range(1, 3) as $i) {
+        foreach (range(1, 3) as $i) {
             $user = User::factory()->create();
-            LocationScore::factory()->for($user)->for($location)->create([
+            LocationScore::factory()->for($user)->for($location)->createQuietly([
                 'score' => ($scores[] = rand(1, 5)),
             ]);
         }
@@ -132,7 +132,6 @@ class StoreTest extends TestCase
         // THEN
         $response->assertStatus(Response::HTTP_UNAUTHORIZED)->assertJson($expected);
     }
-
 
     public function testWhenLocationScoreNotFound()
     {

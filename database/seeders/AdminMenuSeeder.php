@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Encore\Admin\Auth\Database\Menu;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class AdminMenuSeeder extends Seeder
 {
@@ -55,6 +56,9 @@ class AdminMenuSeeder extends Seeder
             'locations' => [
                 'icon' => 'fa-map-marker',
             ],
+            'location-scores' => [
+                'icon' => 'fa-pencil',
+            ],
             'posts' => [
                 'icon' => 'fa-newspaper-o'
             ],
@@ -72,7 +76,7 @@ class AdminMenuSeeder extends Seeder
                 'uri' => $uri,
             ], array_merge($data, [
                 'order' => ++$maxOrder,
-                'title' => $data['title'] ?? ucfirst($uri),
+                'title' => $data['title'] ?? Str::studly($uri),
             ]));
         }
     }

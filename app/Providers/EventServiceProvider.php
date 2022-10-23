@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\LocationScore;
+use App\Observers\LocationScoreObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -35,5 +36,7 @@ class EventServiceProvider extends ServiceProvider
                 ->line('Click the button below to verify your email address.')
                 ->action('Verify Email Address', $url);
         });
+
+        LocationScore::observe(LocationScoreObserver::class);
     }
 }

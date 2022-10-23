@@ -23,7 +23,7 @@ class LocationServiceHourController extends Controller
      * Display a listing of the location service hours.
      *
      * @urlParam location integer required The id of the location. Example: 5
-     * @responseFile 200 scenario="when location service hours displayed." responses/locationServiceHours.index/200.json
+     * @responseFile 200 scenario="when location service hours displayed." responses/location_service_hours.index/200.json
      *
      * @param \Illuminate\Http\Request $request
      * @param Location $location
@@ -40,12 +40,12 @@ class LocationServiceHourController extends Controller
      * Store a newly created location service hour in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
-     * @responseFile 201 scenario="when location service hours created." responses/locationServiceHours.store/201.json
+     * @responseFile 201 scenario="when location service hours created." responses/location_service_hours.store/201.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 403 scenario="when location service hour stored by wrong user." responses/403.json
-     * @responseFile 422 scenario="when any validation failed." responses/locationServiceHours.store/422.json
+     * @responseFile 422 scenario="when any validation failed." responses/location_service_hours.store/422.json
      *
      * @param  \Illuminate\Http\Request  $request
      * @param Location $location
@@ -84,9 +84,9 @@ class LocationServiceHourController extends Controller
      *
      * @urlParam location integer required The id of the location. Example: 5
      * @urlParam location_service_hour integer required The id of the location service hour. Example: 5
-     * @responseFile 200 scenario="when location service hour displayed." responses/locationServiceHours.show/200.json
-     * @responseFile 404 scenario="when location not found." responses/locationServiceHours.show/404_location.json
-     * @responseFile 404 scenario="when location service hour not found." responses/locationServiceHours.show/404_locationServiceHour.json
+     * @responseFile 200 scenario="when location service hour displayed." responses/location_service_hours.show/200.json
+     * @responseFile 404 scenario="when location not found." responses/location_service_hours.show/404_location.json
+     * @responseFile 404 scenario="when location service hour not found." responses/location_service_hours.show/404_location_service_hour.json
      *
      * @param  \App\Models\Location  $location
      * @param  \App\Models\LocationServiceHour  $locationServiceHour
@@ -101,15 +101,15 @@ class LocationServiceHourController extends Controller
      * Update the specified location service hour in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
      * @urlParam location_service_hour integer required The id of the location service hour. Example: 5
-     * @responseFile 200 scenario="when location service hour updated." responses/locationServiceHours.update/200.json
+     * @responseFile 200 scenario="when location service hour updated." responses/location_service_hours.update/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 403 scenario="when location service hour updated by wrong user." responses/403.json
-     * @responseFile 404 scenario="when location not found." responses/locationServiceHours.update/404_location.json
-     * @responseFile 404 scenario="when location service hour not found." responses/locationServiceHours.update/404_locationServiceHour.json
-     * @responseFile 422 scenario="when any validation failed." responses/locationServiceHours.update/422.json
+     * @responseFile 404 scenario="when location not found." responses/location_service_hours.update/404_location.json
+     * @responseFile 404 scenario="when location service hour not found." responses/location_service_hours.update/404_location_service_hour.json
+     * @responseFile 422 scenario="when any validation failed." responses/location_service_hours.update/422.json
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Location  $location
@@ -146,14 +146,14 @@ class LocationServiceHourController extends Controller
      * Remove the specified location service hour from storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam location integer required The id of the location. Example: 5
      * @urlParam location_service_hour integer required The id of the location service hour. Example: 5
-     * @responseFile 200 scenario="when location service hour deleted." responses/locationServiceHours.destroy/200.json
+     * @responseFile 200 scenario="when location service hour deleted." responses/location_service_hours.destroy/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 403 scenario="when location service hour deleted by wrong user." responses/403.json
-     * @responseFile 404 scenario="when location not found." responses/locationServiceHours.destroy/404_location.json
-     * @responseFile 404 scenario="when location service hour not found." responses/locationServiceHours.destroy/404_locationServiceHour.json
+     * @responseFile 404 scenario="when location not found." responses/location_service_hours.destroy/404_location.json
+     * @responseFile 404 scenario="when location service hour not found." responses/location_service_hours.destroy/404_location_service_hour.json
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Location  $location

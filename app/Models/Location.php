@@ -33,6 +33,7 @@ class Location extends Model
         'phone',
         'avgScore',
         'introduction',
+        'active',
         'images',
     ];
 
@@ -71,5 +72,15 @@ class Location extends Model
     public function locationServiceHours()
     {
         return $this->hasMany(LocationServiceHour::class);
+    }
+
+    /**
+     * Get the location likes for the location.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locationLikes()
+    {
+        return $this->hasMany(LocationLike::class);
     }
 }

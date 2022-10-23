@@ -68,6 +68,7 @@ response.json()
 {
     "data": [
         {
+            "id": "{location-service-hour-id}",
             "location_id": "{location-service-hour-location-id}",
             "opened_at": "{location-service-hour-opened-at}",
             "closed_at": "{location-service-hour-closed-at}",
@@ -200,6 +201,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -266,7 +268,7 @@ curl -X POST \
     "http://ones-blog-api.test/api/locations/5/location-service-hours" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"
+    -H "Authorization: Bearer {personal-access-token}"
 ```
 
 ```javascript
@@ -277,7 +279,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 
@@ -295,7 +297,7 @@ $response = $client->post(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -311,7 +313,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('POST', url, headers=headers)
@@ -324,6 +326,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -364,7 +367,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-locations--location--location-service-hours"></code></pre>
 </div>
-<form id="form-POSTapi-locations--location--location-service-hours" data-method="POST" data-path="api/locations/{location}/location-service-hours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-service-hours', this);">
+<form id="form-POSTapi-locations--location--location-service-hours" data-method="POST" data-path="api/locations/{location}/location-service-hours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-locations--location--location-service-hours', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -398,7 +401,7 @@ curl -X PUT \
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"
+    -H "Authorization: Bearer {personal-access-token}"
 ```
 
 ```javascript
@@ -409,7 +412,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 
@@ -427,7 +430,7 @@ $response = $client->put(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -443,7 +446,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('PUT', url, headers=headers)
@@ -456,6 +459,7 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{location-service-hour-id}",
         "location_id": "{location-service-hour-location-id}",
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
@@ -510,7 +514,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-locations--location--location-service-hours--location_service_hour-"></code></pre>
 </div>
-<form id="form-PUTapi-locations--location--location-service-hours--location_service_hour-" data-method="PUT" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location--location-service-hours--location_service_hour-', this);">
+<form id="form-PUTapi-locations--location--location-service-hours--location_service_hour-" data-method="PUT" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-locations--location--location-service-hours--location_service_hour-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>
@@ -550,7 +554,7 @@ curl -X DELETE \
     "http://ones-blog-api.test/api/locations/5/location-service-hours/5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -H "token: Bearer {personal-access-token}"
+    -H "Authorization: Bearer {personal-access-token}"
 ```
 
 ```javascript
@@ -561,7 +565,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "token": "Bearer {personal-access-token}",
+    "Authorization": "Bearer {personal-access-token}",
 };
 
 
@@ -579,7 +583,7 @@ $response = $client->delete(
     [
         'headers' => [
             'Accept' => 'application/json',
-            'token' => 'Bearer {personal-access-token}',
+            'Authorization' => 'Bearer {personal-access-token}',
         ],
     ]
 );
@@ -595,7 +599,7 @@ url = 'http://ones-blog-api.test/api/locations/5/location-service-hours/5'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'token': 'Bearer {personal-access-token}'
+  'Authorization': 'Bearer {personal-access-token}'
 }
 
 response = requests.request('DELETE', url, headers=headers)
@@ -646,7 +650,7 @@ response.json()
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-locations--location--location-service-hours--location_service_hour-"></code></pre>
 </div>
-<form id="form-DELETEapi-locations--location--location-service-hours--location_service_hour-" data-method="DELETE" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location--location-service-hours--location_service_hour-', this);">
+<form id="form-DELETEapi-locations--location--location-service-hours--location_service_hour-" data-method="DELETE" data-path="api/locations/{location}/location-service-hours/{location_service_hour}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-locations--location--location-service-hours--location_service_hour-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
     </h3>

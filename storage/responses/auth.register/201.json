@@ -1,7 +1,10 @@
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
-        "token": "{personal-access-token}"
+        "login_type_id": "{user-login-type-id}",
+        "location": null,
+        "token": null
     }
 }

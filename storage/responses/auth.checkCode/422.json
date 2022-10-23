@@ -1,0 +1,10 @@
+{
+    "data": {
+        "email": [
+            "{validation-error-message}"
+        ],
+        "code": [
+            "{validation-error-message}"
+        ]
+    }
+}

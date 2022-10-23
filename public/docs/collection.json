@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "d8f059d3-5a65-4753-9cdf-831e121cb1f0",
+        "_postman_id": "f92cbf53-7692-4b2c-9dba-c4069167b988",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -82,7 +82,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"login_type_id\": \"{user-login-type-id}\",\n        \"location\": null,\n        \"token\": null\n    }\n}"
                         },
                         {
                             "name": "Register a user with a personal access token for the device. Response #2",
@@ -121,14 +121,14 @@
                     ]
                 },
                 {
-                    "name": "Verify a user with a code.",
+                    "name": "After registration, verify the user's email with a code.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/verifyCode",
+                            "path": "api\/verify-code",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/verifyCode"
+                            "raw": "http:\/\/{{baseUrl}}\/api\/verify-code"
                         },
                         "method": "POST",
                         "header": [
@@ -152,14 +152,14 @@
                     },
                     "response": [
                         {
-                            "name": "Verify a user with a code. Response #1",
+                            "name": "After registration, verify the user's email with a code. Response #1",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
                                     "host": "{{baseUrl}}",
-                                    "path": "api\/verifyCode",
+                                    "path": "api\/verify-code",
                                     "query": [],
-                                    "raw": "http:\/\/{{baseUrl}}\/api\/verifyCode"
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/verify-code"
                                 },
                                 "method": "POST",
                                 "header": [
@@ -183,17 +183,17 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": null\n    }\n}"
                         },
                         {
-                            "name": "Verify a user with a code. Response #2",
+                            "name": "After registration, verify the user's email with a code. Response #2",
                             "originalRequest": {
                                 "url": {
                                     "protocol": "http",
                                     "host": "{{baseUrl}}",
-                                    "path": "api\/verifyCode",
+                                    "path": "api\/verify-code",
                                     "query": [],
-                                    "raw": "http:\/\/{{baseUrl}}\/api\/verifyCode"
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/verify-code"
                                 },
                                 "method": "POST",
                                 "header": [
@@ -209,6 +209,410 @@
                                 "body": {
                                     "mode": "raw",
                                     "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"code\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "After registration, resend verification code to verify the user's email.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/resend-verification-code",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/resend-verification-code"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "After registration, resend verification code to verify the user's email. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/resend-verification-code",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/resend-verification-code"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": null\n    }\n}"
+                        },
+                        {
+                            "name": "After registration, resend verification code to verify the user's email. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/resend-verification-code",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/resend-verification-code"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"code\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "When a user forgot password, send a verification code to the user.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/forgot-password",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/forgot-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "When a user forgot password, send a verification code to the user. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/forgot-password",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/forgot-password"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Success\"\n}"
+                        },
+                        {
+                            "name": "When a user forgot password, send a verification code to the user. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/forgot-password",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/forgot-password"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "During forgetting password, verify the user's email with a code.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/check-code",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/check-code"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\"\n}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "During forgetting password, verify the user's email with a code. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/check-code",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/check-code"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Success\"\n}"
+                        },
+                        {
+                            "name": "During forgetting password, verify the user's email with a code. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/check-code",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/check-code"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"code\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "After the user verified during forgetting password, reset password in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reset-password",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/reset-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\",\n    \"password\": \"123456\"\n}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "After the user verified during forgetting password, reset password in storage. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/reset-password",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/reset-password"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\",\n    \"password\": \"123456\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": null\n    }\n}"
+                        },
+                        {
+                            "name": "After the user verified during forgetting password, reset password in storage. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/reset-password",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/reset-password"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"hanTest@gmail.com\",\n    \"code\": \"VYB6P9\",\n    \"password\": \"123456\"\n}"
                                 },
                                 "description": "",
                                 "auth": {
@@ -284,7 +688,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"login_type_id\": \"{user-login-type-id}\",\n        \"location\": \"{user-location}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
                         },
                         {
                             "name": "Login a user with a new personal access token for the device. Response #2",
@@ -351,13 +755,13 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Han\",\n    \"email\": \"han@gmail.com\",\n    \"password\": \"1234567890\"\n}"
+                            "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
                         },
                         "description": ""
                     },
@@ -391,19 +795,19 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"name\": \"Han\",\n    \"email\": \"han@gmail.com\",\n    \"password\": \"1234567890\"\n}"
+                                    "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
                                 },
                                 "description": ""
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{user-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"login_type_id\": \"{user-login-type-id}\",\n        \"token\": null\n    }\n}"
                         },
                         {
                             "name": "Update the specified user in storage. Response #2",
@@ -434,13 +838,13 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"name\": \"Han\",\n    \"email\": \"han@gmail.com\",\n    \"password\": \"1234567890\"\n}"
+                                    "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
                                 },
                                 "description": ""
                             },
@@ -477,13 +881,13 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"name\": \"Han\",\n    \"email\": \"han@gmail.com\",\n    \"password\": \"1234567890\"\n}"
+                                    "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
                                 },
                                 "description": ""
                             },
@@ -520,19 +924,62 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"name\": \"Han\",\n    \"email\": \"han@gmail.com\",\n    \"password\": \"1234567890\"\n}"
+                                    "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
                                 },
                                 "description": ""
                             },
                             "header": null,
                             "cookie": [],
                             "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ],\n        \"password\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        },
+                        {
+                            "name": "Update the specified user in storage. Response #5",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users\/:user",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user",
+                                    "variable": [
+                                        {
+                                            "id": "user",
+                                            "key": "user",
+                                            "value": "34",
+                                            "description": "The id of the user."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Han\",\n    \"login_type_id\": 1,\n    \"password\": \"1234567890\"\n}"
+                                },
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -557,7 +1004,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -589,7 +1036,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -601,7 +1048,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"token\": \"{personal-access-token}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"login_type_id\": \"{user-login-type-id}\",\n        \"location\": \"{user-location}\",\n        \"token\": null\n    }\n}"
                         },
                         {
                             "name": "Logout a user with all the personal access tokens being revoked on the device. Response #2",
@@ -624,7 +1071,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -668,8 +1115,8 @@
                                 },
                                 {
                                     "key": "random",
-                                    "value": "1",
-                                    "description": "Whether the results are in random order or not.",
+                                    "value": "5",
+                                    "description": "The random amount of the results.",
                                     "disabled": false
                                 },
                                 {
@@ -691,7 +1138,7 @@
                                     "disabled": false
                                 }
                             ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=1&ranking=6&limit=10&page=1"
+                            "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=5&ranking=6&limit=10&page=1"
                         },
                         "method": "GET",
                         "header": [
@@ -733,8 +1180,8 @@
                                         },
                                         {
                                             "key": "random",
-                                            "value": "1",
-                                            "description": "Whether the results are in random order or not.",
+                                            "value": "5",
+                                            "description": "The random amount of the results.",
                                             "disabled": false
                                         },
                                         {
@@ -756,7 +1203,7 @@
                                             "disabled": false
                                         }
                                     ],
-                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=1&ranking=6&limit=10&page=1"
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/locations?category_id=2&city_id=11&random=5&ranking=6&limit=10&page=1"
                                 },
                                 "method": "GET",
                                 "header": [
@@ -777,7 +1224,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"city_area_id\": \"{city-area-id}\",\n            \"category_id\": \"{category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{location-id}\",\n            \"user_id\": \"{location-user-id}\",\n            \"city_area_id\": \"{location-city-area-id}\",\n            \"category_id\": \"{location-category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\",\n            \"active\": \"{location-active}\",\n            \"images\": \"{location-images}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&city_id=11&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -854,7 +1301,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-id}\",\n        \"user_id\": \"{location-user-id}\",\n        \"city_area_id\": \"{location-city-area-id}\",\n        \"category_id\": \"{location-category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\",\n        \"active\": \"{location-active}\",\n        \"images\": \"{location-images}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified location. Response #2",
@@ -918,7 +1365,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -986,7 +1433,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1034,7 +1481,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-id}\",\n        \"user_id\": \"{location-user-id}\",\n        \"city_area_id\": \"{location-city-area-id}\",\n        \"category_id\": \"{location-category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\",\n        \"active\": \"{location-active}\",\n        \"images\": \"{location-images}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created location in storage. Response #2",
@@ -1057,7 +1504,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1128,7 +1575,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1209,7 +1656,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -1290,7 +1737,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1343,7 +1790,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"city_area_id\": \"{city-area-id}\",\n        \"category_id\": \"{category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-id}\",\n        \"user_id\": \"{location-user-id}\",\n        \"city_area_id\": \"{location-city-area-id}\",\n        \"category_id\": \"{location-category-id}\",\n        \"name\": \"{location-name}\",\n        \"address\": \"{location-address}\",\n        \"phone\": \"{location-phone}\",\n        \"avgScore\": \"{location-avgScore}\",\n        \"introduction\": \"{location-introduction}\",\n        \"images\": \"{location-images}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified location in storage. Response #2",
@@ -1374,7 +1821,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1458,7 +1905,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1542,7 +1989,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1626,7 +2073,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1712,7 +2159,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -1749,7 +2196,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1789,7 +2236,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1829,7 +2276,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1869,7 +2316,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -1995,7 +2442,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"location_id\": \"{location-id}\",\n            \"score\": \"{location-score}\"\n        }\n    ]\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{locatoin-score-user-id}\",\n            \"location_id\": \"{locatoin-score-location-id}\",\n            \"score\": \"{locatoin-score-user-location-score}\"\n        }\n    ]\n}"
                         }
                     ]
                 },
@@ -2028,7 +2475,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -2068,7 +2515,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2080,7 +2527,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"location_id\": \"{location-id}\",\n        \"score\": \"{user-location-score}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"user_id\": \"{locatoin-score-user-id}\",\n        \"location_id\": \"{locatoin-score-location-id}\",\n        \"score\": \"{locatoin-score-user-location-score}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created or update the specified location score in storage, or remove the specified location score from storage. Response #2",
@@ -2111,7 +2558,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2154,7 +2601,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2197,7 +2644,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2292,7 +2739,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"location_id\": \"{location-service-hour-location-id}\",\n            \"opened_at\": \"{location-service-hour-opened-at}\",\n            \"closed_at\": \"{location-service-hour-closed-at}\",\n            \"weekday\": \"{location-service-hour-weekday}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{location-service-hour-id}\",\n            \"location_id\": \"{location-service-hour-location-id}\",\n            \"opened_at\": \"{location-service-hour-opened-at}\",\n            \"closed_at\": \"{location-service-hour-closed-at}\",\n            \"weekday\": \"{location-service-hour-weekday}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\\\/6\\\/location-service-hours\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -2381,7 +2828,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-service-hour-id}\",\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified location service hour. Response #2",
@@ -2504,7 +2951,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -2541,7 +2988,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2550,7 +2997,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-service-hour-id}\",\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created location service hour in storage. Response #2",
@@ -2581,7 +3028,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2621,7 +3068,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2661,7 +3108,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2709,7 +3156,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -2752,7 +3199,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2761,7 +3208,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{location-service-hour-id}\",\n        \"location_id\": \"{location-service-hour-location-id}\",\n        \"opened_at\": \"{location-service-hour-opened-at}\",\n        \"closed_at\": \"{location-service-hour-closed-at}\",\n        \"weekday\": \"{location-service-hour-weekday}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified location service hour in storage. Response #2",
@@ -2798,7 +3245,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2844,7 +3291,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2890,7 +3337,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2936,7 +3383,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -2982,7 +3429,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3030,7 +3477,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -3073,7 +3520,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3119,7 +3566,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3165,7 +3612,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3211,7 +3658,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3257,7 +3704,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3273,7 +3720,162 @@
             ]
         },
         {
-            "name": "05. Posts",
+            "name": "05. LocationLikes",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the location.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/location-likes",
+                            "query": [
+                                {
+                                    "key": "user_id",
+                                    "value": "2",
+                                    "description": "The id of the user.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10",
+                                    "description": "The amount of results per page. Defaults to '10'.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page of the results. Defaults to '1'.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/location-likes?user_id=2&limit=10&page=1"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display a listing of the location. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/location-likes",
+                                    "query": [
+                                        {
+                                            "key": "user_id",
+                                            "value": "2",
+                                            "description": "The id of the user.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/location-likes?user_id=2&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{location-like-id}\",\n            \"created_at\": \"{location-like-created-at}\",\n            \"updated_at\": \"{location-like-updated-at}\",\n            \"user_id\": \"{location-like-user-id}\",\n            \"location_id\": \"{location-like-location-id}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                        },
+                        {
+                            "name": "Display a listing of the location. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/location-likes",
+                                    "query": [
+                                        {
+                                            "key": "user_id",
+                                            "value": "2",
+                                            "description": "The id of the user.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/location-likes?user_id=2&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{location-id}\",\n            \"user_id\": \"{location-user-id}\",\n            \"city_area_id\": \"{location-city-area-id}\",\n            \"category_id\": \"{location-category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\",\n            \"active\": \"{location-active}\",\n            \"images\": \"{location-images}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?user_id=11&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?user_id=11&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes?user_id=11&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/location-likes\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "06. Posts",
             "description": "",
             "item": [
                 {
@@ -3371,7 +3973,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"city_area_id\": \"{location-city-area-id}\",\n            \"category_id\": \"{location-category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations?category_id=1&cuty=5&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/locations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{post-id}\",\n            \"user\": {\n                \"id\": \"{user-id}\",\n                \"created_at\": \"{user-created-at}\",\n                \"updated_at\": \"{user-updated-at}\",\n                \"name\": \"{user-name}\",\n                \"email\": \"{user-email}\",\n                \"email_verified_at\": \"{user-email-verified-at}\",\n                \"login_type_id\": \"{user-login-type-id}\"\n            },\n            \"location_id\": \"{post-location-id}\",\n            \"title\": \"{post-title}\",\n            \"content\": \"{post-content}\",\n            \"published_at\": \"{post-published-at}\",\n            \"created_at\": \"{post-created-at}\",\n            \"slug\": \"{post-slug}\",\n            \"images\": \"{post-images}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts?category_id=2&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -3448,7 +4050,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{post-id}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"created_at\": \"{post-created-at}\",\n        \"slug\": \"{post-slug}\",\n        \"images\": \"{post-images}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified post. Response #2",
@@ -3512,7 +4114,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -3575,7 +4177,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3618,7 +4220,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location_id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{post-id}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location_id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"created_at\": \"{post-created-at}\",\n        \"slug\": \"{post-slug}\",\n        \"images\": \"{post-images}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created post in storage. Response #2",
@@ -3641,7 +4243,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3707,7 +4309,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3783,7 +4385,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -3854,7 +4456,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -3897,7 +4499,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"created_at\": \"{post-created-at}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"slug\": \"{post-slug}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{post-id}\",\n        \"user\": {\n            \"id\": \"{user-id}\",\n            \"created_at\": \"{user-created-at}\",\n            \"updated_at\": \"{user-updated-at}\",\n            \"name\": \"{user-name}\",\n            \"email\": \"{user-email}\",\n            \"email_verified_at\": \"{user-email-verified-at}\",\n            \"login_type_id\": \"{user-login-type-id}\"\n        },\n        \"location_id\": \"{post-location-id}\",\n        \"title\": \"{post-title}\",\n        \"content\": \"{post-content}\",\n        \"published_at\": \"{post-published-at}\",\n        \"created_at\": \"{post-created-at}\",\n        \"slug\": \"{post-slug}\",\n        \"images\": \"{post-images}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified post in storage. Response #2",
@@ -3928,7 +4530,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4002,7 +4604,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4076,7 +4678,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4152,7 +4754,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -4189,7 +4791,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4229,7 +4831,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4269,7 +4871,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4285,7 +4887,162 @@
             ]
         },
         {
-            "name": "06. Comments",
+            "name": "07. PostKeeps",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display a listing of the post.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/post-keeps",
+                            "query": [
+                                {
+                                    "key": "user_id",
+                                    "value": "2",
+                                    "description": "The id of the user.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10",
+                                    "description": "The amount of results per page. Defaults to '10'.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page of the results. Defaults to '1'.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/post-keeps?user_id=2&limit=10&page=1"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Display a listing of the post. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/post-keeps",
+                                    "query": [
+                                        {
+                                            "key": "user_id",
+                                            "value": "2",
+                                            "description": "The id of the user.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/post-keeps?user_id=2&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{post-keep-id}\",\n            \"created_at\": \"{post-keep-created-at}\",\n            \"updated_at\": \"{post-keep-updated-at}\",\n            \"user_id\": \"{post-keep-user-id}\",\n            \"post_id\": \"{post-keep-post-id}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                        },
+                        {
+                            "name": "Display a listing of the post. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/post-keeps",
+                                    "query": [
+                                        {
+                                            "key": "user_id",
+                                            "value": "2",
+                                            "description": "The id of the user.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "10",
+                                            "description": "The amount of results per page. Defaults to '10'.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "1",
+                                            "description": "The page of the results. Defaults to '1'.",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/post-keeps?user_id=2&limit=10&page=1"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{post-id}\",\n            \"user\": {\n                \"id\": \"{user-id}\",\n                \"created_at\": \"{user-created_at}\",\n                \"updated_at\": \"{user-updated-at}\",\n                \"name\": \"{user-name}\",\n                \"email\": \"{user-email}\",\n                \"email_verified_at\": \"{user-email-verified-at}\",\n                \"login_type_id\": \"{user-login-type-id}\"\n            },\n            \"location_id\": \"{post-location-id}\",\n            \"title\": \"{post-title}\",\n            \"content\": \"{post-content}\",\n            \"published_at\": \"{post-published-at}\",\n            \"created_at\": \"{post-created-at}\",\n            \"active\": \"{post-active}\",\n            \"slug\": \"{post-slug}\",\n            \"images\": \"{post-images}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?user_id=12&page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?user_id=12&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps?user_id=12&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/post-keeps\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "08. Comments",
             "description": "",
             "item": [
                 {
@@ -4387,7 +5144,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": [\n        {\n            \"user_id\": \"{user-id}\",\n            \"post_id\": \"{post-id}\",\n            \"content\": \"{content}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": \"{comment-id}\",\n            \"user_id\": \"{comment-user-id}\",\n            \"post_id\": \"{comment-post-id}\",\n            \"content\": \"{comment-content}\",\n            \"images\": \"{comment-images}\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"last\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"pagination.previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"pagination.next\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/ones-blog-api.test\\\/api\\\/posts\\\/109\\\/comments\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
                         }
                     ]
                 },
@@ -4476,7 +5233,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{comment-id}\",\n        \"user_id\": \"{comment-user-id}\",\n        \"post_id\": \"{comment-post-id}\",\n        \"content\": \"{comment-content}\",\n        \"images\": \"{comment-images}\"\n    }\n}"
                         },
                         {
                             "name": "Display the specified comment. Response #2",
@@ -4599,7 +5356,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -4650,7 +5407,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4673,7 +5430,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{comment-id}\",\n        \"user_id\": \"{comment-user-id}\",\n        \"post_id\": \"{comment-post-id}\",\n        \"content\": \"{comment-content}\",\n        \"images\": \"{comment-images}\"\n    }\n}"
                         },
                         {
                             "name": "Store a newly created comment in storage. Response #2",
@@ -4704,7 +5461,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4758,7 +5515,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4812,7 +5569,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4874,7 +5631,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -4936,7 +5693,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -4964,7 +5721,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"data\": {\n        \"user_id\": \"{user-id}\",\n        \"post_id\": \"{post-id}\",\n        \"content\": \"{content}\"\n    }\n}"
+                            "body": "{\n    \"data\": {\n        \"id\": \"{comment-id}\",\n        \"user_id\": \"{comment-user-id}\",\n        \"post_id\": \"{comment-post-id}\",\n        \"content\": \"{comment-content}\",\n        \"images\": \"{comment-images}\"\n    }\n}"
                         },
                         {
                             "name": "Update the specified comment in storage. Response #2",
@@ -5001,7 +5758,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5066,7 +5823,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5131,7 +5888,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5196,7 +5953,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5247,7 +6004,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "2",
+                                    "value": "9",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -5263,7 +6020,7 @@
                                 "value": "application\/json"
                             },
                             {
-                                "key": "token",
+                                "key": "Authorization",
                                 "value": "Bearer {personal-access-token}"
                             }
                         ],
@@ -5290,7 +6047,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "2",
+                                            "value": "9",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -5306,7 +6063,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5336,7 +6093,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "2",
+                                            "value": "9",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -5352,7 +6109,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5382,7 +6139,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "2",
+                                            "value": "9",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -5398,7 +6155,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5428,7 +6185,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "2",
+                                            "value": "9",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -5444,7 +6201,7 @@
                                         "value": "application\/json"
                                     },
                                     {
-                                        "key": "token",
+                                        "key": "Authorization",
                                         "value": "Bearer {personal-access-token}"
                                     }
                                 ],
@@ -5460,7 +6217,7 @@
             ]
         },
         {
-            "name": "07. Cities",
+            "name": "09. Cities",
             "description": "",
             "item": [
                 {

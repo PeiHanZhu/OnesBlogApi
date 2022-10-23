@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\UserLoginTypeIdEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -21,15 +22,16 @@ class UserController extends Controller
      * Update the specified user in storage.
      *
      * @authenticated
-     * @header token Bearer {personal-access-token}
+     * @header Authorization Bearer {personal-access-token}
      * @urlParam user integer required The id of the user. Example: 34
      * @bodyParam name string The name of the user. Example: Han
-     * @bodyParam email string The email of the user. Example: han@gmail.com
+     * @bodyParam login_type_id integer The login type id of the user. Example: 1
      * @bodyParam password string The password of the user. Example: 1234567890
      * @responseFile 200 scenario="when user's information updated." responses/users.update/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 404 scenario="when user not found." responses/users.update/404.json
      * @responseFile 422 scenario="when any validation failed." responses/users.update/422.json
+     * @responseFile 422 scenario="when user without location." responses/users.update/422_without_location.json
      *
      * @param \Illuminate\Http\Request $request
      * @param User $user
@@ -39,7 +41,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string',
-            'email' => 'email|unique:users,email',
+            'login_type_id' => 'numeric|between:1,2',
             'password' => 'string|min:6',
         ]);
 
@@ -49,14 +51,23 @@ class UserController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        $user = $request->user();
+        if ($request->input('login_type_id') == UserLoginTypeIdEnum::LOCATION and !($user->location->active ?? false)) {
+            return response()->json([
+                'data' => [
+                    'email' => __('auth.none_location_user')
+                ]
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         $data = $request->only([
             'name',
-            'email',
+            'login_type_id',
             'password',
         ]);
         !isset($data['password']) ?: $data['password'] = Hash::make($data['password']);
 
-        ($user = $request->user())->update($data);
+        $user->update($data);
 
         return new UserResource($user->refresh());
     }

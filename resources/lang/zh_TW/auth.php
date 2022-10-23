@@ -15,4 +15,5 @@ return [
     'password' => '密碼錯誤。',
     'throttle' => '嘗試登入太多次，請在 :seconds 秒後再試。',
     'code' => '驗證碼錯誤',
+    'none_location_user' => '使用者尚未具有店家帳號',
 ];

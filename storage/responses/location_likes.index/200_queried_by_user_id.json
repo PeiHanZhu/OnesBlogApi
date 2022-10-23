@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "id": "{location-id}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "active": "{location-active}",
+            "images": "{location-images}"
+        }
+    ],
+    "links": {
+        "first": "http://ones-blog-api.test/api/location-likes?user_id=11&page=1",
+        "last": "http://ones-blog-api.test/api/location-likes?user_id=11&page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "pagination.previous",
+                "active": false
+            },
+            {
+                "url": "http://ones-blog-api.test/api/location-likes?user_id=11&page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "pagination.next",
+                "active": false
+            }
+        ],
+        "path": "http://ones-blog-api.test/api/location-likes",
+        "per_page": 10,
+        "to": 1,
+        "total": 1
+    }
+}
