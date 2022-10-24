@@ -51,10 +51,12 @@ class IndexTest extends TestCase
             ]));
             LocationLike::factory()->for($likeUser)->for($location)->create();
         });
-
+        foreach ($locations = (new LocationCollection($locations))->jsonSerialize() as $index => $location) {
+            $locations[$index]['user'] = $locations[$index]['user']->toArray();
+        }
 
         $expected = [
-            'data' => (new LocationCollection($locations))->jsonSerialize(),
+            'data' => $locations
         ];
 
         // WHEN

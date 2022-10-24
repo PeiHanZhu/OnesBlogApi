@@ -3,6 +3,9 @@
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }

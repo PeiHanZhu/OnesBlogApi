@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Location;
 
+use App\Enums\LocationCategoryEnum;
+use App\Http\Resources\LocationResource;
 use App\Models\CityArea;
 use App\Models\Location;
 use App\Models\User;
@@ -36,6 +38,7 @@ class StoreTest extends TestCase
     public function testWhenLocationCreated()
     {
         // GIVEN
+        /** @var \Illuminate\Database\Eloquent\Model */
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
         $data = [
             'user_id' => $user->id,
@@ -49,7 +52,9 @@ class StoreTest extends TestCase
         ];
 
         $expected = [
-            'data' => $data,
+            'data' => [
+                'user' => $user->toArray()
+            ]
         ];
 
         // WHEN
@@ -93,7 +98,7 @@ class StoreTest extends TestCase
         $data = [
             'user_id' => $user->id,
             'city_area_id' => $this->cityArea->id,
-            'category_id' => 2,
+            'category_id' => LocationCategoryEnum::SPOTS,
             'name' => '巨小機械',
             'address' => '鳳仁街九段243巷701號64樓',
             'phone' => '12345678',

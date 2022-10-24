@@ -17,8 +17,8 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'post_id' => $this->post_id,
+            'user' => $this->user,
+            'post' => $this->post,
             'content' => $this->content,
             'images' => array_map(function ($filePath) {
                 return url(Storage::url($filePath));

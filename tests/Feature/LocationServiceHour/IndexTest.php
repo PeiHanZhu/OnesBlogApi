@@ -28,8 +28,12 @@ class IndexTest extends TestCase
                     ])
             );
         }
+        foreach ($locationServiceHours = (new LocationServiceHourCollection($locationServiceHours))->jsonSerialize() as $index => $locationServiceHour) {
+            $locationServiceHours[$index]['location'] = $locationServiceHours[$index]['location']->toArray();
+        }
+
         $expected = [
-            'data' => (new LocationServiceHourCollection($locationServiceHours))->jsonSerialize()
+            'data' => $locationServiceHours
         ];
 
         // WHEN

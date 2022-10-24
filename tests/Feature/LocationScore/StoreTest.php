@@ -32,15 +32,17 @@ class StoreTest extends TestCase
     {
         // GIVEN
         $location = Location::factory()->for($this->locationUser)->create();
+        /** @var \Illuminate\Database\Eloquent\Model */
         $user = Sanctum::actingAs(User::factory()->create(), ['*']);
         $data = [
             'score' => 3.5,
         ];
+        $location->avgScore = $data['score'];
         $expected = [
-            'data' => array_merge($data, [
-                'user_id' => $user->id,
-                'location_id' => $location->id,
-            ]),
+            'data' => [
+                'user' => $user->toArray(),
+                'location' => $location->toArray(),
+            ],
         ];
 
         // WHEN

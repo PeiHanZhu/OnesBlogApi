@@ -47,8 +47,12 @@ class IndexTest extends TestCase
             ]));
         });
 
+        foreach ($locations = (new LocationCollection($locations))->jsonSerialize() as $index => $location) {
+            $locations[$index]['user'] = $locations[$index]['user']->toArray();
+        }
+
         $expected = [
-            'data' => (new LocationCollection($locations))->jsonSerialize()
+            'data' => $locations
         ];
 
         // WHEN
@@ -74,9 +78,14 @@ class IndexTest extends TestCase
                 'avgScore' => $i + 1,
             ]));
         });
+        
+        $locations = $locations->sortByDesc('avgScore');
+        foreach ($locations = (new LocationCollection($locations))->jsonSerialize() as $index => $location) {
+            $locations[$index]['user'] = $locations[$index]['user']->toArray();
+        }
 
         $expected = [
-            'data' => (new LocationCollection($locations->sortByDesc('avgScore')))->jsonSerialize(),
+            'data' => $locations,
         ];
 
         // WHEN

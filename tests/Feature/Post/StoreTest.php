@@ -41,6 +41,7 @@ class StoreTest extends TestCase
     public function testWhenPostCreated()
     {
         // GIVEN
+        /** @var \Illuminate\Database\Eloquent\Model */
         $postUser = Sanctum::actingAs(User::factory()->create([
             'name' => 'GUO_XUN',
             'email' => 'saber@gmail.com',
@@ -55,12 +56,10 @@ class StoreTest extends TestCase
         ];
 
         $expected = [
-            'data' => array_merge(
-                array_diff_key($data, array_flip([
-                    'user_id',
-                ])),
-                ['user' => ['id' => $postUser->id]]
-            ),
+            'data' => [
+                'user' => $postUser->toArray(),
+                'location' => $this->location->toArray(),
+            ]
         ];
 
         // WHEN

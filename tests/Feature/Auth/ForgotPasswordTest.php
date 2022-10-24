@@ -15,6 +15,7 @@ class ForgotPasswordTest extends TestCase
     {
         // GIVEN
         $user = User::factory()->create([
+            'email' => 'Test@gmail.com',
             'email_verified_at' => now(),
         ]);
         $data = [

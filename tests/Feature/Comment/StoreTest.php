@@ -42,6 +42,7 @@ class StoreTest extends TestCase
     public function testWhenCommentCreated()
     {
         // GIVEN
+        /** @var \Illuminate\Database\Eloquent\Model */
         $postUser = Sanctum::actingAs(User::factory()->create([
             'name' => 'GUO_XUN',
             'email' => 'saber@gmail.com',
@@ -51,11 +52,15 @@ class StoreTest extends TestCase
             'published_at' => now()->toDateString(),
             'active' => 1,
         ]);
-
+        $data = [
+            'user_id' => $postUser->id,
+            'post_id' => $post->id,
+            'content' => 'XUN',
+        ];
         $expected = [
-            'data' => $data = [
-                'user_id' => $postUser->id,
-                'post_id' => $post->id,
+            'data' => [
+                'user' => $postUser->toArray(),
+                'post' => $post->toArray(),
                 'content' => 'XUN',
             ],
         ];

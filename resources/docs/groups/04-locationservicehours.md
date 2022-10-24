@@ -69,7 +69,21 @@ response.json()
     "data": [
         {
             "id": "{location-service-hour-id}",
-            "location_id": "{location-service-hour-location-id}",
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "opened_at": "{location-service-hour-opened-at}",
             "closed_at": "{location-service-hour-closed-at}",
             "weekday": "{location-service-hour-weekday}"
@@ -202,7 +216,21 @@ response.json()
 {
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"
@@ -327,7 +355,21 @@ response.json()
 {
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"
@@ -460,7 +502,21 @@ response.json()
 {
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"

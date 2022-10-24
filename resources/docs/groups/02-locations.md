@@ -96,10 +96,20 @@ response.json()
     "data": [
         {
             "id": "{location-id}",
-            "user_id": "{location-user-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
             "city_area_id": "{location-city-area-id}",
             "category_id": "{location-category-id}",
             "name": "{location-name}",
+            "city_and_area": "{location-city-and-area}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",
@@ -265,10 +275,20 @@ response.json()
 {
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
@@ -331,7 +351,7 @@ curl -X POST \
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO" 
 ```
 
 ```javascript
@@ -398,7 +418,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO', 'r')
             ],
         ],
     ]
@@ -413,7 +433,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -440,10 +460,20 @@ response.json()
 {
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
@@ -571,7 +601,7 @@ curl -X PUT \
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV" 
 ```
 
 ```javascript
@@ -643,7 +673,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV', 'r')
             ],
         ],
     ]
@@ -658,7 +688,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -686,10 +716,20 @@ response.json()
 {
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",

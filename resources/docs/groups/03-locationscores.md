@@ -89,8 +89,31 @@ response.json()
 {
     "data": [
         {
-            "user_id": "{locatoin-score-user-id}",
-            "location_id": "{locatoin-score-location-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created_at}",
+                "updated_at": "{user-updated_at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "score": "{locatoin-score-user-location-score}"
         }
     ]
@@ -223,8 +246,31 @@ response.json()
 ```json
 {
     "data": {
-        "user_id": "{locatoin-score-user-id}",
-        "location_id": "{locatoin-score-location-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created_at}",
+            "updated_at": "{user-updated_at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "score": "{locatoin-score-user-location-score}"
     }
 }
