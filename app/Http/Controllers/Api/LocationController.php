@@ -109,6 +109,10 @@ class LocationController extends Controller
             'introduction',
         ])));
 
+        $user->update([
+            'location_applied_at' => now()
+        ]);
+
         $filePaths = [];
         foreach ($request->file('images', []) as $file) {
             (($path = $file->store("/locations/{$location->id}", 'public')) === false) ?:

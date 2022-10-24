@@ -94,9 +94,24 @@ response.json()
                 "name": "{user-name}",
                 "email": "{user-email}",
                 "email_verified_at": "{user-email-verified-at}",
-                "login_type_id": "{user-login-type-id}"
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
             },
-            "location_id": "{post-location-id}",
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
@@ -251,9 +266,24 @@ response.json()
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
@@ -315,7 +345,7 @@ curl -X POST \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN" 
 ```
 
 ```javascript
@@ -377,7 +407,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN', 'r')
             ],
         ],
     ]
@@ -392,7 +422,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -425,9 +455,24 @@ response.json()
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location_id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
@@ -539,7 +584,7 @@ curl -X PUT \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5" 
 ```
 
 ```javascript
@@ -601,7 +646,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5', 'r')
             ],
         ],
     ]
@@ -616,7 +661,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5', 'rb')
 }
 payload = {
     "title": "0724Post",
@@ -649,9 +694,24 @@ response.json()
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",

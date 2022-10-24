@@ -46,7 +46,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: October 23 2022</li>
+            <li>Last updated: October 24 2022</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -136,6 +136,7 @@ response.json()</code></pre>
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
         "location": null,
         "token": null
     }
@@ -270,6 +271,9 @@ response.json()</code></pre>
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }</code></pre>
@@ -382,6 +386,9 @@ response.json()</code></pre>
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }</code></pre>
@@ -702,6 +709,9 @@ response.json()</code></pre>
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }</code></pre>
@@ -827,7 +837,22 @@ response.json()</code></pre>
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
-        "location": "{user-location}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": "{personal-access-token}"
     }
 }</code></pre>
@@ -957,9 +982,26 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": null
     }
 }</code></pre>
@@ -1116,7 +1158,22 @@ response.json()</code></pre>
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
-        "location": "{user-location}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": null
     }
 }</code></pre>
@@ -1232,10 +1289,20 @@ response.json()</code></pre>
     "data": [
         {
             "id": "{location-id}",
-            "user_id": "{location-user-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
             "city_area_id": "{location-city-area-id}",
             "category_id": "{location-category-id}",
             "name": "{location-name}",
+            "city_and_area": "{location-city-and-area}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",
@@ -1381,10 +1448,20 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
@@ -1439,7 +1516,7 @@ The id of the location.
     -F "address=賢好街四段43巷434號75樓" \
     -F "phone=9110576179" \
     -F "introduction=Introduction" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations"
 );
@@ -1500,7 +1577,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO', 'r')
             ],
         ],
     ]
@@ -1512,7 +1589,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php9dCjum', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpR5IeZO', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -1536,10 +1613,20 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
@@ -1658,7 +1745,7 @@ The images of the location.
     -F "phone=1335933680" \
     -F "introduction=IntroductionTest" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/locations/5"
 );
@@ -1724,7 +1811,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV', 'r')
             ],
         ],
     ]
@@ -1736,7 +1823,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/locations/5'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpi6iNqP', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpJix8HV', 'rb')
 }
 payload = {
     "city_area_id": 153,
@@ -1761,10 +1848,20 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-id}",
-        "user_id": "{location-user-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
         "city_area_id": "{location-city-area-id}",
         "category_id": "{location-category-id}",
         "name": "{location-name}",
+        "city_and_area": "{location-city-and-area}",
         "address": "{location-address}",
         "phone": "{location-phone}",
         "avgScore": "{location-avgScore}",
@@ -2052,8 +2149,31 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": [
         {
-            "user_id": "{locatoin-score-user-id}",
-            "location_id": "{locatoin-score-location-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created_at}",
+                "updated_at": "{user-updated_at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "score": "{locatoin-score-user-location-score}"
         }
     ]
@@ -2167,8 +2287,31 @@ response.json()</code></pre>
 </blockquote>
 <pre><code class="language-json">{
     "data": {
-        "user_id": "{locatoin-score-user-id}",
-        "location_id": "{locatoin-score-location-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created_at}",
+            "updated_at": "{user-updated_at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "score": "{locatoin-score-user-location-score}"
     }
 }</code></pre>
@@ -2280,7 +2423,21 @@ response.json()</code></pre>
     "data": [
         {
             "id": "{location-service-hour-id}",
-            "location_id": "{location-service-hour-location-id}",
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "opened_at": "{location-service-hour-opened-at}",
             "closed_at": "{location-service-hour-closed-at}",
             "weekday": "{location-service-hour-weekday}"
@@ -2393,7 +2550,21 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"
@@ -2496,7 +2667,21 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"
@@ -2606,7 +2791,21 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{location-service-hour-id}",
-        "location_id": "{location-service-hour-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "opened_at": "{location-service-hour-opened-at}",
         "closed_at": "{location-service-hour-closed-at}",
         "weekday": "{location-service-hour-weekday}"
@@ -2906,10 +3105,20 @@ response.json()</code></pre>
     "data": [
         {
             "id": "{location-id}",
-            "user_id": "{location-user-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created_at}",
+                "updated_at": "{user-updated_at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
             "city_area_id": "{location-city-area-id}",
             "category_id": "{location-category-id}",
             "name": "{location-name}",
+            "city_and_area": "{location-city-and-area}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",
@@ -3063,9 +3272,24 @@ response.json()</code></pre>
                 "name": "{user-name}",
                 "email": "{user-email}",
                 "email_verified_at": "{user-email-verified-at}",
-                "login_type_id": "{user-login-type-id}"
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
             },
-            "location_id": "{post-location-id}",
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
@@ -3200,9 +3424,24 @@ response.json()</code></pre>
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
@@ -3256,7 +3495,7 @@ The id of the post.
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts"
 );
@@ -3312,7 +3551,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN', 'r')
             ],
         ],
     ]
@@ -3324,7 +3563,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0YsoUk', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phppxnqrN', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -3354,9 +3593,24 @@ response.json()</code></pre>
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location_id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
@@ -3459,7 +3713,7 @@ The images of the post.
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/108"
 );
@@ -3515,7 +3769,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5', 'r')
             ],
         ],
     ]
@@ -3527,7 +3781,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php7wAzhp', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpSKqWf5', 'rb')
 }
 payload = {
     "title": "0724Post",
@@ -3557,9 +3811,24 @@ response.json()</code></pre>
             "name": "{user-name}",
             "email": "{user-email}",
             "email_verified_at": "{user-email-verified-at}",
-            "login_type_id": "{user-login-type-id}"
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
         },
-        "location_id": "{post-location-id}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "location-introduction",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "title": "{post-title}",
         "content": "{post-content}",
         "published_at": "{post-published-at}",
@@ -3881,7 +4150,21 @@ response.json()</code></pre>
                 "email_verified_at": "{user-email-verified-at}",
                 "login_type_id": "{user-login-type-id}"
             },
-            "location_id": "{post-location-id}",
+            "location": {
+                "id": "{location-id}",
+                "created_at": "{location-created-at}",
+                "updated_at": "{location-updated-at}",
+                "user_id": "{location-user-id}",
+                "city_area_id": "{location-city-area-id}",
+                "category_id": "{location-category-id}",
+                "name": "{location-name}",
+                "address": "{location-address}",
+                "phone": "{location-phone}",
+                "avgScore": "{location-avgScore}",
+                "introduction": "location-introduction",
+                "images": "{location-images}",
+                "active": "{location-active}"
+            },
             "title": "{post-title}",
             "content": "{post-content}",
             "published_at": "{post-published-at}",
@@ -4026,8 +4309,29 @@ response.json()</code></pre>
     "data": [
         {
             "id": "{comment-id}",
-            "user_id": "{comment-user-id}",
-            "post_id": "{comment-post-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
+            "post": {
+                "id": "{post-id}",
+                "created_at": "{post-created-at}",
+                "updated_at": "{post-updated-at}",
+                "user_id": "{post-user-id}",
+                "location_id": "{post-location-id}",
+                "title": "{post-title}",
+                "content": "{post-content}",
+                "published_at": "{post-published-at}",
+                "active": "{post-active}",
+                "slug": "{post-slug}",
+                "images": "{post-images}"
+            },
             "content": "{comment-content}",
             "images": "{comment-images}"
         }
@@ -4152,8 +4456,29 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{comment-id}",
-        "user_id": "{comment-user-id}",
-        "post_id": "{comment-post-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
+        "post": {
+            "id": "{post-id}",
+            "created_at": "{post-created-at}",
+            "updated_at": "{post-updated-at}",
+            "user_id": "{post-user-id}",
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "active": "{post-active}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
+        },
         "content": "{comment-content}",
         "images": "{comment-images}"
     }
@@ -4211,7 +4536,7 @@ The id of the comment.
     -H "Accept: application/json" \
     -H "Authorization: Bearer {personal-access-token}" \
     -F "content=commentTest" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpDrsMYP" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/109/comments"
 );
@@ -4247,7 +4572,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpDrsMYP', 'r')
             ],
         ],
     ]
@@ -4259,7 +4584,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpcsL2qm', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpDrsMYP', 'rb')
 }
 payload = {
     "content": "commentTest"
@@ -4278,8 +4603,29 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{comment-id}",
-        "user_id": "{comment-user-id}",
-        "post_id": "{comment-post-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
+        "post": {
+            "id": "{post-id}",
+            "created_at": "{post-created-at}",
+            "updated_at": "{post-updated-at}",
+            "user_id": "{post-user-id}",
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "active": "{post-active}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
+        },
         "content": "{comment-content}",
         "images": "{comment-images}"
     }
@@ -4360,7 +4706,7 @@ The images of the comment.
     -H "Authorization: Bearer {personal-access-token}" \
     -F "content=0724Comment" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF" </code></pre>
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpo3z6NT" </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://ones-blog-api.test/api/posts/109/comments/32"
 );
@@ -4401,7 +4747,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'r')
+                'contents' =&gt; fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpo3z6NT', 'r')
             ],
         ],
     ]
@@ -4413,7 +4759,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/109/comments/32'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/php0MM5IF', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpo3z6NT', 'rb')
 }
 payload = {
     "content": "0724Comment",
@@ -4433,8 +4779,29 @@ response.json()</code></pre>
 <pre><code class="language-json">{
     "data": {
         "id": "{comment-id}",
-        "user_id": "{comment-user-id}",
-        "post_id": "{comment-post-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created-at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": "{user-location-applied-at}"
+        },
+        "post": {
+            "id": "{post-id}",
+            "created_at": "{post-created-at}",
+            "updated_at": "{post-updated-at}",
+            "user_id": "{post-user-id}",
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "active": "{post-active}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
+        },
         "content": "{comment-content}",
         "images": "{comment-images}"
     }
@@ -4527,12 +4894,12 @@ Required if the <code><b>images</b></code> of the comment are uploaded, must be 
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://ones-blog-api.test/api/posts/109/comments/9" \
+    "http://ones-blog-api.test/api/posts/109/comments/12" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {personal-access-token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://ones-blog-api.test/api/posts/109/comments/9"
+    "http://ones-blog-api.test/api/posts/109/comments/12"
 );
 
 let headers = {
@@ -4548,7 +4915,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://ones-blog-api.test/api/posts/109/comments/9',
+    'http://ones-blog-api.test/api/posts/109/comments/12',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
@@ -4561,7 +4928,7 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-python">import requests
 import json
 
-url = 'http://ones-blog-api.test/api/posts/109/comments/9'
+url = 'http://ones-blog-api.test/api/posts/109/comments/12'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',

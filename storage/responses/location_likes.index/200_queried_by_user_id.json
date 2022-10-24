@@ -2,10 +2,20 @@
     "data": [
         {
             "id": "{location-id}",
-            "user_id": "{location-user-id}",
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created_at}",
+                "updated_at": "{user-updated_at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
             "city_area_id": "{location-city-area-id}",
             "category_id": "{location-category-id}",
             "name": "{location-name}",
+            "city_and_area": "{location-city-and-area}",
             "address": "{location-address}",
             "phone": "{location-phone}",
             "avgScore": "{location-avgScore}",

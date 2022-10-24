@@ -92,6 +92,7 @@ response.json()
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
         "location": null,
         "token": null
     }
@@ -246,6 +247,9 @@ response.json()
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }
@@ -378,6 +382,9 @@ response.json()
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }
@@ -758,6 +765,9 @@ response.json()
         "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": null,
+        "location": null,
         "token": null
     }
 }
@@ -903,7 +913,22 @@ response.json()
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
-        "location": "{user-location}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": "{personal-access-token}"
     }
 }
@@ -1053,9 +1078,26 @@ response.json()
 ```json
 {
     "data": {
+        "id": "{user-id}",
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": null
     }
 }
@@ -1235,7 +1277,22 @@ response.json()
         "name": "{user-name}",
         "email": "{user-email}",
         "login_type_id": "{user-login-type-id}",
-        "location": "{user-location}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
         "token": null
     }
 }

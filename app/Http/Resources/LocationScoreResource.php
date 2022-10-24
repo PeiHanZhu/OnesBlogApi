@@ -15,8 +15,8 @@ class LocationScoreResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'user_id' => $this->user_id,
-            'location_id' => $this->location_id,
+            'user' => $this->user,
+            'location' => $this->location,
             'score' => $this->score,
         ];
     }

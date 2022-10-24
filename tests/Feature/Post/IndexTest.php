@@ -27,7 +27,6 @@ class IndexTest extends TestCase
             'active' => 1,
         ]);
 
-
         $expected = [
             'data' => [
                 $data,
@@ -59,6 +58,7 @@ class IndexTest extends TestCase
         });
         foreach ($posts = (new PostCollection($posts))->jsonSerialize() as $index => $post) {
             $posts[$index]['user'] = $posts[$index]['user']->toArray();
+            $posts[$index]['location'] = $posts[$index]['location']->toArray();
             $posts[$index]['created_at'] = $posts[$index]['created_at']->toISOString();
         }
 

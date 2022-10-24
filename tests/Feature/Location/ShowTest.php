@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Location;
 
+use App\Http\Resources\LocationResource;
 use App\Models\CityArea;
 use App\Models\Location;
 use App\Models\User;
@@ -34,19 +35,16 @@ class ShowTest extends TestCase
     {
         // GIVEN
         $user = User::factory()->create();
-        $location = Location::factory()->create($data = [
+        $location = Location::factory()->create([
             'user_id' => $user->id,
             'city_area_id' => $this->cityArea->id,
             'active' => 1,
         ]);
+        $locationArray = (new LocationResource($location))->jsonSerialize();
+        $locationArray['user'] = $locationArray['user']->toArray();
 
         $expected = [
-            'data' => array_diff_key(
-                $data,
-                array_flip([
-                    'active'
-                ]),
-            )
+            'data' => $locationArray,
         ];
 
         // WHEN
