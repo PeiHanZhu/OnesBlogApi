@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "OnesBlog API Documentation",
-        "_postman_id": "75b08561-f412-42da-8677-b756e52be891",
+        "_postman_id": "ca9c9945-d1f7-409c-9143-59b31e89c08f",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -980,6 +980,165 @@
                             "header": null,
                             "cookie": [],
                             "body": "{\n    \"data\": {\n        \"email\": [\n            \"{validation-error-message}\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified user.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:user",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user",
+                            "variable": [
+                                {
+                                    "id": "user",
+                                    "key": "user",
+                                    "value": "5",
+                                    "description": "The id of the user."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {personal-access-token}"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "name": "Display the specified user. Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users\/:user",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user",
+                                    "variable": [
+                                        {
+                                            "id": "user",
+                                            "key": "user",
+                                            "value": "5",
+                                            "description": "The id of the user."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": \"{user-id}\",\n        \"name\": \"{user-name}\",\n        \"email\": \"{user-email}\",\n        \"login_type_id\": \"{user-login-type-id}\",\n        \"location_applied_at\": \"{user-location-applied-at}\",\n        \"location\": {\n            \"id\": \"{location-id}\",\n            \"created_at\": \"{location-created-at}\",\n            \"updated_at\": \"{location-updated-at}\",\n            \"user_id\": \"{location-user-id}\",\n            \"city_area_id\": \"{location-city-area-id}\",\n            \"category_id\": \"{location-category-id}\",\n            \"name\": \"{location-name}\",\n            \"address\": \"{location-address}\",\n            \"phone\": \"{location-phone}\",\n            \"avgScore\": \"{location-avgScore}\",\n            \"introduction\": \"{location-introduction}\",\n            \"images\": \"{location-images}\",\n            \"active\": \"{location-active}\"\n        },\n        \"token\": null\n    }\n}"
+                        },
+                        {
+                            "name": "Display the specified user. Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users\/:user",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user",
+                                    "variable": [
+                                        {
+                                            "id": "user",
+                                            "key": "user",
+                                            "value": "5",
+                                            "description": "The id of the user."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"Unauthenticated.\"\n}"
+                        },
+                        {
+                            "name": "Display the specified user. Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users\/:user",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user",
+                                    "variable": [
+                                        {
+                                            "id": "user",
+                                            "key": "user",
+                                            "value": "5",
+                                            "description": "The id of the user."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {personal-access-token}"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"data\": \"User(ID:{user-id}) is not found.\"\n}"
                         }
                     ]
                 },
@@ -6004,7 +6163,7 @@
                                 {
                                     "id": "comment",
                                     "key": "comment",
-                                    "value": "12",
+                                    "value": "2",
                                     "description": "The id of the comment. Exmaple: 32"
                                 }
                             ]
@@ -6047,7 +6206,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "12",
+                                            "value": "2",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -6093,7 +6252,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "12",
+                                            "value": "2",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -6139,7 +6298,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "12",
+                                            "value": "2",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]
@@ -6185,7 +6344,7 @@
                                         {
                                             "id": "comment",
                                             "key": "comment",
-                                            "value": "12",
+                                            "value": "2",
                                             "description": "The id of the comment. Exmaple: 32"
                                         }
                                     ]

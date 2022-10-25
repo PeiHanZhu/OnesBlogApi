@@ -19,6 +19,25 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
+     * Display the specified user.
+     *
+     * @authenticated
+     * @header Authorization Bearer {personal-access-token}
+     * @urlParam user integer required The id of the user. Example: 5
+     * @responseFile 200 scenario="when user displayed." responses/users.show/200.json
+     * @responseFile 401 scenario="without personal access token." responses/401.json
+     * @responseFile 404 scenario="when user not found." responses/users.show/404.json
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, User $user)
+    {
+        return new UserResource($request->user());
+    }
+
+    /**
      * Update the specified user in storage.
      *
      * @authenticated
@@ -27,7 +46,7 @@ class UserController extends Controller
      * @bodyParam name string The name of the user. Example: Han
      * @bodyParam login_type_id integer The login type id of the user. Example: 1
      * @bodyParam password string The password of the user. Example: 1234567890
-     * @responseFile 200 scenario="when user's information updated." responses/users.update/200.json
+     * @responseFile 200 scenario="when user updated." responses/users.update/200.json
      * @responseFile 401 scenario="without personal access token." responses/401.json
      * @responseFile 404 scenario="when user not found." responses/users.update/404.json
      * @responseFile 422 scenario="when any validation failed." responses/users.update/422.json
