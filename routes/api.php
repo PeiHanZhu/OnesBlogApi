@@ -31,6 +31,7 @@ Route::post('check-code', [AuthController::class, 'checkCode'])->name('auth.chec
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('auth.reset-password');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
 });

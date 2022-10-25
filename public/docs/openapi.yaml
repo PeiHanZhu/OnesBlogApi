@@ -472,7 +472,7 @@ paths:
                         type: string
             responses:
                 200:
-                    description: '200, when user''s information updated.'
+                    description: '200, when user updated.'
                     content:
                         application/json:
                             schema:
@@ -532,6 +532,64 @@ paths:
                                     type: string
                                     description: 'The password of the user.'
                                     example: '1234567890'
+        get:
+            summary: 'Display the specified user.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when user displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null }
+                                properties:
+                                    data: { type: object, example: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null } }
+                401:
+                    description: '401, without personal access token.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Unauthenticated.
+                                properties:
+                                    data: { type: string, example: Unauthenticated. }
+                404:
+                    description: '404, when user not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'User(ID:{user-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'User(ID:{user-id}) is not found.' }
+            tags:
+                - '01. Authentication and Users'
         parameters:
             -
                 in: path
