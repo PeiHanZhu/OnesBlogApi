@@ -21,7 +21,7 @@ class PostResource extends JsonResource
             'user' => $this->user,
             'location' => $this->location,
             'title' => $this->title,
-            'content' => Str::limit($this->content, 50),
+            'content' => $this->content,
             'published_at' => $this->published_at,
             'created_at' => $this->created_at,
             'active' => $this->active,
