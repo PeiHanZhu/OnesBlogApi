@@ -46,7 +46,7 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Reset Password')
+            ->subject(__('email.reset_password'))
             ->markdown('email.send_code_reset_password', ['code' => $this->code]);
     }
 

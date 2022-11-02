@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostKeepCollection;
+use App\Http\Resources\PostKeepResource;
 use App\Models\Post;
 use App\Models\PostKeep;
 use Illuminate\Http\Request;
@@ -41,6 +42,37 @@ class PostKeepController extends Controller
                     $query->where('user_id', $userId);
                 })->paginate($request->query('limit') ?? 10)
             ))->preserveQuery();
+        }
+    }
+
+    /**
+     * Store a newly created or remove the specified post keep in storage.
+     *
+     * @authenticated
+     * @header Authorization Bearer {personal-access-token}
+     * @urlParam post integer required The id of the post. Example: 5
+     * @responseFile 200 scenario="when post keep deleted." responses/post_keeps.store/200.json
+     * @responseFile 201 scenario="when post keep created." responses/post_keeps.store/201.json
+     * @responseFile 404 scenario="when post not found." responses/post_keeps.store/404.json
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Post $post
+     */
+    public function store(Request $request, Post $post)
+    {
+        if (is_null($postKeep = PostKeep::where([
+            ['user_id', $request->user()->id],
+            ['post_id', $post->id],
+        ])->first())) {
+            return new PostKeepResource(PostKeep::create([
+                'user_id' => $request->user()->id,
+                'post_id' => $post->id,
+            ]));
+        } else {
+            $postKeep->delete();
+            return response()->json([
+                'data' => 'Success',
+            ]);
         }
     }
 }

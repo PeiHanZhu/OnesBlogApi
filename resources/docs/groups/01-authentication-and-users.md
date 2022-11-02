@@ -989,6 +989,144 @@ The device name of the user.
 </form>
 
 
+## Display the specified user.
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://ones-blog-api.test/api/users/5" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {personal-access-token}"
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/users/5"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {personal-access-token}",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://ones-blog-api.test/api/users/5',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {personal-access-token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/users/5'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {personal-access-token}'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()
+```
+
+
+> Example response (200, when user displayed.):
+
+```json
+{
+    "data": {
+        "id": "{user-id}",
+        "name": "{user-name}",
+        "email": "{user-email}",
+        "login_type_id": "{user-login-type-id}",
+        "location_applied_at": "{user-location-applied-at}",
+        "location": {
+            "id": "{location-id}",
+            "created_at": "{location-created-at}",
+            "updated_at": "{location-updated-at}",
+            "user_id": "{location-user-id}",
+            "city_area_id": "{location-city-area-id}",
+            "category_id": "{location-category-id}",
+            "name": "{location-name}",
+            "address": "{location-address}",
+            "phone": "{location-phone}",
+            "avgScore": "{location-avgScore}",
+            "introduction": "{location-introduction}",
+            "images": "{location-images}",
+            "active": "{location-active}"
+        },
+        "token": null
+    }
+}
+```
+> Example response (401, without personal access token.):
+
+```json
+{
+    "data": "Unauthenticated."
+}
+```
+> Example response (404, when user not found.):
+
+```json
+{
+    "data": "User(ID:{user-id}) is not found."
+}
+```
+<div id="execution-results-GETapi-users--user-" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-users--user-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-users--user-"></code></pre>
+</div>
+<div id="execution-error-GETapi-users--user-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-users--user-"></code></pre>
+</div>
+<form id="form-GETapi-users--user-" data-method="GET" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-users--user-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/users/{user}</code></b>
+</p>
+<p>
+<label id="auth-GETapi-users--user-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-users--user-" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>user</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="user" data-endpoint="GETapi-users--user-" data-component="url" required  hidden>
+<br>
+The id of the user.
+</p>
+</form>
+
+
 ## Update the specified user in storage.
 
 <small class="badge badge-darkred">requires authentication</small>
@@ -1187,144 +1325,6 @@ The login type id of the user.
 The password of the user.
 </p>
 
-</form>
-
-
-## Display the specified user.
-
-<small class="badge badge-darkred">requires authentication</small>
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://ones-blog-api.test/api/users/5" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer {personal-access-token}"
-```
-
-```javascript
-const url = new URL(
-    "http://ones-blog-api.test/api/users/5"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer {personal-access-token}",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response => response.json());
-```
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://ones-blog-api.test/api/users/5',
-    [
-        'headers' => [
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {personal-access-token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
-```python
-import requests
-import json
-
-url = 'http://ones-blog-api.test/api/users/5'
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {personal-access-token}'
-}
-
-response = requests.request('GET', url, headers=headers)
-response.json()
-```
-
-
-> Example response (200, when user displayed.):
-
-```json
-{
-    "data": {
-        "id": "{user-id}",
-        "name": "{user-name}",
-        "email": "{user-email}",
-        "login_type_id": "{user-login-type-id}",
-        "location_applied_at": "{user-location-applied-at}",
-        "location": {
-            "id": "{location-id}",
-            "created_at": "{location-created-at}",
-            "updated_at": "{location-updated-at}",
-            "user_id": "{location-user-id}",
-            "city_area_id": "{location-city-area-id}",
-            "category_id": "{location-category-id}",
-            "name": "{location-name}",
-            "address": "{location-address}",
-            "phone": "{location-phone}",
-            "avgScore": "{location-avgScore}",
-            "introduction": "{location-introduction}",
-            "images": "{location-images}",
-            "active": "{location-active}"
-        },
-        "token": null
-    }
-}
-```
-> Example response (401, without personal access token.):
-
-```json
-{
-    "data": "Unauthenticated."
-}
-```
-> Example response (404, when user not found.):
-
-```json
-{
-    "data": "User(ID:{user-id}) is not found."
-}
-```
-<div id="execution-results-GETapi-users--user-" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-users--user-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-users--user-"></code></pre>
-</div>
-<div id="execution-error-GETapi-users--user-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-users--user-"></code></pre>
-</div>
-<form id="form-GETapi-users--user-" data-method="GET" data-path="api/users/{user}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-users--user-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/users/{user}</code></b>
-</p>
-<p>
-<label id="auth-GETapi-users--user-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-users--user-" data-component="header"></label>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>user</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="user" data-endpoint="GETapi-users--user-" data-component="url" required  hidden>
-<br>
-The id of the user.
-</p>
 </form>
 
 

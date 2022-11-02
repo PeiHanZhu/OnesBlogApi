@@ -28,7 +28,10 @@ class AdminPermissionSeeder extends Seeder
             'auth.login' => [
                 'name' => 'Login',
                 'http_method' => '',
-                'http_path' => implode("\r\n", ['/auth/login', '/auth/logout']),
+                'http_path' => implode("\r\n", [
+                    '/auth/login',
+                    '/auth/logout',
+                ]),
             ],
             'auth.setting' => [
                 'name'  => 'User setting',
@@ -38,12 +41,25 @@ class AdminPermissionSeeder extends Seeder
             'auth.management' => [
                 'name' => 'Auth management',
                 'http_method' => '',
-                'http_path' => implode("\r\n", ['/auth/roles', '/auth/permissions', '/auth/menu', '/auth/logs']),
+                'http_path' => implode("\r\n", [
+                    '/auth/roles',
+                    '/auth/permissions',
+                    '/auth/menu',
+                    '/auth/logs',
+                ]),
             ],
             'assistant' => [
                 'name' => 'Assistant',
                 'http_method' => '',
-                'http_path' => implode("\r\n", ['/users*', '/locations*', '/posts*', '/comments*', '/cities*', '/media*']),
+                'http_path' => implode("\r\n", [
+                    '/users*',
+                    '/locations*',
+                    '/location-scores*',
+                    '/posts*',
+                    '/comments*',
+                    '/cities*',
+                    '/media*',
+                ]),
             ],
         ] as $slug => $data) {
             Permission::firstOrCreate([

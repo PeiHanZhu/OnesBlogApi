@@ -228,7 +228,10 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'code' => Hash::make($code = app(CodeGenerator::class)->generate()),
         ]);
-        Notification::route('mail', $request->input('email'))->notify(new ResetPasswordNotification($code));
+
+        if (!app()->environment('testing')) {
+            Notification::route('mail', $request->input('email'))->notify(new ResetPasswordNotification($code));
+        }
 
         return response()->json([
             'data' => 'Success'

@@ -28,9 +28,13 @@ class IndexTest extends TestCase
             $locationLikes->push(LocationLike::factory()->for($likeUser)->for($location)->create());
         });
 
+        foreach ($locationLikes = (new LocationLikeCollection($locationLikes))->jsonSerialize() as $index => $locationLike) {
+            $locationLikes[$index]['user'] = $locationLikes[$index]['user']->toArray();
+            $locationLikes[$index]['location'] = $locationLikes[$index]['location']->toArray();
+        }
 
         $expected = [
-            'data' => (new LocationLikeCollection($locationLikes))->jsonSerialize(),
+            'data' => $locationLikes,
         ];
 
         // WHEN
@@ -43,6 +47,7 @@ class IndexTest extends TestCase
     public function testWhenLocationLikesQueriedByUserId()
     {
         // GIVEN
+        // TODO: 待完成
         $locations = collect();
         $likeUser = User::factory()->create();
         User::factory(5)->create()->each(function ($user) use ($locations, $likeUser){
@@ -51,8 +56,10 @@ class IndexTest extends TestCase
             ]));
             LocationLike::factory()->for($likeUser)->for($location)->create();
         });
+
         foreach ($locations = (new LocationCollection($locations))->jsonSerialize() as $index => $location) {
             $locations[$index]['user'] = $locations[$index]['user']->toArray();
+            // $locations[$index]['location'] = $locations[$index]['location']->toArray();
         }
 
         $expected = [

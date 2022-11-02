@@ -1,6 +1,147 @@
 # 07. PostKeeps
 
 
+## Store a newly created or remove the specified post keep in storage.
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://ones-blog-api.test/api/posts/5/post-keeps" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {personal-access-token}"
+```
+
+```javascript
+const url = new URL(
+    "http://ones-blog-api.test/api/posts/5/post-keeps"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {personal-access-token}",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response => response.json());
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://ones-blog-api.test/api/posts/5/post-keeps',
+    [
+        'headers' => [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {personal-access-token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```python
+import requests
+import json
+
+url = 'http://ones-blog-api.test/api/posts/5/post-keeps'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {personal-access-token}'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()
+```
+
+
+> Example response (200, when post keep deleted.):
+
+```json
+{
+    "data": "Success"
+}
+```
+> Example response (201, when post keep created.):
+
+```json
+{
+    "data": {
+        "id": "{post-keep-id}",
+        "user": {
+            "id": "{user-id}",
+            "created_at": "{user-created_at}",
+            "updated_at": "{user-updated-at}",
+            "name": "{user-name}",
+            "email": "{user-email}",
+            "email_verified_at": "{user-email-verified-at}",
+            "login_type_id": "{user-login-type-id}",
+            "location_applied_at": null
+        },
+        "post": {
+            "id": "{post-id}",
+            "created_at": "{post-created-at}",
+            "updated_at": "{post-updated-at}",
+            "user_id": "{post-user-id}",
+            "location_id": "{post-location-id}",
+            "title": "{post-title}",
+            "content": "{post-content}",
+            "published_at": "{post-published-at}",
+            "active": "{post-active}",
+            "slug": "{post-slug}",
+            "images": "{post-images}"
+        }
+    }
+}
+```
+> Example response (404, when post not found.):
+
+```json
+{
+    "data": "Post(ID:{post-id}) is not found."
+}
+```
+<div id="execution-results-POSTapi-posts--post--post-keeps" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-posts--post--post-keeps"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-posts--post--post-keeps"></code></pre>
+</div>
+<div id="execution-error-POSTapi-posts--post--post-keeps" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-posts--post--post-keeps"></code></pre>
+</div>
+<form id="form-POSTapi-posts--post--post-keeps" data-method="POST" data-path="api/posts/{post}/post-keeps" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {personal-access-token}"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--post-keeps', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/posts/{post}/post-keeps</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-posts--post--post-keeps" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-posts--post--post-keeps" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>post</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="post" data-endpoint="POSTapi-posts--post--post-keeps" data-component="url" required  hidden>
+<br>
+The id of the post.
+</p>
+</form>
+
+
 ## Display a listing of the post.
 
 
@@ -87,10 +228,29 @@ response.json()
     "data": [
         {
             "id": "{post-keep-id}",
-            "created_at": "{post-keep-created-at}",
-            "updated_at": "{post-keep-updated-at}",
-            "user_id": "{post-keep-user-id}",
-            "post_id": "{post-keep-post-id}"
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
+            "post": {
+                "id": "{post-id}",
+                "created_at": "{post-created-at}",
+                "updated_at": "{post-updated-at}",
+                "user_id": "{post-user-id}",
+                "location_id": "{post-location-id}",
+                "title": "{post-title}",
+                "content": "{post-content}",
+                "published_at": "{post-published-at}",
+                "active": "{post-active}",
+                "slug": "{post-slug}",
+                "images": "{post-images}"
+            }
         }
     ],
     "links": {
@@ -141,7 +301,8 @@ response.json()
                 "name": "{user-name}",
                 "email": "{user-email}",
                 "email_verified_at": "{user-email-verified-at}",
-                "login_type_id": "{user-login-type-id}"
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
             },
             "location": {
                 "id": "{location-id}",

@@ -27,6 +27,7 @@ class PostController extends Controller
      * Display a listing of the posts.
      *
      * @queryParam category_id integer The id of the category. Example: 2
+     * @queryParam location_id integer The id of the location. Example: 2
      * @queryParam limit integer The amount of results per page. Defaults to '10'. Example: 10
      * @queryParam page integer The page of the results. Defaults to '1'. Example: 1
      * @responseFile 200 scenario="when posts displayed." responses/posts.index/200.json
