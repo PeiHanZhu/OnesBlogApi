@@ -32,7 +32,7 @@ class LocationController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Location());
-        $grid->model()->with('locationServiceHours');
+        $grid->model()->with(['locationServiceHours', 'cityArea.city']);
 
         $grid->filter(function ($filter) {
             $filter->between('created_at', __('admin.created_at'))->datetime();
@@ -64,6 +64,9 @@ class LocationController extends AdminController
             ]);
             return "<a href='$href' target='_blank'>$value</a>";
         })->sortable();
+        $grid->column(__('admin.location_city'))->display(function () {
+            return $this->cityArea->city->city;
+        });
         $grid->column('cityArea.city_area', __('admin.location_area'))->sortable();
         $grid->column('category_id', __('admin.location_category_id'))
             ->using(__('admin.location_category_options'))
@@ -196,6 +199,14 @@ SCRIPT
                 ]);
             }
         });
+
+        if ($form->isCreating()) {
+            $form->saved(function ($form) {
+                $form->model()->user()->update([
+                    'location_applied_at' => now(),
+                ]);
+            });
+        }
 
         return $form;
     }

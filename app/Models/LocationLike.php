@@ -10,6 +10,14 @@ class LocationLike extends Model
     use HasFactory;
 
     /**
+     * @inheritDoc
+     */
+    protected $fillable = [
+        'user_id',
+        'location_id',
+    ];
+
+    /**
      * Get the user of the location like.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

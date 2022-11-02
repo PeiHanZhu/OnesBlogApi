@@ -2,10 +2,29 @@
     "data": [
         {
             "id": "{post-keep-id}",
-            "created_at": "{post-keep-created-at}",
-            "updated_at": "{post-keep-updated-at}",
-            "user_id": "{post-keep-user-id}",
-            "post_id": "{post-keep-post-id}"
+            "user": {
+                "id": "{user-id}",
+                "created_at": "{user-created-at}",
+                "updated_at": "{user-updated-at}",
+                "name": "{user-name}",
+                "email": "{user-email}",
+                "email_verified_at": "{user-email-verified-at}",
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
+            },
+            "post": {
+                "id": "{post-id}",
+                "created_at": "{post-created-at}",
+                "updated_at": "{post-updated-at}",
+                "user_id": "{post-user-id}",
+                "location_id": "{post-location-id}",
+                "title": "{post-title}",
+                "content": "{post-content}",
+                "published_at": "{post-published-at}",
+                "active": "{post-active}",
+                "slug": "{post-slug}",
+                "images": "{post-images}"
+            }
         }
     ],
     "links": {

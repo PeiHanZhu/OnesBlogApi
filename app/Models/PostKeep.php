@@ -10,6 +10,14 @@ class PostKeep extends Model
     use HasFactory;
 
     /**
+     * @inheritDoc
+     */
+    protected $fillable = [
+        'user_id',
+        'post_id',
+    ];
+
+    /**
      * Get the user of the post keep.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

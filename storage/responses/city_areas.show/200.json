@@ -1,0 +1,12 @@
+{
+    "data": {
+        "id": "{city-area-id}",
+        "city": {
+            "id": "{city-id}",
+            "created_at": "{city-created-at}",
+            "updated_at": "{city-updated-at}",
+            "city": "{city-city}"
+        },
+        "city_area": "{city-area-city-area}"
+    }
+}

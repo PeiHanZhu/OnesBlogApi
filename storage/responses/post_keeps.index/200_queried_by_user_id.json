@@ -9,7 +9,8 @@
                 "name": "{user-name}",
                 "email": "{user-email}",
                 "email_verified_at": "{user-email-verified-at}",
-                "login_type_id": "{user-login-type-id}"
+                "login_type_id": "{user-login-type-id}",
+                "location_applied_at": "{user-location-applied-at}"
             },
             "location": {
                 "id": "{location-id}",

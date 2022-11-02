@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LocationCollection;
 use App\Http\Resources\LocationLikeCollection;
+use App\Http\Resources\LocationLikeResource;
 use App\Models\Location;
 use App\Models\LocationLike;
 use Illuminate\Http\Request;
@@ -39,6 +40,37 @@ class LocationLikeController extends Controller
             return (new LocationLikeCollection(
                 LocationLike::paginate($request->query('limit') ?? 10)
             ))->preserveQuery();
+        }
+    }
+
+    /**
+     * Store a newly created or remove the specified location like in storage.
+     *
+     * @authenticated
+     * @header Authorization Bearer {personal-access-token}
+     * @urlParam location integer required The id of the location. Example: 5
+     * @responseFile 200 scenario="when location like deleted." responses/location_likes.store/200.json
+     * @responseFile 201 scenario="when location like created." responses/location_likes.store/201.json
+     * @responseFile 404 scenario="when location not found." responses/location_likes.store/404.json
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Location $location
+     */
+    public function store(Request $request, Location $location)
+    {
+        if (is_null($locationLike = LocationLike::where([
+            ['user_id', $request->user()->id],
+            ['location_id', $location->id],
+        ])->first())) {
+            return new LocationLikeResource(LocationLike::create([
+                'user_id' => $request->user()->id,
+                'location_id' => $location->id,
+            ]));
+        } else {
+            $locationLike->delete();
+            return response()->json([
+                'data' => 'Success',
+            ]);
         }
     }
 }

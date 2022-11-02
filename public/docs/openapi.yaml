@@ -445,6 +445,64 @@ paths:
                                 - device_name
             security: []
     '/api/users/{user}':
+        get:
+            summary: 'Display the specified user.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when user displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null }
+                                properties:
+                                    data: { type: object, example: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null } }
+                401:
+                    description: '401, without personal access token.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Unauthenticated.
+                                properties:
+                                    data: { type: string, example: Unauthenticated. }
+                404:
+                    description: '404, when user not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'User(ID:{user-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'User(ID:{user-id}) is not found.' }
+            tags:
+                - '01. Authentication and Users'
         put:
             summary: 'Update the specified user in storage.'
             description: ''
@@ -532,70 +590,12 @@ paths:
                                     type: string
                                     description: 'The password of the user.'
                                     example: '1234567890'
-        get:
-            summary: 'Display the specified user.'
-            description: ''
-            parameters:
-                -
-                    in: header
-                    name: Content-Type
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-                -
-                    in: header
-                    name: Accept
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-                -
-                    in: header
-                    name: Authorization
-                    description: ''
-                    example: 'Bearer {personal-access-token}'
-                    schema:
-                        type: string
-            responses:
-                200:
-                    description: '200, when user displayed.'
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                example:
-                                    data: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null }
-                                properties:
-                                    data: { type: object, example: { id: '{user-id}', name: '{user-name}', email: '{user-email}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}', location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' }, token: null } }
-                401:
-                    description: '401, without personal access token.'
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                example:
-                                    data: Unauthenticated.
-                                properties:
-                                    data: { type: string, example: Unauthenticated. }
-                404:
-                    description: '404, when user not found.'
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                example:
-                                    data: 'User(ID:{user-id}) is not found.'
-                                properties:
-                                    data: { type: string, example: 'User(ID:{user-id}) is not found.' }
-            tags:
-                - '01. Authentication and Users'
         parameters:
             -
                 in: path
                 name: user
                 description: 'The id of the user.'
-                example: 34
+                example: 5
                 required: true
                 schema:
                     type: integer
@@ -1586,6 +1586,74 @@ paths:
                 required: true
                 schema:
                     type: integer
+    '/api/locations/{location}/location-likes':
+        post:
+            summary: 'Store a newly created or remove the specified location like in storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when location like deleted.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Success
+                                properties:
+                                    data: { type: string, example: Success }
+                201:
+                    description: '201, when location like created.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: '{location-like-id}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' } }
+                                properties:
+                                    data: { type: object, example: { id: '{location-like-id}', user: { id: '{user-id}', created_at: '{user-created-at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: '{location-introduction}', images: '{location-images}', active: '{location-active}' } } }
+                404:
+                    description: '404, when location not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'Location(ID:{location-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'Location(ID:{location-id}) is not found.' }
+            tags:
+                - '05. LocationLikes'
+        parameters:
+            -
+                in: path
+                name: location
+                description: 'The id of the location.'
+                example: 5
+                required: true
+                schema:
+                    type: integer
     /api/location-likes:
         get:
             summary: 'Display a listing of the location.'
@@ -1667,6 +1735,16 @@ paths:
                     schema:
                         type: integer
                         description: 'The id of the category.'
+                        example: 2
+                -
+                    in: query
+                    name: location_id
+                    description: 'The id of the location.'
+                    example: 2
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The id of the location.'
                         example: 2
                 -
                     in: query
@@ -2023,6 +2101,74 @@ paths:
                 required: true
                 schema:
                     type: integer
+    '/api/posts/{post}/post-keeps':
+        post:
+            summary: 'Store a newly created or remove the specified post keep in storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {personal-access-token}'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when post keep deleted.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: Success
+                                properties:
+                                    data: { type: string, example: Success }
+                201:
+                    description: '201, when post keep created.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: '{post-keep-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: null }, post: { id: '{post-id}', created_at: '{post-created-at}', updated_at: '{post-updated-at}', user_id: '{post-user-id}', location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' } }
+                                properties:
+                                    data: { type: object, example: { id: '{post-keep-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: null }, post: { id: '{post-id}', created_at: '{post-created-at}', updated_at: '{post-updated-at}', user_id: '{post-user-id}', location_id: '{post-location-id}', title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' } } }
+                404:
+                    description: '404, when post not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'Post(ID:{post-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'Post(ID:{post-id}) is not found.' }
+            tags:
+                - '07. PostKeeps'
+        parameters:
+            -
+                in: path
+                name: post
+                description: 'The id of the post.'
+                example: 5
+                required: true
+                schema:
+                    type: integer
     /api/post-keeps:
         get:
             summary: 'Display a listing of the post.'
@@ -2080,11 +2226,11 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    data: [{ id: '{post-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: location-introduction, images: '{location-images}', active: '{location-active}' }, title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', created_at: '{post-created-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' }]
+                                    data: [{ id: '{post-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: location-introduction, images: '{location-images}', active: '{location-active}' }, title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', created_at: '{post-created-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' }]
                                     links: { first: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', last: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', prev: null, next: null }
                                     meta: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/post-keeps', per_page: 10, to: 1, total: 1 }
                                 properties:
-                                    data: { type: array, example: [{ id: '{post-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: location-introduction, images: '{location-images}', active: '{location-active}' }, title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', created_at: '{post-created-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' }], items: { type: object } }
+                                    data: { type: array, example: [{ id: '{post-id}', user: { id: '{user-id}', created_at: '{user-created_at}', updated_at: '{user-updated-at}', name: '{user-name}', email: '{user-email}', email_verified_at: '{user-email-verified-at}', login_type_id: '{user-login-type-id}', location_applied_at: '{user-location-applied-at}' }, location: { id: '{location-id}', created_at: '{location-created-at}', updated_at: '{location-updated-at}', user_id: '{location-user-id}', city_area_id: '{location-city-area-id}', category_id: '{location-category-id}', name: '{location-name}', address: '{location-address}', phone: '{location-phone}', avgScore: '{location-avgScore}', introduction: location-introduction, images: '{location-images}', active: '{location-active}' }, title: '{post-title}', content: '{post-content}', published_at: '{post-published-at}', created_at: '{post-created-at}', active: '{post-active}', slug: '{post-slug}', images: '{post-images}' }], items: { type: object } }
                                     links: { type: object, example: { first: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', last: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', prev: null, next: null } }
                                     meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, links: [{ url: null, label: pagination.previous, active: false }, { url: 'http://ones-blog-api.test/api/post-keeps?user_id=12&page=1', label: '1', active: true }, { url: null, label: pagination.next, active: false }], path: 'http://ones-blog-api.test/api/post-keeps', per_page: 10, to: 1, total: 1 } }
             tags:
@@ -2530,6 +2676,58 @@ paths:
                 name: city
                 description: 'The id of the city.'
                 example: 20
+                required: true
+                schema:
+                    type: integer
+    '/api/city-areas/{city_area}':
+        get:
+            summary: 'Display the specified city area.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, when city area displayed.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: '{city-area-id}', city: { id: '{city-id}', created_at: '{city-created-at}', updated_at: '{city-updated-at}', city: '{city-city}' }, city_area: '{city-area-city-area}' }
+                                properties:
+                                    data: { type: object, example: { id: '{city-area-id}', city: { id: '{city-id}', created_at: '{city-created-at}', updated_at: '{city-updated-at}', city: '{city-city}' }, city_area: '{city-area-city-area}' } }
+                404:
+                    description: '404, when city area not found.'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: 'CityArea(ID:{city-area-id}) is not found.'
+                                properties:
+                                    data: { type: string, example: 'CityArea(ID:{city-area-id}) is not found.' }
+            tags:
+                - '10. CityAreas'
+            security: []
+        parameters:
+            -
+                in: path
+                name: city_area
+                description: 'The id of the city area.'
+                example: 108
                 required: true
                 schema:
                     type: integer

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CityAreaController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
@@ -51,9 +52,10 @@ Route::scopeBindings()->group(function () {
         Route::post('locations/{location}/location-service-hours', [LocationServiceHourController::class, 'store'])->name('location-service-hours.store');
         Route::put('locations/{location}/location-service-hours/{location_service_hour}', [LocationServiceHourController::class, 'update'])->name('location-service-hours.update');
         Route::delete('locations/{location}/location-service-hours/{location_service_hour}', [LocationServiceHourController::class, 'destroy'])->name('location-service-hours.destroy');
+
+        Route::post('locations/{location}/location-likes', [LocationLikeController::class, 'store'])->name('location-likes.store');
     });
 });
-
 Route::get('location-likes', [LocationLikeController::class, 'index'])->name('location-likes.index');
 Route::get('post-keeps', [PostKeepController::class, 'index'])->name('post-keeps.index');
 
@@ -63,6 +65,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    
+    Route::post('posts/{post}/post-keeps', [PostKeepController::class, 'store'])->name('post-keeps.store');
 });
 
 Route::scopeBindings()->group(function () {
@@ -77,3 +81,4 @@ Route::scopeBindings()->group(function () {
 
 Route::get('cities', [CityController::class, 'index'])->name('cities.index');
 Route::get('cities/{city}', [CityController::class, 'show'])->name('cities.show');
+Route::get('city-areas/{city_area}', [CityAreaController::class, 'show'])->name('city-areas.show');

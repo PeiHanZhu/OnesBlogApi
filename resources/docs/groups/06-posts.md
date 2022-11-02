@@ -10,7 +10,7 @@
 
 ```bash
 curl -X GET \
-    -G "http://ones-blog-api.test/api/posts?category_id=2&limit=10&page=1" \
+    -G "http://ones-blog-api.test/api/posts?category_id=2&location_id=2&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -22,6 +22,7 @@ const url = new URL(
 
 let params = {
     "category_id": "2",
+    "location_id": "2",
     "limit": "10",
     "page": "1",
 };
@@ -51,6 +52,7 @@ $response = $client->get(
         ],
         'query' => [
             'category_id'=> '2',
+            'location_id'=> '2',
             'limit'=> '10',
             'page'=> '1',
         ],
@@ -67,6 +69,7 @@ import json
 url = 'http://ones-blog-api.test/api/posts'
 params = {
   'category_id': '2',
+  'location_id': '2',
   'limit': '10',
   'page': '1',
 }
@@ -176,6 +179,12 @@ response.json()
 <input type="number" name="category_id" data-endpoint="GETapi-posts" data-component="query"  hidden>
 <br>
 The id of the category.
+</p>
+<p>
+<b><code>location_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="location_id" data-endpoint="GETapi-posts" data-component="query"  hidden>
+<br>
+The id of the location.
 </p>
 <p>
 <b><code>limit</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
@@ -345,7 +354,7 @@ curl -X POST \
     -F "content=Test" \
     -F "published_at=2022-07-23T08:31:45.000000Z" \
     -F "active=1" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpm56TLm" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpk8UzjN" 
 ```
 
 ```javascript
@@ -407,7 +416,7 @@ $response = $client->post(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpm56TLm', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpk8UzjN', 'r')
             ],
         ],
     ]
@@ -422,7 +431,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpm56TLm', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpk8UzjN', 'rb')
 }
 payload = {
     "location_id": 6,
@@ -584,7 +593,7 @@ curl -X PUT \
     -F "published_at=20220724" \
     -F "active=1" \
     -F "_method=PUT" \
-    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpO9YA7d" 
+    -F "images[]=@/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpdgQXOy" 
 ```
 
 ```javascript
@@ -646,7 +655,7 @@ $response = $client->put(
             ],
             [
                 'name' => 'images[]',
-                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpO9YA7d', 'r')
+                'contents' => fopen('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpdgQXOy', 'r')
             ],
         ],
     ]
@@ -661,7 +670,7 @@ import json
 
 url = 'http://ones-blog-api.test/api/posts/108'
 files = {
-  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpO9YA7d', 'rb')
+  'images[]': open('/private/var/folders/l6/2wvm3yyn1blbsd_4c3_s2kb80000gn/T/phpdgQXOy', 'rb')
 }
 payload = {
     "title": "0724Post",

@@ -33,8 +33,13 @@ class IndexTest extends TestCase
             $postKeeps->push(PostKeep::factory()->for($keepUser)->for($post)->create());
         });
 
+        foreach ($postKeeps = (new PostKeepCollection($postKeeps))->jsonSerialize() as $index => $postKeep) {
+            $postKeeps[$index]['user'] = $postKeeps[$index]['user']->toArray();
+            $postKeeps[$index]['post'] = $postKeeps[$index]['post']->toArray();
+        }
+
         $expected = [
-            'data' => (new PostKeepCollection($postKeeps))->jsonSerialize(),
+            'data' => $postKeeps
         ];
 
         // WHEN

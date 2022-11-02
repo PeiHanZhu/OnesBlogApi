@@ -33,6 +33,7 @@ class UserController extends AdminController
             $filter->between('updated_at', __('admin.updated_at'))->datetime();
             $filter->equal('id', __('admin.name'))->select(User::pluck('name', 'id'));
             $filter->like('email', __('admin.email'));
+            $filter->between('location_applied_at', __('admin.location_applied_at'))->datetime();
             $filter->where(function ($query) {
                 $query->whereHas('location', function ($query) {
                     $query->where('name', 'like', "%{$this->input}%");
@@ -52,6 +53,9 @@ class UserController extends AdminController
         $grid->column('name', __('admin.name'))->sortable();
         $grid->column('email', __('admin.email'));
         $grid->column('email_verified_at', __('admin.email_verified_at'))->display(function ($value) {
+            return !is_null($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
+        });
+        $grid->column('location_applied_at', __('admin.location_applied_at'))->display(function ($value) {
             return !is_null($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
         });
         $grid->column('location', __('admin.location_name'))->display(function ($location) {
@@ -84,6 +88,7 @@ class UserController extends AdminController
         $show->field('name', __('admin.name'));
         $show->field('email', __('admin.email'));
         $show->field('email_verified_at', __('admin.email_verified_at'));
+        $show->field('location_applied_at', __('admin.location_applied_at'));
         $show->field('login_type_id', __('admin.login_type_id'))->using(__('admin.login_type_options'));
 
         return $show;
@@ -102,6 +107,7 @@ class UserController extends AdminController
         $form->email('email', __('admin.email'))->rules('required');
         $form->datetime('email_verified_at', __('admin.email_verified_at'))
             ->default(!is_null($form->email_verified_at) ? date('Y-m-d H:i:s') : null);
+        $form->display('location_applied_at', __('admin.location_applied_at'));
         $form->password('password', __('admin.password'))->creationRules('required');
         if ($form->isEditing()) {
             $user = $form->model()->find(request()->route('user'));
