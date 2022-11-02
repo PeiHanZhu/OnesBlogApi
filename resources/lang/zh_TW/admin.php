@@ -116,6 +116,7 @@ return [
         1 => '會員',
         2 => '店家',
     ],
+    'location_applied_at' => '首次成為店家時間',
 
     // Location
     'location_category_id' => '店家分類',
