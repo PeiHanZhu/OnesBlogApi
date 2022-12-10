@@ -17,6 +17,8 @@ class LocationResource extends JsonResource
      */
     public function toArray($request)
     {
+        $this->loadMissing('cityArea.city');
+
         return [
             'id' => $this->id,
             'user' => $this->user,
