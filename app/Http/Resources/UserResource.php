@@ -24,7 +24,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'login_type_id' => $this->login_type_id,
             'location_applied_at' => $this->location_applied_at,
-            'location' => $this->location,
+            'location' => LocationResource::make($this->location),
             'token' => $this->token,
         ];
     }
