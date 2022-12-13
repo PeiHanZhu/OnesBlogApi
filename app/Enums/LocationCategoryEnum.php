@@ -8,8 +8,13 @@ class LocationCategoryEnum
     const SPOTS = 2;
     const LODGINGS = 3;
 
-    public static function getAllCategoryValues() {
-        $oClass = new \ReflectionClass(__CLASS__);
-        return array_values($oClass->getConstants());
+    public static function constants()
+    {
+        return (new \ReflectionClass(__CLASS__))->getConstants();
+    }
+
+    public static function values()
+    {
+        return array_values(self::constants());
     }
 }

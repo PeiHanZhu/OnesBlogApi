@@ -81,7 +81,7 @@ class LocationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'city_area_id' => 'required|integer|exists:city_areas,id',
-            'category_id' => ['required', 'integer', Rule::in(LocationCategoryEnum::getAllCategoryValues())],
+            'category_id' => ['required', 'integer', Rule::in(LocationCategoryEnum::values())],
             'name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
@@ -190,7 +190,7 @@ class LocationController extends Controller
 
         $validator = Validator::make($request->all(), [
             'city_area_id' => 'integer|exists:city_areas,id',
-            'category_id' => ['integer', Rule::in(LocationCategoryEnum::getAllCategoryValues())],
+            'category_id' => ['integer', Rule::in(LocationCategoryEnum::values())],
             'name' => 'string',
             'address' => 'string',
             'phone' => 'string',

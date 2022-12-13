@@ -17,7 +17,7 @@ class LocationFactory extends Factory
     {
         return [
             'category_id' => $this->faker->numberBetween(
-                min($categoryIds = LocationCategoryEnum::getAllCategoryValues()),
+                min($categoryIds = LocationCategoryEnum::values()),
                 max($categoryIds)
             ),
             'name' => $this->faker->company(),
